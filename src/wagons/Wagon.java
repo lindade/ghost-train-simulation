@@ -17,4 +17,6 @@ public abstract class Wagon {
     }
 
     abstract void addPassenger(Passenger p);
+    
+    abstract void printList();
 }

@@ -15,7 +15,7 @@ public class Destination {
     }
 
     public Destination() {
-        name = "Default";
+        name = "Berlin";
     }
 
     public String getName() {

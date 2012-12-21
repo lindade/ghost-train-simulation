@@ -26,8 +26,8 @@ public class FunWagon extends ActivityWagon {
     }
 
     @Override
-    public void printName() {
-        System.out.println("Funwagon: " + name);
+    public String printName() {
+        return String.format("Funwagon: " + name + "\n");
     }
 
     @Override
@@ -35,15 +35,25 @@ public class FunWagon extends ActivityWagon {
         int earnings = 0;
         for (Passenger p : passengers) {
             earnings += p.getFunValue();
-            System.out.println("Earnings: " + earnings);
         }
+        System.out.println("Fun earnings: " + earnings);
         return earnings;
     }
 
     @Override
     public void addPassenger(Passenger p) {
-        //  muss noch auf 3 Personen begrenzt werden
+        // has to be limited to 3 persons
         passengers.add(p);
-        System.out.println("Passenger List: " + passengers);
+        // just for the output on the console
+        System.out.print(this.printName() + "Passenger List: ");
+        this.printList();
+        System.out.println();
+    }
+
+    @Override
+    public void printList() {
+        for (Passenger pas : passengers) {
+            System.out.print(pas.getName() + "\t");
+        }
     }
 }

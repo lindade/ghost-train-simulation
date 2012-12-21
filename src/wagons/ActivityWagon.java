@@ -13,7 +13,9 @@ public abstract class ActivityWagon extends Wagon {
 
     abstract void fillBucket();
 
-    abstract void printName();
+    abstract String printName();
 
     abstract int demandEarning();
+    
+    
 }

@@ -20,8 +20,12 @@ public class PassengerWagon extends Wagon {
 
     @Override
     public void addPassenger(Passenger p) {
+        // has to be limited to 3 persons
         passengers.add(p);
-        System.out.println("Passenger List: " + passengers);
+        // just for the output on the console
+        System.out.print("Passenger wagon List: ");
+        this.printList();
+        System.out.println();
     }
 
     public void getOff(Destination currentDest) {
@@ -32,8 +36,15 @@ public class PassengerWagon extends Wagon {
                 passengers.remove(p);
                 offBoardedPassengersCount++;
             } else {
-                System.out.println("Passenger " + p.getName() + " has not deboarded. He wants to deboard at " + p.getDeboarding() + ".");
+                System.out.println("Passenger " + p.getName() + " has not deboarded. Requested deboard is at " + p.getDeboarding().getName() + ".");
             }
+        }
+    }
+
+    @Override
+    void printList() {
+        for (Passenger pas : passengers) {
+            System.out.print(pas.getName() + "\t");
         }
     }
 }

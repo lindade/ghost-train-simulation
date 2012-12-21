@@ -26,8 +26,8 @@ public class EatingWagon extends ActivityWagon {
     }
 
     @Override
-    public void printName() {
-        System.out.println("Eatingwagon: " + name);
+    public String printName() {
+        return String.format("Eatingwagon: " + name + "\n");
     }
 
     @Override
@@ -35,31 +35,26 @@ public class EatingWagon extends ActivityWagon {
         int earnings = 0;
         for (Passenger p : passengers) {
             earnings += p.getEatingValue();
-            System.out.println("Earnings: " + earnings);
         }
+        System.out.println("Eating earnings: " + earnings);
         return earnings;
     }
 
     @Override
     public void addPassenger(Passenger p) {
-        //  muss noch auf 3 Personen begrenzt werden
+        // has to be limited to 3 persons
         passengers.add(p);
-        System.out.println("Passenger List: ");
+        // just for the output on the console
+        System.out.print(this.printName() + "Passenger List: ");
         this.printList();
+        System.out.println();
     }
     
-    private void printList(){
+    @Override
+    public void printList(){
         for(Passenger pas:passengers){
-            System.out.println(pas.getName());
+            System.out.print(pas.getName() + "\t");
         }
     }
 
-//    private static void editlist(Collection<String> list, Collection<String> list2) {
-//        Iterator<String> it = list.iterator();
-//        while (it.hasNext()) {
-//            if (list2.contains(it.next())) {
-//                it.remove();
-//            }
-//        }
-//    }
 }
