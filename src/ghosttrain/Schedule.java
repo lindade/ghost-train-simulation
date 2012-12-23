@@ -5,6 +5,7 @@
 package ghosttrain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -17,9 +18,28 @@ public class Schedule {
         "New York", "Havanna", "Limbo2", "Limbo3", "Limbo4", "Limbo5"};
     // distance from preceding city to this city
     private static final int[] DISTANCE_TO_CITIES = {2000, 4000, 6000, 8000, 5000};
-    private int availableCities = 3; // initially only "Limbo1", "London", "Paris"
+    private static int availableCities = 3; // initially only "Limbo1", "London", "Paris"
     private int currentCity = 0; // starting in Limbo1
     private ArrayList<Destination> currentSchedule;
+    public static final HashMap<String, Integer> DESTINATIONS;
+    
+    static {
+        DESTINATIONS = new HashMap<>();
+        int index = 0;
+        for( String city : AVAILABLE_CITIES ) {
+            DESTINATIONS.put( city, index);
+            index++;
+        }
+    }
+    
+    
+    /**
+     * HashMap -> (DestinationName, Int)
+     * ArrayList<Destination>
+     * 
+     * 
+     **/
+    
 
     public Schedule(int initCities) {
         availableCities = initCities;
@@ -79,5 +99,13 @@ public class Schedule {
         } else {
             return currentSchedule.get(currentCity + 1);
         }
+    }
+    
+    public static  boolean doesDestinationExist(String destination ) {
+        Integer index =  DESTINATIONS.get(destination);
+        if ( index != null) {
+            return index < availableCities;
+        }
+        return false;
     }
 }

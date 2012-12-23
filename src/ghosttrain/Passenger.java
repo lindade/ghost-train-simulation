@@ -12,11 +12,11 @@ public class Passenger {
     private int training;
     private Destination deboarding;
 
-    public Passenger(String n, int f, int e, int t, Destination d) {
-        name = n;
-        fun = f;
-        eating = e;
-        training = t;
+    public Passenger(String name, int fun, int eating, int training, Destination d) {
+        this.name = name;
+        this.fun = fun;
+        this.eating = eating;
+        this.training = training;
         deboarding = d; // Eine die schon dabei ist oder die nächste die freigeschaltet wird.
     }
 

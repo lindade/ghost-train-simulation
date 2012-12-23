@@ -14,16 +14,12 @@ public class Destination {
         this.distance = distance;
     }
 
-    public Destination() {
-        name = "Berlin";
+    public Destination(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getDistance() {

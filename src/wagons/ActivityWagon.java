@@ -1,5 +1,6 @@
 package wagons;
 
+import exceptions.MaxWagonCountReached;
 import ghosttrain.Bucket;
 
 /**
@@ -8,6 +9,12 @@ import ghosttrain.Bucket;
  */
 public abstract class ActivityWagon extends Wagon {
 
+    public ActivityWagon() throws MaxWagonCountReached {
+        super();
+    }
+
+     
+    
     protected Bucket bucket;
     protected String name;
 
