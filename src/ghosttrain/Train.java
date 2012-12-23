@@ -41,10 +41,10 @@ public class Train {
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : wagons) {
-            PassengerWagon pw = new PassengerWagon();
-            if (w.equals(pw)) {
-                pw.getOff(this.getCurrentDestination());
-            }
+//            PassengerWagon pw = new PassengerWagon();
+//            if (w.equals(pw)) {
+//                pw.getOff(this.getCurrentDestination());
+//            }
         }
     }
 

@@ -4,6 +4,7 @@
  */
 package wagons;
 
+import exceptions.MaxWagonCountReached;
 import ghosttrain.Bucket;
 import ghosttrain.Passenger;
 import java.util.ArrayList;
@@ -14,9 +15,8 @@ import java.util.ArrayList;
  */
 public class TrainingWagon extends ActivityWagon {
 
-    public TrainingWagon(String name) {
-        wagonCount++;
-        passengers = new ArrayList<Passenger>();
+    public TrainingWagon(String name) throws MaxWagonCountReached {
+        super();
         bucket = new Bucket();
         this.name = name;
     }
@@ -34,27 +34,11 @@ public class TrainingWagon extends ActivityWagon {
     @Override
     public int demandEarning() {
         int earnings = 0;
-        for (Passenger p : passengers) {
+        for (Passenger p : getPassengers()) {
             earnings += p.getTrainingValue();
         }
         System.out.println("Training earnings: " + earnings);
         return earnings;
     }
 
-    @Override
-    public void addPassenger(Passenger p) {
-        // has to be limited to 3 persons
-        passengers.add(p);
-        // just for the output on the console
-        System.out.print(this.printName() + "Passenger List: ");
-        this.printList();
-        System.out.println();
-    }
-
-    @Override
-    public void printList() {
-        for(Passenger pas:passengers){
-            System.out.print(pas.getName() + "\t");
-        }
-    }
 }
