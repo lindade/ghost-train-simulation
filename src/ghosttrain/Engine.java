@@ -16,6 +16,9 @@ public class Engine {
         quantityOfWagons = 3;
     }
 
+    /**
+     * the quantityUprgade should be variable and not the constant 3
+     */
     public void engineUpgrade() {
         System.out.println("Engine was capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
         quantityOfWagons += 3;

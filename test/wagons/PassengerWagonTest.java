@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package wagons;
 
 import exceptions.MaxPassengerCapacityReachedException;
@@ -19,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author mnguyen
+ * @author linda
  */
 public class PassengerWagonTest {
     PassengerWagon wagon;
@@ -59,7 +55,7 @@ public class PassengerWagonTest {
     @Test
     public void testAddPassenger() {
         System.out.println("addPassenger");
-        Passenger p = new Passenger("Minh", 2, 3, 5, new Destination("Berlin"));
+        Passenger p = new Passenger("Alena", 2, 3, 5, new Destination("Berlin"));
         try {
             wagon.addPassenger(p);
         } catch (MaxPassengerCapacityReachedException ex) {

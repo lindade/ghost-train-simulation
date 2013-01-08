@@ -5,9 +5,7 @@
 package wagons;
 
 import exceptions.MaxWagonCountReached;
-import ghosttrain.Bucket;
 import ghosttrain.Passenger;
-import java.util.ArrayList;
 
 /**
  *
@@ -17,12 +15,12 @@ public class FunWagon extends ActivityWagon {
 
     public FunWagon(String name) throws MaxWagonCountReached {
         super();
-        bucket = new Bucket();
         this.name = name;
     }
 
     @Override
     public void fillBucket() {
+        bucket.fillBucket(demandEarning());
     }
 
     @Override

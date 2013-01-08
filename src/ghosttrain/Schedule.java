@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ghosttrain;
 
 import java.util.ArrayList;
@@ -27,11 +23,10 @@ public class Schedule {
         DESTINATIONS = new HashMap<>();
         int index = 0;
         for( String city : AVAILABLE_CITIES ) {
-            DESTINATIONS.put( city, index);
+            DESTINATIONS.put(city, index);
             index++;
         }
     }
-    
     
     /**
      * HashMap -> (DestinationName, Int)

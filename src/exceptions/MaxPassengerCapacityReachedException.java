@@ -1,17 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package exceptions;
 
 /**
  *
- * @author mnguyen
+ * @author Linda
  */
 public class MaxPassengerCapacityReachedException extends Exception {
 
     public MaxPassengerCapacityReachedException(String message) {
-        super( message );
+        super(message);
     }
     
 }

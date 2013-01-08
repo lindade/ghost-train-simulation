@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ghosttrain;
 
 import java.util.ArrayList;
@@ -25,13 +21,21 @@ public class Train {
         wagons = new ArrayList<Wagon>();
         theSchedule = new Schedule(3);
     }
-
+    
+    /**
+     * in wagon is also an add wagon method
+     * @param pw 
+     */
     //add Passenger Wagons to list: wagons
     public void addPassengerWagon(PassengerWagon pw) {
         wagons.add(pw);
         System.out.println("PassengerWagon List: " + wagons);
     }
 
+    /**
+     * in wagon is also an add wagon method
+     * @param aw 
+     */
     //add Activity Wagons to list: wagons
     public void addActivityWagon(ActivityWagon aw) {
         wagons.add(aw);
@@ -41,12 +45,14 @@ public class Train {
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : wagons) {
-//            PassengerWagon pw = new PassengerWagon();
-//            if (w.equals(pw)) {
-//                pw.getOff(this.getCurrentDestination());
-//            }
+            if (w instanceof PassengerWagon) {
+                PassengerWagon pw = (PassengerWagon) w;
+                pw.getOff(this.getCurrentDestination());
+            }
         }
     }
+
+    
 
     public void enterNextCity() {
         Destination d = theSchedule.getNextStop();
@@ -58,5 +64,9 @@ public class Train {
 
     public Destination getCurrentDestination() {
         return theSchedule.getCurrentStop();
+    }
+
+    public List<Wagon> getWagons() {
+        return wagons;
     }
 }

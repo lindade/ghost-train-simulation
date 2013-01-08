@@ -14,8 +14,8 @@ import java.util.List;
 public abstract class Wagon {
 
     private List<Passenger> passengers;
-    private static int wagonCount = 0;
     private static final int MAX_PASSENGER_CAPACITY = 3;
+    private static int wagonCount = 0;
     private static int maxWagonCount = 50;
 
     public Wagon() throws MaxWagonCountReached {
@@ -26,7 +26,11 @@ public abstract class Wagon {
     public void getWagonCount() {
         System.out.println("Wagons created: " + wagonCount);
     }
-
+    
+    /**
+     * controls that no more than 50 wagons are build.
+     * @throws MaxWagonCountReached 
+     */
     private static void increaseWagonCount() throws MaxWagonCountReached {
         if (wagonCount < maxWagonCount) {
             wagonCount++;

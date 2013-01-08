@@ -1,6 +1,7 @@
 package ghosttrain;
 
-import Datatype.Level;
+import wagons.ActivityWagon;
+import wagons.Wagon;
 
 /**
  *
@@ -8,7 +9,7 @@ import Datatype.Level;
  */
 public class Player {
 
-    private Level level;
+    private int level;
     private Wallet wallet;
     private Destination currentDestination;
     private Train train;
@@ -26,21 +27,39 @@ public class Player {
 
     public void staffActivityWagon() {
         System.out.println("staff activity wagons");
-
+    }
+    
+    public void staffPassengerWagon() {
+        System.out.println("staff passenger wagons");
     }
 
     public void collectIncome() {
+        for( Wagon w : train.getWagons()) {
+            if( w instanceof ActivityWagon ) {
+                ActivityWagon aw = (ActivityWagon) w;
+                Bucket bucket;
+                bucket = aw.getBucket();
+                int coins = bucket.emtpyBucket();
+                wallet.addCoins(coins);
+            }
+        }
         System.out.println("collect income");
-
+        wallet.getCoins();
+    }
+    
+    public void switchPassengersToPassengerWagon() {
+        System.out.println("switch passenger who can exit to passenger wagons");
     }
 
     public void buyPassengerWagon() {
+        // get PassengerWagon
+        // sub coins
         System.out.println("buy passenger wagon");
-
     }
 
     public void buyActivityWagon() {
+        // get ActivityWagon
+        // sub coins
         System.out.println("buy activity wagon");
-
     }
 }

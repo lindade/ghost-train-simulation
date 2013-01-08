@@ -13,6 +13,11 @@ public class PassengerSorter {
     List<Passenger> passengerSorter = new ArrayList<Passenger>();
     List<Wagon> wagons;
 
+    /**
+     * this method is already in wagon
+     * delete or edit?
+     * @param p 
+     */
     public void addToWagon(Passenger p) {
         if (passengerSorter.size() <= 2) {
             passengerSorter.add(p);
