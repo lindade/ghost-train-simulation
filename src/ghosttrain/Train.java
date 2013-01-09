@@ -13,12 +13,12 @@ import wagons.Wagon;
 public class Train {
 
     private Engine engine;
-    private List<Wagon> wagons;
+    private List<Wagon> ratioWagons;
     private Schedule theSchedule;
 
     public Train() {
         engine = new Engine();
-        wagons = new ArrayList<Wagon>();
+        ratioWagons = new ArrayList<Wagon>();
         theSchedule = new Schedule(3);
     }
     
@@ -28,8 +28,8 @@ public class Train {
      */
     //add Passenger Wagons to list: wagons
     public void addPassengerWagon(PassengerWagon pw) {
-        wagons.add(pw);
-        System.out.println("PassengerWagon List: " + wagons);
+        ratioWagons.add(pw);
+        System.out.println("PassengerWagon List: " + ratioWagons);
     }
 
     /**
@@ -38,21 +38,19 @@ public class Train {
      */
     //add Activity Wagons to list: wagons
     public void addActivityWagon(ActivityWagon aw) {
-        wagons.add(aw);
-        System.out.println("ActivityWagon List: " + wagons);
+        ratioWagons.add(aw);
+        System.out.println("ActivityWagon List: " + ratioWagons);
     }
 
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
-        for (Wagon w : wagons) {
+        for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
                 PassengerWagon pw = (PassengerWagon) w;
                 pw.getOff(this.getCurrentDestination());
             }
         }
     }
-
-    
 
     public void enterNextCity() {
         Destination d = theSchedule.getNextStop();
@@ -67,6 +65,6 @@ public class Train {
     }
 
     public List<Wagon> getWagons() {
-        return wagons;
+        return ratioWagons;
     }
 }

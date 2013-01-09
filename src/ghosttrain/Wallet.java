@@ -2,7 +2,9 @@ package ghosttrain;
 
 
 /**
- *
+ * Wallet contains all coins and premiumCredits one player possesses
+ * The player can earn coins and premiumCredits and freely spent as he wishes.
+ * 
  * @author Linda
  */
 public class Wallet {

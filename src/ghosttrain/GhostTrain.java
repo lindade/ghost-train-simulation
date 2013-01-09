@@ -4,7 +4,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * the simulation loop:
+ * at destination                                               traveling
+ * 1 Passenger Boarding
+ * 2 sort Passengers into AW
+ * 3 sort remaining Passengers into PW
+ * 4 start train
+ *                                                             5 produce income
+ *                                                             6 collect income
+ *                                                             7 sort Passengers into PW
+ * 8 Passenger getOff train from PW
+ * 9 cash check
+ *10 buy upgrades
  * @author Linda
  */
 public class GhostTrain {

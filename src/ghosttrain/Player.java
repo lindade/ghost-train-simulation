@@ -19,7 +19,15 @@ public class Player {
         train = new Train();
 
     }
-
+    
+    public int getLevel(){
+        return level;
+    }
+    
+    public void raiseLevel(){
+        level += 1;
+    }
+    
     public void loadPassengers() {
         //train.set
         System.out.println("load passengers");
@@ -61,5 +69,11 @@ public class Player {
         // get ActivityWagon
         // sub coins
         System.out.println("buy activity wagon");
+    }
+    
+     public void Engine() {
+     // get ActivityWagon
+     // sub coins
+     System.out.println("buy engine");
     }
 }

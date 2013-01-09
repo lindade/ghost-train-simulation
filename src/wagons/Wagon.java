@@ -55,7 +55,7 @@ public abstract class Wagon {
         passengers.remove(p);
     }
 
-    public void printList() {
+    public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
             System.out.print(pas.getName() + "\t");
         }
