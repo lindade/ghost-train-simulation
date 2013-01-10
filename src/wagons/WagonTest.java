@@ -26,9 +26,9 @@ public class WagonTest {
         try {
             passengerWagon = new PassengerWagon();
             passengerWagon.getWagonCount();
-            funWagon = new FunWagon("Minigolf");
-            eatingWagon = new EatingWagon("Sushi");
-            trainingWagon = new TrainingWagon("Weightlifting");
+            funWagon = new FunWagon();
+            eatingWagon = new EatingWagon();
+            trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }
@@ -46,12 +46,6 @@ public class WagonTest {
          * get names of Destination, activity wagons
         */
         berlin.getName();
-
-        funWagon.printName();
-
-        eatingWagon.printName();
-
-        trainingWagon.printName();
         
         /**
          * create passengers
@@ -125,8 +119,8 @@ public class WagonTest {
          * set maximum wagon counter to 5, tested if more than 5 wagons could be build.
          */
         try {
-            trainingWagon = new TrainingWagon("Skiing");
-            trainingWagon = new TrainingWagon("Trampolin");
+            trainingWagon = new TrainingWagon();
+            trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }

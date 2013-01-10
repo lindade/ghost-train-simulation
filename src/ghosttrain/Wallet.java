@@ -19,15 +19,23 @@ public class Wallet {
         coins += coin;
     }
     
+    public void subCoins(int coin){
+        coins -= coin;
+    }
+    
     public void getCoins(){
         System.out.println("Coins: " + coins);
     }
         
-    public void addPremiumCredits(int premiumCredits){
+    public void addPC(int premiumCredits){
         pc += premiumCredits;
     }
     
-    public void getPremiumCredits(){
+    public void subPC(int premiumCredits){
+        pc -= premiumCredits;
+    }
+    
+    public void getPC(){
         System.out.println("PremiumCredits: " + pc);
     }
 }

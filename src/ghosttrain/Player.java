@@ -1,6 +1,9 @@
 package ghosttrain;
 
+import exceptions.MaxWagonCountReached;
 import wagons.ActivityWagon;
+import wagons.FunWagon;
+import wagons.PassengerWagon;
 import wagons.Wagon;
 
 /**
@@ -10,11 +13,13 @@ import wagons.Wagon;
 public class Player {
 
     private int level;
+    private LevelAdmin la;
     private Wallet wallet;
     private Destination currentDestination;
     private Train train;
 
     public Player() {
+        la = new LevelAdmin();
         wallet = new Wallet();
         train = new Train();
 
@@ -60,14 +65,32 @@ public class Player {
     }
 
     public void buyPassengerWagon() {
-        // get PassengerWagon
         // sub coins
+        // ! cost must be variable depending on the cost in the shop for the pw 
+        int cost = 2;
+        wallet.subCoins(cost);
+        // get PassengerWagon
+        try{
+            PassengerWagon pw = new PassengerWagon();
+            train.addPassengerWagon(pw);
+        } catch (MaxWagonCountReached ex) {
+            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        }
         System.out.println("buy passenger wagon");
     }
 
     public void buyActivityWagon() {
-        // get ActivityWagon
         // sub coins
+        // ! cost must be variable depending on the cost in the shop for the pw 
+        int cost = 2;
+        wallet.subCoins(cost);
+        // get ActivityWagon
+        try{
+            ActivityWagon aw = new FunWagon();
+            train.addActivityWagon(aw);
+        } catch (MaxWagonCountReached ex) {
+            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        }
         System.out.println("buy activity wagon");
     }
     

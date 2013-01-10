@@ -9,19 +9,13 @@ import ghosttrain.Passenger;
  */
 public class TrainingWagon extends ActivityWagon {
 
-    public TrainingWagon(String name) throws MaxWagonCountReached {
+    public TrainingWagon() throws MaxWagonCountReached {
         super();
-        this.name = name;
     }
 
     @Override
     public void fillBucket() {
         bucket.fillBucket(demandEarning());
-    }
-
-    @Override
-    public String printName() {
-        return String.format("Trainingwagon: " + name + "\n");
     }
 
     @Override
