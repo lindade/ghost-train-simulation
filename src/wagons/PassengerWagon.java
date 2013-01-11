@@ -34,5 +34,14 @@ public class PassengerWagon extends Wagon {
             System.out.println("Passenger " + p.getName() + " has disembarked at " + currentDest.getName() + ".");
         }
     }
+    
+    /**
+     * 
+     * @return number of all passengers who ever left the train
+     */
+    public int tellLevelAdmin() {
+        System.out.println("tellLevelAdmin " + offBoardedPassengersCount);
+        return offBoardedPassengersCount;
+    }
 
 }

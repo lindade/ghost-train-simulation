@@ -90,14 +90,15 @@ public class WagonTest {
             eatingWagon.addPassenger(p12);
             eatingWagon.addPassenger(p13);
             //test if maximum number of passengers is limited to 3 
-            eatingWagon.addPassenger(p1);
+            //eatingWagon.addPassenger(p1);
         } catch (MaxPassengerCapacityReachedException ex) {
             // automatically generated after Logger
             Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         eatingWagon.demandEarning();
-
-        System.out.println("Is Berlin available: " + Schedule.doesDestinationExist("Berlin"));
+        
+        // Asks if Berlin exists as a destination
+        //System.out.println("Is Berlin available: " + Schedule.doesDestinationExist("Berlin"));
 
 
         Passenger p21 = new Passenger("Gregor", 3, 4, 3, new Destination("Berlin"));
@@ -116,7 +117,7 @@ public class WagonTest {
         
         /**
          * Test case:
-         * set maximum wagon counter to 5, tested if more than 5 wagons could be build.
+         * set temporary maximum wagon counter to 5, tested if more than 5 wagons could be build.
          */
         try {
             trainingWagon = new TrainingWagon();

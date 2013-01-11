@@ -16,7 +16,7 @@ public abstract class Wagon {
     private List<Passenger> passengers;
     private static final int MAX_PASSENGER_CAPACITY = 3;
     private static int wagonCount = 0;
-    private static int maxWagonCount = 50;
+    private static final int MAX_WAGON_COUNT = 50;
 
     public Wagon() throws MaxWagonCountReached {
         increaseWagonCount();
@@ -32,7 +32,7 @@ public abstract class Wagon {
      * @throws MaxWagonCountReached 
      */
     private static void increaseWagonCount() throws MaxWagonCountReached {
-        if (wagonCount < maxWagonCount) {
+        if (wagonCount < MAX_WAGON_COUNT) {
             wagonCount++;
         } else {
             throw new MaxWagonCountReached("Train already has maximum number of wagons");

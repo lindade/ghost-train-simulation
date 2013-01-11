@@ -36,6 +36,6 @@ public class GhostTrain {
         train.dropOffPassenger();
         player.collectIncome();
         player.buyPassengerWagon();
-        player.buyActivityWagon();
+        player.buyEatingWagon();
     }
 }

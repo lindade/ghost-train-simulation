@@ -13,7 +13,8 @@ public class Schedule {
         "Cairo", "Peking", "Tokyo", "Sydney", "Rio de Janiero", "San Francisco",
         "New York", "Havanna", "Limbo2", "Limbo3", "Limbo4", "Limbo5"};
     // distance from preceding city to this city
-    private static final int[] DISTANCE_TO_CITIES = {2000, 4000, 6000, 8000, 5000};
+    private static final int[] DISTANCE_TO_CITIES = { 1400, 1600, 1800, 2000,
+        4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000};
     private static int availableCities = 3; // initially only "Limbo1", "London", "Paris"
     private int currentCity = 0; // starting in Limbo1
     private ArrayList<Destination> currentSchedule;
