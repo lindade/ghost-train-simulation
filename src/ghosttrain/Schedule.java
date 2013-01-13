@@ -78,7 +78,7 @@ public class Schedule {
      * @param currentCity the currentCity to set
      */
     public void setCurrentCity(int currentCity) {
-        if (currentCity == availableCities - 1) {
+        if (currentCity == availableCities) {
             this.currentCity = 0;
         } else {
             this.currentCity = currentCity;

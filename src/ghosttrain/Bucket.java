@@ -46,7 +46,7 @@ public class Bucket {
         return capacity;
     }
 
-    private void setCapacity(int capacityUpgrade) {
+    public void setCapacity(int capacityUpgrade) {
         capacity += capacityUpgrade;
     }
 }

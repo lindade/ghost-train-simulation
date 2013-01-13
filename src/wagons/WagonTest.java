@@ -114,6 +114,9 @@ public class WagonTest {
             Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         trainingWagon.demandEarning();
+        trainingWagon.removePassenger(p22);
+        System.out.println("Passenger " + p22.getName() + " unfortunately jumped out of the window. He will not be able to earn any money anymore. minus " + p22.getTrainingValue() );
+        trainingWagon.demandEarning();
         
         /**
          * Test case:

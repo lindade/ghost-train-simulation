@@ -17,28 +17,29 @@ public class Player {
     protected int level;
     private LevelAdmin la;
     private Wallet wallet;
-    private Destination currentDestination;
     private Train train;
+    // das muss nur der zug wissen 
 
     public Player() {
         la = new LevelAdmin();
-        level = la.getLevel();
+        level = la.getLevel(); // from the start 1
         wallet = new Wallet();
-        train = new Train();
+        train = new Train(la);
     }
 
     public int getLevel() {
+        System.out.println("level: "+ level);
         return level;
     }
     
-    public Destination getCurrentDestination(){
-        return currentDestination;
+    public void setLevel(){
+        this.level = la.getLevel();
     }
     
-    public void setCurrentDestination(){
-        currentDestination = train.getCurrentDestination();
+     public Train getTrain() {
+        return train;
     }
-
+    
     public void loadPassengers() {
         //train.set
         System.out.println("load passengers");
@@ -70,16 +71,22 @@ public class Player {
         System.out.println("switch passenger who can exit to passenger wagons");
     }
 
+    /**
+     * from here on should the methods bodies be in the shop class 
+     */
     public void buyPassengerWagon() {
         // get PassengerWagon
         try {
             PassengerWagon pw = new PassengerWagon();
             train.addPassengerWagon(pw);
+            //add LevelAdmin to PassengerWagon
+            pw.addPassengerListener(la);
             // sub coins
             // ! cost must be variable depending on the cost in the shop for the pw 
             int cost = 2;
             wallet.subCoins(cost);
             System.out.println("bought passenger wagon");
+            System.out.println();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }
@@ -95,6 +102,7 @@ public class Player {
             int cost = 2;
             wallet.subCoins(cost);
             System.out.println("bought fun wagon");
+            System.out.println();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }
@@ -110,11 +118,12 @@ public class Player {
             int cost = 2;
             wallet.subCoins(cost);
             System.out.println("bought eating wagon");
+            System.out.println();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }
     }
-
+    
     public void buyTrainingWagon() {
         // get ActivityWagon
         try {
@@ -125,6 +134,7 @@ public class Player {
             int cost = 2;
             wallet.subCoins(cost);
             System.out.println("bought training wagon");
+            System.out.println();
         } catch (MaxWagonCountReached ex) {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }

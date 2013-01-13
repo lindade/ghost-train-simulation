@@ -19,49 +19,46 @@ public class Train {
     private Engine engine;
     private List<Wagon> ratioWagons;
     private Schedule theSchedule;
-    private int deboardedPassengers;
 
-    public Train() {
+    public Train(PassengerListener pL) {
         engine = new Engine();
         ratioWagons = new ArrayList<Wagon>();
         theSchedule = new Schedule(3);
-        createFirstWagons();
+        createFirstWagons(pL);
     }
     
     /**
      * @param pw 
+     * add Passenger Wagons to list: wagons
      */
-    //add Passenger Wagons to list: wagons
     public void addPassengerWagon(PassengerWagon pw) {
         ratioWagons.add(pw);
-        System.out.println("PassengerWagon List: " + ratioWagons);
+        System.out.println("added an passenger wagon to the overall wagon list: " + ratioWagons);
     }
 
     /**
      * @param aw 
+     * add Activity Wagons to list: wagons
      */
-    //add Activity Wagons to list: wagons
     public void addActivityWagon(ActivityWagon aw) {
         ratioWagons.add(aw);
-        System.out.println("ActivityWagon List: " + ratioWagons);
+        System.out.println("added an activity wagon to the overall wagon list: " + ratioWagons);
     }
-
+    
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
                 PassengerWagon pw = (PassengerWagon) w;
                 pw.getOff(this.getCurrentDestination());
-                int dP = pw.tellLevelAdmin();
-                setDeboardedPassengers(dP);
+                System.out.println("dropoffPassenger");
             }
         }
     }
-       
-    private void setDeboardedPassengers(int deboardedPassengers) {
-        this.deboardedPassengers = deboardedPassengers;
-    }
 
+    /**
+     * this method must be called when the train approches at the new destination
+     */
     public void enterNextCity() {
         Destination d = theSchedule.getNextStop();
         //wait or do something for time d.getDistance()
@@ -73,6 +70,10 @@ public class Train {
     public Destination getCurrentDestination() {
         return theSchedule.getCurrentStop();
     }
+    
+    public Destination getNextDestination() {
+        return theSchedule.getNextStop();
+    }
 
     public List<Wagon> getWagons() {
         return ratioWagons;
@@ -83,9 +84,10 @@ public class Train {
      * The player gets one passenger wagon and one activity wagon.
      * The activity wagon is an eating wagon by default.
      */
-    private void createFirstWagons() {
+    private void createFirstWagons(PassengerListener passengerListener) {
         try {
             PassengerWagon pw = new PassengerWagon();
+            pw.addPassengerListener(passengerListener);
             addPassengerWagon(pw);
             ActivityWagon aw = new EatingWagon();
             addActivityWagon(aw);

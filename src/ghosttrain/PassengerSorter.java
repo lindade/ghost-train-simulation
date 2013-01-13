@@ -62,7 +62,7 @@ public class PassengerSorter {
      
      public void sortRandomInWagon(List<Passenger> passengerList){
          for(Passenger p : passengerList){
-             //put p into any wagon
+             //put p into any wagon wagon.addPassenger(p);
          }
      }
 }

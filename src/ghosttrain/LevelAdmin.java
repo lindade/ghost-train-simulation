@@ -9,7 +9,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
  * 
  * @author Linda
  */
-public class LevelAdmin {
+public class LevelAdmin implements PassengerListener{
     
     private int dropOffCounter;
     private int level;
@@ -29,6 +29,7 @@ public class LevelAdmin {
     }
     
     /**
+     * works not propably
      * raise the level of the player 
      * @param player 
      */
@@ -39,15 +40,17 @@ public class LevelAdmin {
             System.out.println("level was increased");
         }
     }
-    
-    public void incrementDropOffCounter(){
-        dropOffCounter++;
-    }
 
     public int getLevel() {
         return level;
     }
-    
-    
+
+    @Override
+    public void passengersGotOff(int numOfPassengers) {
+        dropOffCounter += numOfPassengers;
+        //raiseLevel();
+        System.out.println("Drop of counter was increased by " + numOfPassengers);
+        System.out.println("Drop of counter is " + dropOffCounter);
+    }
     
 }
