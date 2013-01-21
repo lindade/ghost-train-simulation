@@ -22,7 +22,7 @@ public class Train {
 
     public Train(PassengerListener pL) {
         engine = new Engine();
-        ratioWagons = new ArrayList<Wagon>();
+        ratioWagons = new ArrayList<>();
         theSchedule = new Schedule(3);
         createFirstWagons(pL);
     }
@@ -57,7 +57,7 @@ public class Train {
     }
 
     /**
-     * this method must be called when the train approches at the new destination
+     * this method must be called when the train approaches at the new destination
      */
     public void enterNextCity() {
         Destination d = theSchedule.getNextStop();

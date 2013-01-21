@@ -12,13 +12,12 @@ import wagons.Wagon;
  *
  * @author Linda
  */
-public class Player {
+public class Player implements LevelListener {
 
     protected int level;
     private LevelAdmin la;
     private Wallet wallet;
     private Train train;
-    // das muss nur der zug wissen 
 
     public Player() {
         la = new LevelAdmin();
@@ -32,8 +31,8 @@ public class Player {
         return level;
     }
     
-    public void setLevel(){
-        this.level = la.getLevel();
+    public void setLevel(int newlevel){
+        this.level = newlevel;
     }
     
      public Train getTrain() {
@@ -144,5 +143,10 @@ public class Player {
         // get Engine
         // sub coins
         System.out.println("bought engine");
+    }
+
+    @Override
+    public void levelUp(int level) {
+        setLevel(level);
     }
 }

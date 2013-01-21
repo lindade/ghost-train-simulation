@@ -27,7 +27,7 @@ public class PassengerWagon extends Wagon {
      */
     public void getOff(Destination currentDest) {
         // drop off passenger at correct destination
-        List<Passenger> passengersToDelete = new ArrayList<Passenger>();
+        List<Passenger> passengersToDelete = new ArrayList<>();
         for (Passenger p : getPassengers()) {
             if (p.getDeboarding() == currentDest) {
                 passengersToDelete.add(p);

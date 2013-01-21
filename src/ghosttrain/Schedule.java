@@ -9,13 +9,14 @@ import java.util.HashMap;
  */
 public class Schedule {
 
-    private static final String[] AVAILABLE_CITIES = {"Limbo1", "London", "Paris",
-        "Cairo", "Peking", "Tokyo", "Sydney", "Rio de Janiero", "San Francisco",
-        "New York", "Havanna", "Limbo2", "Limbo3", "Limbo4", "Limbo5"};
+    private static final String[] AVAILABLE_CITIES = {"Limbo", "London",
+        "Berlin", "Cairo", "Beijing", "Istanbul", "Sydney", "Rio de Janiero",
+        "San Francisco", "New York", "Havana", "Moscow", "Burial Ground",
+        "Necropolis", "Underworld", "City of the Dead"};
     // distance from preceding city to this city
     private static final int[] DISTANCE_TO_CITIES = { 1400, 1600, 1800, 2000,
         4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000};
-    private static int availableCities = 3; // initially only "Limbo1", "London", "Paris"
+    private static int availableCities = 3; // initially only "Limbo", "London", "Berlin"
     private int currentCity = 0; // starting in Limbo1
     private ArrayList<Destination> currentSchedule;
     public static final HashMap<String, Integer> DESTINATIONS;

@@ -7,10 +7,17 @@ import wagons.PassengerWagon;
 import wagons.Wagon;
 
 /**
- * the simulation loop: at destination traveling 1 Passenger Boarding 2 sort
- * Passengers into AW 3 sort remaining Passengers into PW 4 start train 5
- * produce income 6 collect income 7 sort Passengers into PW 8 Passenger getOff
- * train from PW 9 cash check 10 buy upgrades
+ * the simulation loop: 
+ * at destination                                       traveling
+ * 1 Passenger Boarding 
+ * 2 sort Passengers into AW
+ * 3 sort remaining Passengers into PW
+ * 4 start train                                        5 produce income
+ *                                                      6 collect income
+ *                                                      7 sort Passengers into PW
+ * 8 Passenger getOff train from PW
+ * 9 cash check
+ * 10 buy upgrades
  *
  * @author Linda
  */
@@ -38,7 +45,7 @@ public class GhostTrain {
         }
         player.getTrain().enterNextCity();
         log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-        log.log(Level.INFO, "Next city: {0}", player.getTrain().getCurrentDestination().getName());
+        log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         player.getTrain().dropOffPassenger();
         player.collectIncome();
         player.buyPassengerWagon();
@@ -62,14 +69,14 @@ public class GhostTrain {
         // train approaches at next destination
         player.getTrain().enterNextCity();
         log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-        log.log(Level.INFO, "Next city: {0}", player.getTrain().getCurrentDestination().getName());
+        log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         player.getTrain().dropOffPassenger();
 
         // test the schedule
         for (int i = 0; i < 4; i++) {
             player.getTrain().enterNextCity();
             log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-            log.log(Level.INFO, "Next city: {0}", player.getTrain().getCurrentDestination().getName());
+            log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         }
         player.getLevel();
     }

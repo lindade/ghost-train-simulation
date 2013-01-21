@@ -45,18 +45,6 @@ public class LevelAdminTest {
     }
 
     /**
-     * Test of incrementDropOffCounter method, of class LevelAdmin.
-     */
-    @Test
-    public void testIncrementDropOffCounter() {
-        System.out.println("incrementDropOffCounter");
-        LevelAdmin instance = new LevelAdmin();
-        instance.incrementDropOffCounter();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getLevel method, of class LevelAdmin.
      */
     @Test
