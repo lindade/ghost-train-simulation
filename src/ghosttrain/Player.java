@@ -21,7 +21,8 @@ public class Player implements LevelListener {
 
     public Player() {
         la = new LevelAdmin();
-        level = la.getLevel(); // from the start 1
+        la.addLevelListener(this);
+        level = la.getLevelFromLevelAdmin(); // from the start 1
         wallet = new Wallet();
         train = new Train(la);
     }
@@ -31,7 +32,7 @@ public class Player implements LevelListener {
         return level;
     }
     
-    public void setLevel(int newlevel){
+    private void setLevel(int newlevel){
         this.level = newlevel;
     }
     
