@@ -52,17 +52,19 @@ public class GhostTrain {
         player.buyEatingWagon();
 
         /**
-         * here I just add passengers to the empty passengerWagons it is a bug
-         * to leave the new activityWagons empty they should also be filled with
-         * new passengers if i would fill in passengers into every wagon the
-         * activity wagon where nobody got off from is still full with
+         * here I just add passengers to the empty passengerWagons
+         * it is a bug to leave the new activityWagons empty
+         * they should also be filled with new passengers if i would fill in
+         * passengers into every empty wagon 
+         * the activity wagon where nobody got off from is still full with
          * passengers
+         * each passenger wagon is filled with the same instance of an passenger
          */
         for (Wagon w : player.getTrain().getWagons()) {
             if (w instanceof PassengerWagon) {
                 w.addPassenger(new Passenger("name" + count++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
                 w.addPassenger(new Passenger("name" + count1++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
-                w.addPassenger(new Passenger("name" + count2++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
+//                w.addPassenger(new Passenger("name" + count2++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
             }
         }
 
