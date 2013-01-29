@@ -10,7 +10,6 @@ import ghosttrain.Bucket;
 public abstract class ActivityWagon extends Wagon {
  
     protected Bucket bucket;
-    //protected String name;
 
     public ActivityWagon() throws MaxWagonCountReached {
         super();
@@ -27,5 +26,7 @@ public abstract class ActivityWagon extends Wagon {
         return bucket;
     }
     
-    
+    public void bucketUpgrade(int upgrade){
+        bucket.setCapacity(upgrade);
+    }
 }

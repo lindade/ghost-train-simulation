@@ -13,7 +13,7 @@ import java.util.List;
  */
 public abstract class Wagon {
 
-    private List<Passenger> passengers;
+    protected List<Passenger> passengers;
     private static final int MAX_PASSENGER_CAPACITY = 3;
     private static int wagonCount = 0;
     private static final int MAX_WAGON_COUNT = 50;
@@ -59,5 +59,12 @@ public abstract class Wagon {
         for (Passenger pas : getPassengers()) {
             System.out.print(pas.getName() + "\t");
         }
+    }
+
+    public boolean seatfree() {
+        if(passengers.size() < MAX_PASSENGER_CAPACITY){
+            return true;
+        }
+        return false;
     }
 }

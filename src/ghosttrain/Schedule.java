@@ -15,12 +15,15 @@ public class Schedule {
         "Necropolis", "Underworld", "City of the Dead"};
     // distance from preceding city to this city
     private static final int[] DISTANCE_TO_CITIES = { 1400, 1600, 1800, 2000,
-        4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000};
+        4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000, 20200, 20400, 20600, 20800};
     private static int availableCities = 3; // initially only "Limbo", "London", "Berlin"
     private int currentCity = 0; // starting in Limbo1
     private ArrayList<Destination> currentSchedule;
-    public static final HashMap<String, Integer> DESTINATIONS;
+    public static final HashMap<String, Integer> DESTINATIONS; // contains the destination name and the index of the destination list
     
+    /**
+     * HashMap -> (DestinationName, Integer)
+     */
     static {
         DESTINATIONS = new HashMap<>();
         int index = 0;
@@ -30,28 +33,39 @@ public class Schedule {
         }
     }
     
-    /**
-     * HashMap -> (DestinationName, Int)
+    /** 
      * ArrayList<Destination>
      * 
      * 
      **/
-    
-
     public Schedule(int initCities) {
         availableCities = initCities;
-        currentSchedule = new ArrayList<Destination>(availableCities);
-        for (int i = 0; i < availableCities; i++) {
+        currentSchedule = new ArrayList<Destination>();
+        for (int i = 0; i < AVAILABLE_CITIES.length; i++) {
             currentSchedule.add(new Destination(AVAILABLE_CITIES[i], DISTANCE_TO_CITIES[i]));
         }
     }
-
+    
     public Schedule() {
         this(3);
     }
 
     public int getCitiesInWorld() {
         return AVAILABLE_CITIES.length;
+    }
+    
+    public Destination getDesiredDestination(int index) {
+        if( index <= availableCities) {
+            return currentSchedule.get(index);
+        }
+        else{
+            return null;
+        }
+    }
+    
+    public Destination getDesiredDestination(String cityName) {
+        int index = DESTINATIONS.get(cityName);
+        return currentSchedule.get(index);
     }
 
     /**
@@ -62,7 +76,8 @@ public class Schedule {
     }
 
     /**
-     * @param availableCities the availableCities to set
+     * @param availableCities 
+     * If Level Up the availableCities to set
      */
     public void setAvailableCities(int availableCities) {
         this.availableCities = availableCities;
@@ -74,7 +89,7 @@ public class Schedule {
     public int getCurrentCity() {
         return currentCity;
     }
-
+    
     /**
      * @param currentCity the currentCity to set
      */

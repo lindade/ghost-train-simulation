@@ -13,12 +13,12 @@ public class Engine {
     }
 
     /**
-     * the quantityUprgade should be variable and not the constant 3
+     * engine upgrade extends the number of wagons which can be dragged by the engine
      */
-    public void engineUpgrade() {
+    public void engineUpgrade(int upgrade) {
         System.out.println("Engine was capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
-        quantityOfWagons += 3;
-        System.out.println("Engine is capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
+        quantityOfWagons = upgrade;
+        System.out.println("Engine is now capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
     }
 
     public int getQuantityOfWagons() {

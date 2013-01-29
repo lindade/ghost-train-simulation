@@ -18,6 +18,7 @@ public class Player implements LevelListener {
     private LevelAdmin la;
     private Wallet wallet;
     private Train train;
+    private Store store;
 
     public Player() {
         la = new LevelAdmin();
@@ -25,21 +26,31 @@ public class Player implements LevelListener {
         level = la.getLevelFromLevelAdmin(); // from the start 1
         wallet = new Wallet();
         train = new Train(la);
+        store = new Store(this);
     }
 
     public int getLevel() {
-        System.out.println("level: "+ level);
+        System.out.println("level: " + level);
         return level;
     }
-    
-    private void setLevel(int newlevel){
+
+    private void setLevel(int newlevel) {
         this.level = newlevel;
     }
-    
-     public Train getTrain() {
+
+    @Override
+    public void levelUp(int level) {
+        setLevel(level);
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public Train getTrain() {
         return train;
     }
-    
+
     public void loadPassengers() {
         //train.set
         System.out.println("load passengers");
@@ -72,23 +83,22 @@ public class Player implements LevelListener {
     }
 
     /**
-     * from here on should the methods bodies be in the shop class 
+     * create exception and do a try-catch block in the following methods instead of the if-else-branch
      */
     public void buyPassengerWagon() {
-        // get PassengerWagon
-        try {
-            PassengerWagon pw = new PassengerWagon();
+        // limit wagons to the strength of the engine
+        if (train.getEngine().getQuantityOfWagons() < train.getWagons().size()) {
+            // get PassengerWagon
+            PassengerWagon pw = store.buyPassengerWagon();
             train.addPassengerWagon(pw);
             //add LevelAdmin to PassengerWagon
             pw.addPassengerListener(la);
-            // sub coins
-            // ! cost must be variable depending on the cost in the shop for the pw 
-            int cost = 2;
-            wallet.subCoins(cost);
-            System.out.println("bought passenger wagon");
-            System.out.println();
-        } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        } else{
+            System.out.println("You cannot buy another wagon. "
+                    + "Your Engine can only pull " 
+                    + train.getEngine().getQuantityOfWagons() 
+                    + " wagons. You have allready " 
+                    + train.getWagons().size() + " wagons.");
         }
     }
 
@@ -123,7 +133,7 @@ public class Player implements LevelListener {
             System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
         }
     }
-    
+
     public void buyTrainingWagon() {
         // get ActivityWagon
         try {
@@ -142,12 +152,10 @@ public class Player implements LevelListener {
 
     public void buyEngine() {
         // get Engine
+        train.getEngine().engineUpgrade(6);
         // sub coins
+        int cost = 2;
+        wallet.subCoins(cost);
         System.out.println("bought engine");
-    }
-
-    @Override
-    public void levelUp(int level) {
-        setLevel(level);
     }
 }

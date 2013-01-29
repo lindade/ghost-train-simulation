@@ -1,24 +1,27 @@
 package ghosttrain;
 
-import ghosttrain.Destination;
-import ghosttrain.Passenger;
 import java.util.Random;
 
 /**
- *
+ * the destination where the passenger wants to leave does never match with the
+ * current destination have to check the references
+ * 
+ * have to test the parameters of the passengers
+ * 
  * @author Linda
  */
 public class PassengerFactory {
 
-    private Destination destination;
     private int dependsOnDestination;
     private Random r = new Random();
+    int count = 1;
 
     public PassengerFactory() {
     }
 
     /**
-     *
+     * here is decided how high the parameter values of a passenger are depending
+     * on the destination from which he boarded the train
      * @param currentDest
      */
     public int getRandNumDependOnDest(Destination currentDest) {
@@ -76,13 +79,32 @@ public class PassengerFactory {
         return dependingOnDestination;
     }
 
-    public Passenger createPassenger() {
-//        getRandNumDependOnDest(train.getCurrentDestination());
+
+    
+    /**
+     * 
+     * @param currentDestination
+     * @return 
+     */
+    public Passenger createPassenger(Schedule schedule) {
+        dependsOnDestination = getRandNumDependOnDest(schedule.getCurrentStop());
+        int available = schedule.getAvailableCities();
+        //bereich ist 0..available+1
+        
 //        creates random numbers between one and 5
 //        1 + random.nextInt(6);
 //        creates random numbers between zero and 5
 //        random.nextInt(6);
-        Passenger p = new Passenger("Eins",1 + r.nextInt(dependsOnDestination),1 + r.nextInt(dependsOnDestination),1 + r.nextInt(dependsOnDestination), new Destination("Limbo"));
+        Passenger p = new Passenger("Name"+ count++,
+                1 + r.nextInt(dependsOnDestination),
+                1 + r.nextInt(dependsOnDestination),
+                1 + r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(available+1) )); // the destination has to be changed
+        System.out.printf("passenger parameter: %d\t%d\t%d\n", p.getEatingValue(), p.getFunValue(), p.getTrainingValue());
+        System.out.printf("passenger deboarding destination: %s\n", p.getDeboarding().getName());
+        /**
+         * The last parameter has to be one of the currently available Destinations or
+         * the next Destination available on the schedule
+        */
         return p;
     }
 }

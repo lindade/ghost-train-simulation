@@ -30,41 +30,57 @@ public class GhostTrain {
      */
     public static void main(String[] args) throws MaxPassengerCapacityReachedException {
         Player player = new Player();
+        PassengerFactory pF = new PassengerFactory();
         log.setLevel(Level.ALL);
+        
+        //print level
         player.getLevel();
-
-        player.loadPassengers(); // should put some passengers in the train
-        player.staffActivityWagon();
-        int count = 0;
-        int count1 = 3;
-        int count2 = 6;
+        
+        //print current destination name
+        //System.out.println("" + player.getTrain().getCurrentDestination().getName());
+        
+        //print the engines quantity of wagons
+        //System.out.println("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
+        log.log(Level.INFO,"engine quantity: {0} " , player.getTrain().getEngine().getQuantityOfWagons());
+        player.loadPassengers(); // should put some passengers in the passenger wagons
+        player.staffActivityWagon(); // should put some passengers into the activity wagons
+        
+        // fill Passengers into passenger wagons
         for (Wagon w : player.getTrain().getWagons()) {
-            w.addPassenger(new Passenger("name" + count++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
-            w.addPassenger(new Passenger("name" + count1++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
-            w.addPassenger(new Passenger("name" + count2++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
+            if (w instanceof PassengerWagon) {
+                // einstieg, ausstieg
+                while(w.getPassengers().size() < 3){
+                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));  
+                }
+            }
         }
-        player.getTrain().enterNextCity();
+        
+        player.getTrain().enterNextCity(); // the train approaches the next city
+        
+//        final String KEY = "Limbo"; // für benutzereingabe
+//        if( Schedule.doesDestinationExist(KEY) ) {
+//            Schedule.DESTINATIONS.get(KEY);
+//        }
+        
         log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
         log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         player.getTrain().dropOffPassenger();
         player.collectIncome();
+        player.getTrain().getEngine().engineUpgrade(6); // buy engine upgrade
         player.buyPassengerWagon();
         player.buyEatingWagon();
+//        player.getWallet().getCoins();
 
         /**
-         * here I just add passengers to the empty passengerWagons
-         * it is a bug to leave the new activityWagons empty
-         * they should also be filled with new passengers if i would fill in
-         * passengers into every empty wagon 
-         * the activity wagon where nobody got off from is still full with
-         * passengers
-         * each passenger wagon is filled with the same instance of an passenger
+         * here I just add 3 passengers to the empty passenger wagons
+         * the activity wagon is still empty
          */
         for (Wagon w : player.getTrain().getWagons()) {
-            if (w instanceof PassengerWagon) {
-                w.addPassenger(new Passenger("name" + count++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
-                w.addPassenger(new Passenger("name" + count1++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
-//                w.addPassenger(new Passenger("name" + count2++, (int) Math.random() * 3, (int) Math.random() * 3, (int) Math.random() * 3, player.getTrain().getNextDestination()));
+            if (w instanceof PassengerWagon && w.seatfree()) {
+                // einstieg, ausstieg
+                while(w.getPassengers().size() < 3){
+                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));  
+                }
             }
         }
 
@@ -74,11 +90,12 @@ public class GhostTrain {
         log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         player.getTrain().dropOffPassenger();
 
-        // test the schedule
-        for (int i = 0; i < 4; i++) {
+        // test the schedule, drive through all available destinations
+        for (int i = 0; i < 6; i++) {
             player.getTrain().enterNextCity();
             log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
             log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
+            player.getTrain().dropOffPassenger();
         }
         player.getLevel();
     }

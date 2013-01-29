@@ -1,7 +1,5 @@
 package ghosttrain;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 /**
  * this class sets the level of the player
  * by counting how many passengers have been dropped off

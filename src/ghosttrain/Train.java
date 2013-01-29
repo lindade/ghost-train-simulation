@@ -79,6 +79,14 @@ public class Train {
         return ratioWagons;
     }
     
+    public Engine getEngine() {
+        return engine;
+    }
+    
+    public Schedule getSchedule() {
+        return theSchedule;
+    }
+    
     /**
      * creates the first two wagons when a player is starting a game.
      * The player gets one passenger wagon and one activity wagon.
@@ -89,6 +97,7 @@ public class Train {
             PassengerWagon pw = new PassengerWagon();
             pw.addPassengerListener(passengerListener);
             addPassengerWagon(pw);
+            
             ActivityWagon aw = new EatingWagon();
             addActivityWagon(aw);
         } catch (MaxWagonCountReached ex) {

@@ -10,7 +10,7 @@ public class Bucket {
     private int content;
 
     public Bucket() {
-        capacity = 10;
+        capacity = 270;
         content = 0;
     }
 
@@ -47,6 +47,6 @@ public class Bucket {
     }
 
     public void setCapacity(int capacityUpgrade) {
-        capacity += capacityUpgrade;
+        capacity = capacityUpgrade;
     }
 }

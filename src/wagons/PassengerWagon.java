@@ -2,7 +2,6 @@ package wagons;
 
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
-import ghosttrain.LevelAdmin;
 import ghosttrain.Passenger;
 import ghosttrain.PassengerListener;
 import java.util.ArrayList;
@@ -40,6 +39,7 @@ public class PassengerWagon extends Wagon {
             System.out.println("Passenger " + p.getName() + " has disembarked at " + currentDest.getName() + ".");
         }
         if (passengerListener != null) {
+            //the counter of the overall persons who left is increased
             passengerListener.passengersGotOff(passengersToDelete.size());
         }
     }
