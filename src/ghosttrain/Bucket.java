@@ -7,10 +7,9 @@ package ghosttrain;
 public class Bucket {
 
     private int capacity;
-    private int[] capacityUpgrade = {270, 540, 2160};
+    private int[] capacityUpgrade = {270, 540, 2160, 4320};
      private int numberOfUpgrade = 0;
     /**
-     * the first number: 270 is just a placeholder
      * As a result the index is the same like the number of the current bucketUpgrade
      * 270 default value
      * 540 first upgrade
@@ -18,11 +17,10 @@ public class Bucket {
      * 4320 third upgrade only with premium credits
      * 12960 fourth upgrade only with premium credits
      */
-    private int upgradeIndex = 1;
     private int content;
 
     public Bucket() {
-        capacity = 270;
+        capacity = capacityUpgrade[0];
         content = 0;
     }
 
@@ -58,11 +56,14 @@ public class Bucket {
         return capacity;
     }
 
-    public void setCapacity(int capacityUpgrade) {
-        capacity = capacityUpgrade;
-    }
-
     public int getNumberOfUpgrade() {
         return numberOfUpgrade;
+    }
+    
+    public void upgrade() {
+        if( numberOfUpgrade < capacityUpgrade.length) {
+            numberOfUpgrade++;
+            capacity = capacityUpgrade[numberOfUpgrade];
+        }
     }
 }

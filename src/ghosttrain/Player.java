@@ -1,11 +1,8 @@
 package ghosttrain;
 
-import exceptions.MaxWagonCountReached;
+import com.sun.istack.internal.logging.Logger;
 import wagons.ActivityWagon;
-import wagons.EatingWagon;
-import wagons.FunWagon;
 import wagons.PassengerWagon;
-import wagons.TrainingWagon;
 import wagons.Wagon;
 
 /**
@@ -21,6 +18,7 @@ public class Player implements LevelListener {
     private Store store;
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
+    private static final Logger log = Logger.getLogger(Player.class);
 
     public Player() {
         la = new LevelAdmin();
@@ -33,7 +31,7 @@ public class Player implements LevelListener {
     }
 
     public int getLevel() {
-        System.out.println("level: " + level);
+        log.info("level: " + level);
         return level;
     }
 
@@ -56,15 +54,15 @@ public class Player implements LevelListener {
 
     public void loadPassengers() {
         //train.set
-        System.out.println("load passengers");
+        log.info("load passengers");
     }
 
     public void staffActivityWagon() {
-        System.out.println("staff activity wagons");
+        log.info("staff activity wagons");
     }
 
     public void staffPassengerWagon() {
-        System.out.println("staff passenger wagons");
+        log.info("staff passenger wagons");
     }
 
     public void collectIncome() {
@@ -77,12 +75,12 @@ public class Player implements LevelListener {
                 wallet.addCoins(coins);
             }
         }
-        System.out.println("collect income");
+        log.info("collect income");
         wallet.getCoins();
     }
 
     public void switchPassengersToPassengerWagon() {
-        System.out.println("switch passenger who can exit to passenger wagons");
+        log.info("switch passenger who can exit to passenger wagons");
     }
 
     /**
@@ -100,7 +98,7 @@ public class Player implements LevelListener {
                 pw.addPassengerListener(la);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
+            log.info("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -117,7 +115,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
+            log.info("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -134,7 +132,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
+            log.info("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -151,7 +149,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
+            log.info("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -166,7 +164,7 @@ public class Player implements LevelListener {
             store.buyEngine();
             index++;
         } else {
-            System.out.println("You cannot buy a new engine. First you have to level up."
+            log.info("You cannot buy a new engine. First you have to level up."
                     + " You´re at level " + getLevel() + ". You have to reach level "
                     + levelUnlockEngine[index] + " to be able to purchase a new engine.");
         }

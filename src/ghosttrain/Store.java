@@ -13,7 +13,6 @@ import wagons.TrainingWagon;
  */
 public class Store {
 
-    private int level;
     private Player player;
     private int[] costCoinsPassengerWagon = {300, 2400, 8100, 19200, 37500,
         64800, 102900, 153600, 218700, 300000}; // 10
@@ -27,20 +26,10 @@ public class Store {
     private int[] costCoinsEngine = {2400, 8100, 19200, 37500, 64800, 102900,
         153600, 218700}; // 9
     private int indexE = 0;
-    private int[] costCoinsBucketUpgrade = {250, 375, 563}; // 3
-    private int indexBU = 0;
+    private int[] costCoinsBucketUpgrade = {375, 563}; // 2
 
     public Store(Player player) {
         this.player = player;
-        this.level = player.getLevel();
-    }
-
-    private void setLevel(int newlevel) {
-        this.level = newlevel;
-    }
-
-    public int getLevelFromStore() {
-        return level;
     }
 
     public PassengerWagon buyPassengerWagon() {
@@ -151,13 +140,14 @@ public class Store {
      */
     public void buyBucketUpgrade(ActivityWagon aw) {
         // determine costs
-        int cost = costCoinsBucketUpgrade[aw.getBucket().getNumberOfUpgrade()]; // -1 because the arrayIndex starts at zero
+        int cost = costCoinsBucketUpgrade[aw.getBucket().getNumberOfUpgrade()];
+        System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
         // verify if enough coins are in the wallet to purchase an engine
         if (player.getWallet().getCoins() >= cost) {
+            aw.bucketUpgrade();
             // sub coins
             player.getWallet().subCoins(cost);
-            indexE++;
-            System.out.println("bought engine");
+            System.out.println("bought bucket upgrade");
         } else {
             System.out.println("Not enough coins in the wallet to purchase an engine");
         }

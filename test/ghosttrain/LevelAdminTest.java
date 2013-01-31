@@ -52,7 +52,7 @@ public class LevelAdminTest {
         System.out.println("getLevel");
         LevelAdmin instance = new LevelAdmin();
         int expResult = 1;
-        int result = instance.getLevel();
+        int result = instance.getLevelFromLevelAdmin();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
