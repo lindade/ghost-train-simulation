@@ -28,52 +28,52 @@ public class PassengerFactory {
         int dependingOnDestination = 0;
         switch (currentDest.getName()) {
             case "Limbo":
-                dependingOnDestination = 5;
+                dependingOnDestination = 3;
                 break;
             case "London":
-                dependingOnDestination = 10;
+                dependingOnDestination = 3;
                 break;
             case "Berlin":
-                dependingOnDestination = 15;
+                dependingOnDestination = 3;
                 break;
             case "Cairo":
-                dependingOnDestination = 20;
+                dependingOnDestination = 5;
                 break;
             case "Beijing":
-                dependingOnDestination = 25;
+                dependingOnDestination = 5;
                 break;
             case "Istanbul":
-                dependingOnDestination = 30;
+                dependingOnDestination = 5;
                 break;
             case "Sydney":
-                dependingOnDestination = 35;
+                dependingOnDestination = 7;
                 break;
             case "Rio de Janiero":
-                dependingOnDestination = 40;
+                dependingOnDestination = 7;
                 break;
             case "San Francisco":
-                dependingOnDestination = 45;
+                dependingOnDestination = 7;
                 break;
             case "New York":
-                dependingOnDestination = 50;
+                dependingOnDestination = 9;
                 break;
             case "Havana":
-                dependingOnDestination = 55;
+                dependingOnDestination = 9;
                 break;
             case "Moscow":
-                dependingOnDestination = 60;
+                dependingOnDestination = 9;
                 break;
             case "Burial Ground":
-                dependingOnDestination = 65;
+                dependingOnDestination = 9;
                 break;
             case "Necropolis":
-                dependingOnDestination = 70;
+                dependingOnDestination = 12;
                 break;
             case "Underworld":
-                dependingOnDestination = 75;
+                dependingOnDestination = 12;
                 break;
             case "City of the Dead":
-                dependingOnDestination = 80;
+                dependingOnDestination = 12;
                 break;
         }
         return dependingOnDestination;
@@ -89,22 +89,22 @@ public class PassengerFactory {
     public Passenger createPassenger(Schedule schedule) {
         dependsOnDestination = getRandNumDependOnDest(schedule.getCurrentStop());
         int available = schedule.getAvailableCities();
-        //bereich ist 0..available+1
-        
-//        creates random numbers between one and 5
-//        1 + random.nextInt(6);
-//        creates random numbers between zero and 5
-//        random.nextInt(6);
-        Passenger p = new Passenger("Name"+ count++,
-                1 + r.nextInt(dependsOnDestination),
-                1 + r.nextInt(dependsOnDestination),
-                1 + r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(available+1) )); // the destination has to be changed
-        System.out.printf("passenger parameter: %d\t%d\t%d\n", p.getEatingValue(), p.getFunValue(), p.getTrainingValue());
-        System.out.printf("passenger deboarding destination: %s\n", p.getDeboarding().getName());
         /**
-         * The last parameter has to be one of the currently available Destinations or
-         * the next Destination available on the schedule
-        */
+         * creates random numbers between one and 5
+         * 1 + random.nextInt(6);
+         * creates random numbers between zero and 5
+         * random.nextInt(6);
+         */
+        Passenger p = new Passenger("Name"+ count++,
+                r.nextInt(dependsOnDestination),
+                r.nextInt(dependsOnDestination),
+                r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(available+1) ));
+                /**
+                 * The last parameter has to be one of the currently available Destinations or
+                 * the next Destination not yet available on the schedule
+                */
+        System.out.printf("passenger parameter: %d %d %d\n", p.getEatingValue(), p.getFunValue(), p.getTrainingValue());
+        System.out.printf("passenger deboarding destination: %s\n", p.getDeboarding().getName());
         return p;
     }
 }

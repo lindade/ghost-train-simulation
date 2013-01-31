@@ -23,8 +23,9 @@ public class Wallet {
         coins -= coin;
     }
     
-    public void getCoins(){
+    public int getCoins(){
         System.out.println("Coins: " + coins);
+        return coins;
     }
         
     public void addPC(int premiumCredits){
@@ -35,7 +36,8 @@ public class Wallet {
         pc -= premiumCredits;
     }
     
-    public void getPC(){
+    public int getPC(){
         System.out.println("PremiumCredits: " + pc);
+        return pc;
     }
 }

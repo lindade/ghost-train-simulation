@@ -7,14 +7,13 @@ import wagons.PassengerWagon;
 import wagons.Wagon;
 
 /**
- * the simulation loop: 
- * at destination                                       traveling
- * 1 Passenger Boarding 
+ * the simulation loop: at destination                          traveling
+ * 1 Passenger Boarding
  * 2 sort Passengers into AW
  * 3 sort remaining Passengers into PW
- * 4 start train                                        5 produce income
- *                                                      6 collect income
- *                                                      7 sort Passengers into PW
+ * 4 start train                                                5 produce income
+ *                                                              6 collect income
+ *                                                              7 sort Passengers into PW
  * 8 Passenger getOff train from PW
  * 9 cash check
  * 10 buy upgrades
@@ -31,72 +30,83 @@ public class GhostTrain {
     public static void main(String[] args) throws MaxPassengerCapacityReachedException {
         Player player = new Player();
         PassengerFactory pF = new PassengerFactory();
-        log.setLevel(Level.ALL);
-        
+        log.setLevel(Level.OFF);
+
         //print level
         player.getLevel();
-        
+
         //print current destination name
         //System.out.println("" + player.getTrain().getCurrentDestination().getName());
-        
+
         //print the engines quantity of wagons
         //System.out.println("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
-        log.log(Level.INFO,"engine quantity: {0} " , player.getTrain().getEngine().getQuantityOfWagons());
+        log.log(Level.INFO, "engine quantity: {0} ", player.getTrain().getEngine().getQuantityOfWagons());
         player.loadPassengers(); // should put some passengers in the passenger wagons
         player.staffActivityWagon(); // should put some passengers into the activity wagons
-        
+
         // fill Passengers into passenger wagons
         for (Wagon w : player.getTrain().getWagons()) {
             if (w instanceof PassengerWagon) {
                 // einstieg, ausstieg
-                while(w.getPassengers().size() < 3){
-                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));  
+                while (w.getPassengers().size() < 3) {
+                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
                 }
             }
         }
-        
+
         player.getTrain().enterNextCity(); // the train approaches the next city
-        
+
 //        final String KEY = "Limbo"; // für benutzereingabe
 //        if( Schedule.doesDestinationExist(KEY) ) {
 //            Schedule.DESTINATIONS.get(KEY);
 //        }
-        
+
         log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
         log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
         player.getTrain().dropOffPassenger();
         player.collectIncome();
-        player.getTrain().getEngine().engineUpgrade(6); // buy engine upgrade
+
+        // buy things. Test if the limit of the engine works
         player.buyPassengerWagon();
+        player.buyPassengerWagon(); // this should not work because of the wagon limitation
+        player.buyEngine(); // buy engine upgrade
+        player.buyFunWagon();
         player.buyEatingWagon();
-//        player.getWallet().getCoins();
+        player.buyTrainingWagon();
+        player.buyPassengerWagon(); // this should not work because of the wagon limitation
+        player.buyEngine(); // buy engine upgrade should not work
+        player.getWallet().getCoins();
 
         /**
-         * here I just add 3 passengers to the empty passenger wagons
-         * the activity wagon is still empty
+         * add 3 passengers to the empty passenger wagons the
+         * activity wagon is still empty
          */
         for (Wagon w : player.getTrain().getWagons()) {
             if (w instanceof PassengerWagon && w.seatfree()) {
                 // einstieg, ausstieg
-                while(w.getPassengers().size() < 3){
-                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));  
+                while (w.getPassengers().size() < 3) {
+                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
                 }
             }
         }
 
-        // train approaches at next destination
-        player.getTrain().enterNextCity();
-        log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-        log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
-        player.getTrain().dropOffPassenger();
-
         // test the schedule, drive through all available destinations
-        for (int i = 0; i < 6; i++) {
+        int trips = 4;
+        for (int i = 0; i < trips; i++) {
+            // train approaches at next destination
             player.getTrain().enterNextCity();
             log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
             log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
             player.getTrain().dropOffPassenger();
+//            for (Wagon w : player.getTrain().getWagons()) {
+//                if (w instanceof PassengerWagon && w.seatfree()) {
+//                    // einstieg, ausstieg
+//                    while (w.getPassengers().size() < 3) {
+//                        w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
+//                    }
+//                }
+//            }
+            player.getLevel();
         }
-        player.getLevel();
     }
 }

@@ -4,8 +4,11 @@ import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
 import ghosttrain.Passenger;
 import ghosttrain.PassengerListener;
+import ghosttrain.Train;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +34,7 @@ public class PassengerWagon extends Wagon {
             if (p.getDeboarding() == currentDest) {
                 passengersToDelete.add(p);
             } else {
+//                Logger.getLogger(Train.class.getName()).log(Level.INFO, "Passenger {0} has not disembarked. Requested deboarding is at {1} . ", p.getName(), p.getDeboarding().getName());
                 System.out.println("Passenger " + p.getName() + " has not disembarked. Requested deboarding is at " + p.getDeboarding().getName() + ".");
             }
         }

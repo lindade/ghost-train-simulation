@@ -29,4 +29,8 @@ public abstract class ActivityWagon extends Wagon {
     public void bucketUpgrade(int upgrade){
         bucket.setCapacity(upgrade);
     }
+
+    public int getNumberOfUpgrade() {
+        return bucket.getNumberOfUpgrade();
+    }
 }

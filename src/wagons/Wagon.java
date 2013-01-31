@@ -3,9 +3,12 @@ package wagons;
 import exceptions.MaxPassengerCapacityReachedException;
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Passenger;
+import ghosttrain.Train;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +19,7 @@ public abstract class Wagon {
     protected List<Passenger> passengers;
     private static final int MAX_PASSENGER_CAPACITY = 3;
     private static int wagonCount = 0;
-    private static final int MAX_WAGON_COUNT = 50;
+    private static final int MAX_WAGON_COUNT = 40;
 
     public Wagon() throws MaxWagonCountReached {
         increaseWagonCount();
@@ -24,7 +27,7 @@ public abstract class Wagon {
     }
 
     public void getWagonCount() {
-        System.out.println("Wagons created: " + wagonCount);
+        Logger.getLogger(Train.class.getName()).log(Level.INFO, "Wagons created: {0} ", wagonCount);
     }
     
     /**
@@ -57,7 +60,7 @@ public abstract class Wagon {
 
     public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
-            System.out.print(pas.getName() + "\t");
+            Logger.getLogger(Train.class.getName()).log(Level.INFO, pas.getName(), "\t");
         }
     }
 

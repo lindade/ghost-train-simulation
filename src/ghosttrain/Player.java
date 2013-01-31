@@ -19,6 +19,8 @@ public class Player implements LevelListener {
     private Wallet wallet;
     private Train train;
     private Store store;
+    private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
+    private int index;
 
     public Player() {
         la = new LevelAdmin();
@@ -27,6 +29,7 @@ public class Player implements LevelListener {
         wallet = new Wallet();
         train = new Train(la);
         store = new Store(this);
+        index = 0;
     }
 
     public int getLevel() {
@@ -83,79 +86,93 @@ public class Player implements LevelListener {
     }
 
     /**
-     * create exception and do a try-catch block in the following methods instead of the if-else-branch
+     * create exception and do a try-catch block in the following methods
+     * instead of the if-else-branch
      */
     public void buyPassengerWagon() {
         // limit wagons to the strength of the engine
-        if (train.getEngine().getQuantityOfWagons() < train.getWagons().size()) {
+        if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
             // get PassengerWagon
             PassengerWagon pw = store.buyPassengerWagon();
-            train.addPassengerWagon(pw);
-            //add LevelAdmin to PassengerWagon
-            pw.addPassengerListener(la);
-        } else{
+            if (pw != null) {
+                train.addPassengerWagon(pw);
+                //add LevelAdmin to PassengerWagon
+                pw.addPassengerListener(la);
+            }
+        } else {
             System.out.println("You cannot buy another wagon. "
-                    + "Your Engine can only pull " 
-                    + train.getEngine().getQuantityOfWagons() 
-                    + " wagons. You have allready " 
+                    + "Your Engine can only pull "
+                    + train.getEngine().getQuantityOfWagons()
+                    + " wagons. You have already "
                     + train.getWagons().size() + " wagons.");
         }
     }
 
     public void buyFunWagon() {
-        // get ActivityWagon
-        try {
-            ActivityWagon aw = new FunWagon();
-            train.addActivityWagon(aw);
-            // sub coins
-            // ! cost must be variable depending on the cost in the shop for the pw 
-            int cost = 2;
-            wallet.subCoins(cost);
-            System.out.println("bought fun wagon");
-            System.out.println();
-        } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        // limit wagons to the strength of the engine
+        if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
+            // get ActivityWagon
+            ActivityWagon aw = store.buyFunWagon();
+            if (aw != null) {
+                train.addActivityWagon(aw);
+            }
+        } else {
+            System.out.println("You cannot buy another wagon. "
+                    + "Your Engine can only pull "
+                    + train.getEngine().getQuantityOfWagons()
+                    + " wagons. You have already "
+                    + train.getWagons().size() + " wagons.");
         }
     }
 
     public void buyEatingWagon() {
-        // get ActivityWagon
-        try {
-            ActivityWagon aw = new EatingWagon();
-            train.addActivityWagon(aw);
-            // sub coins
-            // ! cost must be variable depending on the cost in the shop for the pw 
-            int cost = 2;
-            wallet.subCoins(cost);
-            System.out.println("bought eating wagon");
-            System.out.println();
-        } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        // limit wagons to the strength of the engine
+        if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
+            // get ActivityWagon
+            ActivityWagon aw = store.buyEatingWagon();
+            if (aw != null) {
+                train.addActivityWagon(aw);
+            }
+        } else {
+            System.out.println("You cannot buy another wagon. "
+                    + "Your Engine can only pull "
+                    + train.getEngine().getQuantityOfWagons()
+                    + " wagons. You have already "
+                    + train.getWagons().size() + " wagons.");
         }
     }
 
     public void buyTrainingWagon() {
-        // get ActivityWagon
-        try {
-            ActivityWagon aw = new TrainingWagon();
-            train.addActivityWagon(aw);
-            // sub coins
-            // ! cost must be variable depending on the cost in the shop for the pw 
-            int cost = 2;
-            wallet.subCoins(cost);
-            System.out.println("bought training wagon");
-            System.out.println();
-        } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        // limit wagons to the strength of the engine
+        if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
+            // get ActivityWagon
+            ActivityWagon aw = store.buyTrainingWagon();
+            if (aw != null) {
+                train.addActivityWagon(aw);
+            }
+        } else {
+            System.out.println("You cannot buy another wagon. "
+                    + "Your Engine can only pull "
+                    + train.getEngine().getQuantityOfWagons()
+                    + " wagons. You have already "
+                    + train.getWagons().size() + " wagons.");
         }
     }
 
     public void buyEngine() {
-        // get Engine
-        train.getEngine().engineUpgrade(6);
-        // sub coins
-        int cost = 2;
-        wallet.subCoins(cost);
-        System.out.println("bought engine");
+        //limit engine purchase by Level
+        if (level == levelUnlockEngine[index] || level >= levelUnlockEngine[index]) {
+            // get Engine
+            store.buyEngine();
+            index++;
+        } else {
+            System.out.println("You cannot buy a new engine. First you have to level up."
+                    + " You´re at level " + getLevel() + ". You have to reach level "
+                    + levelUnlockEngine[index] + " to be able to purchase a new engine.");
+        }
+    }
+    
+    public void buyBucketUpgrade(ActivityWagon aw){
+        store.buyBucketUpgrade(aw);
     }
 }
