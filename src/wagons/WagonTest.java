@@ -4,7 +4,6 @@ import exceptions.MaxPassengerCapacityReachedException;
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
 import ghosttrain.Passenger;
-import ghosttrain.Schedule;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

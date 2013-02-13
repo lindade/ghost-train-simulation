@@ -79,18 +79,38 @@ public class Train {
     }
 
     /**
-     * a method to get only the passengerwagons of of the ratiowagonlist
-     * @return 
+     * a method to get only the passengerWagons of the ratioWagonList
+     *
+     * @return
      */
-//    public List<Wagon> getPassengerWagons() {
-//        for (Wagon w : ratioWagons) {
-//            if (w instanceof PassengerWagon) {
-//                List<PassengerWagon>  pwList;
-//                pwList.add(w);
-//            }
-//        }
-//        return ratioWagons;
-//    }
+    public List<Wagon> getPassengerWagons() {
+        for (Wagon w : ratioWagons) {
+            if (w instanceof PassengerWagon) {
+                List<Wagon> pwList = new ArrayList<>();
+                pwList.add(w);
+                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an passenger wagon to the passenger wagon list: {0} ", pwList);
+                return pwList;
+            }
+        }
+                return null;
+    }
+
+    /**
+     * a method to get only the activityWagons of the ratioWagonList
+     *
+     * @return
+     */
+    public List<Wagon> getActivityWagons() {
+        for (Wagon w : ratioWagons) {
+            if (w instanceof ActivityWagon) {
+                List<Wagon> awList = new ArrayList<>();
+                awList.add(w);
+                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an activity wagon to the activity wagon list: {0} ", awList);
+                return awList;
+            }
+        }
+        return null;
+    }
 
     public Engine getEngine() {
         return engine;

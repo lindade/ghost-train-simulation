@@ -1,8 +1,10 @@
 package ghosttrain;
 
 import exceptions.MaxPassengerCapacityReachedException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import wagons.ActivityWagon;
 import wagons.PassengerWagon;
 import wagons.Wagon;
 
@@ -43,7 +45,9 @@ public class GhostTrain {
         log.log(Level.INFO, "engine quantity: {0} ", player.getTrain().getEngine().getQuantityOfWagons());
         player.loadPassengers(); // should put some passengers in the passenger wagons
         player.staffActivityWagon(); // should put some passengers into the activity wagons
-
+        player.getTrain().getActivityWagons();
+        player.getTrain().getPassengerWagons();
+        
         // fill Passengers into passenger wagons
         for (Wagon w : player.getTrain().getWagons()) {
             if (w instanceof PassengerWagon) {
@@ -53,7 +57,19 @@ public class GhostTrain {
                 }
             }
         }
-
+        
+        //ausgeben passagierliste...
+        // .> umsortieren
+        for( Wagon w : player.getTrain().getWagons() ) {
+            w.printPassengerList();
+        }
+        PassengerSorter sorter = new PassengerSorter(player.getTrain());
+        sorter.sortRandomInWagon();
+        //wieder ausgeben
+        for( Wagon w : player.getTrain().getWagons() ) {
+            w.printPassengerList();
+        }
+        
         player.getTrain().enterNextCity(); // the train approaches the next city
 
 //        final String KEY = "Limbo"; // für benutzereingabe
@@ -67,14 +83,25 @@ public class GhostTrain {
         player.collectIncome();
 
         // buy things. Test if the limit of the engine works
-        player.buyPassengerWagon();
-        player.buyPassengerWagon(); // this should not work because of the wagon limitation
+//        player.buyPassengerWagon();
+//        player.buyPassengerWagon(); // this should not work because of the wagon limitation
         player.buyEngine(); // buy engine upgrade
-        player.buyFunWagon();
-        player.buyEatingWagon();
-        player.buyTrainingWagon();
-        player.buyPassengerWagon(); // this should not work because of the wagon limitation
-        player.buyEngine(); // buy engine upgrade should not work
+        
+        // upgrade activity wagons buckets
+        for (Wagon w : player.getTrain().getWagons()) {
+            if (w instanceof ActivityWagon) {
+                ActivityWagon aw = (ActivityWagon) w;
+                player.buyBucketUpgrade(aw);
+                player.buyBucketUpgrade(aw);
+                player.buyBucketUpgrade(aw); // this should not work because of the upgrade limitation 
+            }
+        }
+        
+//        player.buyFunWagon();
+//        player.buyEatingWagon();
+//        player.buyTrainingWagon();
+//        player.buyPassengerWagon(); // this should not work because of the wagon limitation
+//        player.buyEngine(); // buy engine upgrade should not work
         player.getWallet().getCoins();
 
         /**

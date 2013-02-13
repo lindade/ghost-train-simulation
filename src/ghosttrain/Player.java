@@ -19,7 +19,7 @@ public class Player implements LevelListener {
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
     private static final Logger log = Logger.getLogger(Player.class);
-
+    
     public Player() {
         la = new LevelAdmin();
         la.addLevelListener(this);

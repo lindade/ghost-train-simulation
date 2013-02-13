@@ -31,7 +31,7 @@ public abstract class Wagon {
     }
     
     /**
-     * controls that no more than 50 wagons are build.
+     * controls that no more than 40 wagons are build.
      * @throws MaxWagonCountReached 
      */
     private static void increaseWagonCount() throws MaxWagonCountReached {
@@ -57,7 +57,14 @@ public abstract class Wagon {
     public void removePassenger(Passenger p) {
         passengers.remove(p);
     }
-
+  
+//    delete if not needed
+//    public List<Passenger> dropOffPassengers(){
+//        List<Passenger> returnValue = passengers;
+//        passengers = null;
+//        return returnValue;
+//    }
+    
     public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
             Logger.getLogger(Train.class.getName()).log(Level.INFO, pas.getName(), "\t");

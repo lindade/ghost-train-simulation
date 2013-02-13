@@ -7,7 +7,7 @@ package ghosttrain;
 public class Bucket {
 
     private int capacity;
-    private int[] capacityUpgrade = {270, 540, 2160, 4320};
+    private int[] capacityUpgrade = {270, 540, 2160}; 
      private int numberOfUpgrade = 0;
     /**
      * As a result the index is the same like the number of the current bucketUpgrade
@@ -61,9 +61,12 @@ public class Bucket {
     }
     
     public void upgrade() {
-        if( numberOfUpgrade < capacityUpgrade.length) {
+        System.out.println("capacityUpgrade.length: " + capacityUpgrade.length);
+        if(numberOfUpgrade < capacityUpgrade.length) {
             numberOfUpgrade++;
             capacity = capacityUpgrade[numberOfUpgrade];
+        } else {
+            System.out.println("no upgrade available");
         }
     }
 }
