@@ -88,12 +88,12 @@ public class GhostTrain {
             player.getTrain().dropOffPassenger();
             // buy things. Test if the limit of the engine works
 //            player.getWallet().getCoins();
-//            player.buyPassengerWagon();
+            player.buyPassengerWagon();
 //            player.buyPassengerWagon(); // this should not work because of the wagon limitation
             player.buyEngine(); // buy engine upgrade
 //            player.buyFunWagon();
-            player.buyEatingWagon();
-//            player.buyTrainingWagon();
+//            player.buyEatingWagon();
+            player.buyTrainingWagon();
 //            player.buyPassengerWagon(); // this should not work because of the wagon limitation
 //            player.buyEngine(); // buy engine upgrade should not work
             // upgrade activity wagons buckets

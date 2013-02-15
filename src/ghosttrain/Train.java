@@ -86,15 +86,14 @@ public class Train {
      * @return
      */
     public List<Wagon> getPassengerWagons() {
+        List<Wagon> pwList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
-                List<Wagon> pwList = new ArrayList<>();
                 pwList.add(w);
                 System.out.println("added an passenger wagon to the passenger wagon list: " + pwList);
-                return pwList;
             }
         }
-        return null;
+        return pwList;
     }
 
     /**
@@ -103,69 +102,62 @@ public class Train {
      * @return
      */
     public List<Wagon> getActivityWagons() {
+        List<Wagon> awList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof ActivityWagon) {
-                List<Wagon> awList = new ArrayList<>();
                 awList.add(w);
                 System.out.println("added an activity wagon to the activity wagon list: " + awList);
-                return awList;
             }
         }
-        return null;
+        return awList;
     }
-    
+
     /**
      * a method to get the eatingWagons of the ratioWagonList
      *
      * @return
      */
     public List<Wagon> getEatingWagons() {
+        List<Wagon> ewList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof EatingWagon) {
-                List<Wagon> ewList = new ArrayList<>();
                 ewList.add(w);
                 System.out.println("added an eating wagon to the eating wagon list: " + ewList);
-                return ewList;
             }
         }
-        System.out.println("no eating wagon to add");
-        return null;
+        return ewList;
     }
-    
+
     /**
      * a method to get the funWagons of the ratioWagonList
      *
      * @return
      */
     public List<Wagon> getFunWagons() {
+        List<Wagon> fwList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof FunWagon) {
-                List<Wagon> fwList = new ArrayList<>();
                 fwList.add(w);
                 System.out.println("added an fun wagon to the fun wagon list: " + fwList);
-                return fwList;
             }
         }
-        System.out.println("no fun wagon to add");
-        return null;
+        return fwList;
     }
-    
+
     /**
      * a method to get the trainingWagons of the ratioWagonList
      *
      * @return
      */
     public List<Wagon> getTrainingWagons() {
+        List<Wagon> twList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof TrainingWagon) {
-                List<Wagon> twList = new ArrayList<>();
                 twList.add(w);
                 System.out.println("added an training wagon to the training wagon list: " + twList);
-                return twList;
             }
         }
-        System.out.println("no training wagon to add");
-        return null;
+        return twList;
     }
 
     public Engine getEngine() {
