@@ -1,6 +1,7 @@
 package ghosttrain;
 
 import com.sun.istack.internal.logging.Logger;
+import exceptions.MaxPassengerCapacityReachedException;
 import wagons.ActivityWagon;
 import wagons.PassengerWagon;
 import wagons.Wagon;
@@ -18,6 +19,7 @@ public class Player implements LevelListener {
     private Store store;
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
+    PassengerFactory pF = new PassengerFactory();
     private static final Logger log = Logger.getLogger(Player.class);
     
     public Player() {
@@ -31,7 +33,7 @@ public class Player implements LevelListener {
     }
 
     public int getLevel() {
-        log.info("level: " + level);
+        System.out.println("level: " + level);
         return level;
     }
 
@@ -52,17 +54,28 @@ public class Player implements LevelListener {
         return train;
     }
 
-    public void loadPassengers() {
-        //train.set
-        log.info("load passengers");
+   /**
+    * add 3 passengers to the empty passenger wagons the
+    * activity wagon is still empty
+    */
+    public void loadPassengers() throws MaxPassengerCapacityReachedException {
+        System.out.println("load passengers");
+        for (Wagon w : getTrain().getWagons()) {
+            if (w instanceof PassengerWagon && w.seatfree()) {
+                // einstieg
+                while (w.getPassengers().size() < 3) {
+                    w.addPassenger(pF.createPassenger(getTrain().getSchedule()));
+                }
+            }
+        }
     }
 
     public void staffActivityWagon() {
-        log.info("staff activity wagons");
+        System.out.println("staff activity wagons");
     }
 
     public void staffPassengerWagon() {
-        log.info("staff passenger wagons");
+        System.out.println("staff passenger wagons");
     }
 
     public void collectIncome() {
@@ -75,12 +88,12 @@ public class Player implements LevelListener {
                 wallet.addCoins(coins);
             }
         }
-        log.info("collect income");
+        System.out.println("collect income");
         wallet.getCoins();
     }
 
     public void switchPassengersToPassengerWagon() {
-        log.info("switch passenger who can exit to passenger wagons");
+        System.out.println("switch passenger who can exit to passenger wagons");
     }
 
     /**
@@ -98,7 +111,7 @@ public class Player implements LevelListener {
                 pw.addPassengerListener(la);
             }
         } else {
-            log.info("You cannot buy another wagon. "
+            System.out.println("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -115,7 +128,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            log.info("You cannot buy another wagon. "
+            System.out.println("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -132,7 +145,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            log.info("You cannot buy another wagon. "
+            System.out.println("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -149,7 +162,7 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            log.info("You cannot buy another wagon. "
+            System.out.println("You cannot buy another wagon. "
                     + "Your Engine can only pull "
                     + train.getEngine().getQuantityOfWagons()
                     + " wagons. You have already "
@@ -164,7 +177,7 @@ public class Player implements LevelListener {
             store.buyEngine();
             index++;
         } else {
-            log.info("You cannot buy a new engine. First you have to level up."
+            System.out.println("You cannot buy a new engine. First you have to level up."
                     + " You´re at level " + getLevel() + ". You have to reach level "
                     + levelUnlockEngine[index] + " to be able to purchase a new engine.");
         }

@@ -34,7 +34,7 @@ public class Train {
      */
     public void addPassengerWagon(PassengerWagon pw) {
         ratioWagons.add(pw);
-        Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an passenger wagon to the overall wagon list: {0} ", ratioWagons);
+        System.out.println("added an passenger wagon to the overall wagon list: " + ratioWagons);
     }
 
     /**
@@ -42,16 +42,16 @@ public class Train {
      */
     public void addActivityWagon(ActivityWagon aw) {
         ratioWagons.add(aw);
-        Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an activity wagon to the overall wagon list: {0} ", ratioWagons);
+        System.out.println("added an activity wagon to the overall wagon list: " + ratioWagons);
     }
 
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
+                System.out.println("dropoffPassenger");
                 PassengerWagon pw = (PassengerWagon) w;
                 pw.getOff(this.getCurrentDestination());
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "dropoffPassenger");
             }
         }
     }
@@ -64,7 +64,7 @@ public class Train {
         Destination d = theSchedule.getNextStop();
         //wait or do something for time d.getDistance()
         //then
-        Logger.getLogger(Train.class.getName()).log(Level.INFO, "on my way for distance: {0} ", d.getDistance());
+        System.out.println("on my way for distance: " + d.getDistance());
         theSchedule.setCurrentCity(theSchedule.getCurrentCity() + 1);
     }
 
@@ -90,11 +90,11 @@ public class Train {
             if (w instanceof PassengerWagon) {
                 List<Wagon> pwList = new ArrayList<>();
                 pwList.add(w);
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an passenger wagon to the passenger wagon list: {0} ", pwList);
+                System.out.println("added an passenger wagon to the passenger wagon list: " + pwList);
                 return pwList;
             }
         }
-                return null;
+        return null;
     }
 
     /**
@@ -107,7 +107,7 @@ public class Train {
             if (w instanceof ActivityWagon) {
                 List<Wagon> awList = new ArrayList<>();
                 awList.add(w);
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an activity wagon to the activity wagon list: {0} ", awList);
+                System.out.println("added an activity wagon to the activity wagon list: " + awList);
                 return awList;
             }
         }
@@ -124,10 +124,11 @@ public class Train {
             if (w instanceof EatingWagon) {
                 List<Wagon> ewList = new ArrayList<>();
                 ewList.add(w);
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an eating wagon to the eating wagon list: {0} ", ewList);
+                System.out.println("added an eating wagon to the eating wagon list: " + ewList);
                 return ewList;
             }
         }
+        System.out.println("no eating wagon to add");
         return null;
     }
     
@@ -141,10 +142,11 @@ public class Train {
             if (w instanceof FunWagon) {
                 List<Wagon> fwList = new ArrayList<>();
                 fwList.add(w);
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an fun wagon to the fun wagon list: {0} ", fwList);
+                System.out.println("added an fun wagon to the fun wagon list: " + fwList);
                 return fwList;
             }
         }
+        System.out.println("no fun wagon to add");
         return null;
     }
     
@@ -158,10 +160,11 @@ public class Train {
             if (w instanceof TrainingWagon) {
                 List<Wagon> twList = new ArrayList<>();
                 twList.add(w);
-                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an training wagon to the training wagon list: {0} ", twList);
+                System.out.println("added an training wagon to the training wagon list: " + twList);
                 return twList;
             }
         }
+        System.out.println("no training wagon to add");
         return null;
     }
 
@@ -183,7 +186,6 @@ public class Train {
             PassengerWagon pw = new PassengerWagon();
             pw.addPassengerListener(passengerListener);
             addPassengerWagon(pw);
-
             ActivityWagon aw = new EatingWagon();
             addActivityWagon(aw);
         } catch (MaxWagonCountReached ex) {

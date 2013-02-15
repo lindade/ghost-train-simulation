@@ -45,7 +45,7 @@ public class LevelAdmin implements PassengerListener {
             level++;
             index++;
             levelListener.levelUp(level);
-            Logger.getLogger(Train.class.getName()).log(Level.INFO, "level was increased");
+            System.out.println("level was increased");
         }
     }
 
@@ -56,10 +56,10 @@ public class LevelAdmin implements PassengerListener {
     @Override
     public void passengersGotOff(int numOfPassengers) {
         dropOffCounter += numOfPassengers;
+        System.out.println("Drop of counter was increased by " + numOfPassengers);
+        System.out.println("Drop of counter is " + dropOffCounter);
         // try to raise level
         raiseLevel();
-        Logger.getLogger(Train.class.getName()).log(Level.INFO, "Drop of counter was increased by {0}", numOfPassengers);
-        Logger.getLogger(Train.class.getName()).log(Level.INFO, "Drop of counter is {0} ", dropOffCounter);
     }
 
     void addLevelListener(LevelListener levelListener) {

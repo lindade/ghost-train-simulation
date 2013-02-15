@@ -61,7 +61,6 @@ public class Bucket {
     }
     
     public void upgrade() {
-        System.out.println("capacityUpgrade.length: " + capacityUpgrade.length);
         if(numberOfUpgrade < capacityUpgrade.length) {
             numberOfUpgrade++;
             capacity = capacityUpgrade[numberOfUpgrade];

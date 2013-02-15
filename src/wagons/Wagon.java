@@ -67,7 +67,7 @@ public abstract class Wagon {
     
     public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
-            Logger.getLogger(Train.class.getName()).log(Level.INFO, pas.getName(), "\t");
+            System.out.println(pas + "\t");
         }
     }
 

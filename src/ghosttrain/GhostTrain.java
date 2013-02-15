@@ -31,108 +31,81 @@ public class GhostTrain {
      */
     public static void main(String[] args) throws MaxPassengerCapacityReachedException {
         Player player = new Player();
-        PassengerFactory pF = new PassengerFactory();
         log.setLevel(Level.OFF);
 
-        //print level
-        player.getLevel();
-
-        //print current destination name
-        //System.out.println("" + player.getTrain().getCurrentDestination().getName());
 
         //print the engines quantity of wagons
         //System.out.println("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
         log.log(Level.INFO, "engine quantity: {0} ", player.getTrain().getEngine().getQuantityOfWagons());
-        player.loadPassengers(); // should put some passengers in the passenger wagons
-        player.staffActivityWagon(); // should put some passengers into the activity wagons
-        player.getTrain().getActivityWagons();
-        player.getTrain().getPassengerWagons();
         
-        // fill Passengers into passenger wagons
-        for (Wagon w : player.getTrain().getWagons()) {
-            if (w instanceof PassengerWagon) {
-                // einstieg, ausstieg
-                while (w.getPassengers().size() < 3) {
-                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
-                }
-            }
-        }
         
-        //ausgeben passagierliste...
-        // .> umsortieren
-//        for( Wagon w : player.getTrain().getWagons() ) {
-//            w.printPassengerList();
-//        }
-//        PassengerSorter sorter = new PassengerSorter(player.getTrain());
-//        sorter.sortRandomInWagon();
-//        //wieder ausgeben
-//        for( Wagon w : player.getTrain().getWagons() ) {
-//            w.printPassengerList();
-//        }
         
-        player.getTrain().enterNextCity(); // the train approaches the next city
 
 //        final String KEY = "Limbo"; // für benutzereingabe
 //        if( Schedule.doesDestinationExist(KEY) ) {
 //            Schedule.DESTINATIONS.get(KEY);
 //        }
 
-        log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-        log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
-        player.getTrain().dropOffPassenger();
-        player.collectIncome();
-
-        // buy things. Test if the limit of the engine works
-//        player.buyPassengerWagon();
-//        player.buyPassengerWagon(); // this should not work because of the wagon limitation
-        player.buyEngine(); // buy engine upgrade
         
-        // upgrade activity wagons buckets
-        for (Wagon w : player.getTrain().getWagons()) {
-            if (w instanceof ActivityWagon) {
-                ActivityWagon aw = (ActivityWagon) w;
-                player.buyBucketUpgrade(aw);
-                player.buyBucketUpgrade(aw);
-                player.buyBucketUpgrade(aw); // this should not work because of the upgrade limitation 
-            }
-        }
         
-//        player.buyFunWagon();
-//        player.buyEatingWagon();
-//        player.buyTrainingWagon();
-//        player.buyPassengerWagon(); // this should not work because of the wagon limitation
-//        player.buyEngine(); // buy engine upgrade should not work
-        player.getWallet().getCoins();
-
-        /**
-         * add 3 passengers to the empty passenger wagons the
-         * activity wagon is still empty
-         */
-        for (Wagon w : player.getTrain().getWagons()) {
-            if (w instanceof PassengerWagon && w.seatfree()) {
-                // einstieg, ausstieg
-                while (w.getPassengers().size() < 3) {
-                    w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
-                }
-            }
-        }
 
         // test the schedule, drive through all available destinations
         int trips = 4;
         for (int i = 0; i < trips; i++) {
+            // in destination
+            
+            //print current destination name
+            //System.out.println("current destination: " + player.getTrain().getCurrentDestination().getName());
+            player.getLevel();
+            player.getTrain().getPassengerWagons();
+            player.getTrain().getEatingWagons();
+            player.getTrain().getFunWagons();
+            player.getTrain().getTrainingWagons(); 
+            player.loadPassengers(); // put some passengers in the passenger wagons
+            
+            // on the road
+            player.collectIncome();
+            
+            //switch passengers
+            //print passengerList...
+//            System.out.println("old order");
+//            for( Wagon w : player.getTrain().getWagons() ) {
+//                w.printPassengerList();
+//            }
+//            PassengerSorter sorter = new PassengerSorter(player.getTrain());
+//            // -> shuffle
+//            sorter.sortRandomInWagon();
+//            //print passengerList...
+//            System.out.println("new order");
+//            for( Wagon w : player.getTrain().getWagons() ) {
+//                w.printPassengerList();
+//            }
+            
             // train approaches at next destination
             player.getTrain().enterNextCity();
-            log.log(Level.INFO, "Current city: {0}", player.getTrain().getCurrentDestination().getName());
-            log.log(Level.INFO, "Next city: {0}", player.getTrain().getNextDestination().getName());
+            System.out.println("current destination: " + player.getTrain().getCurrentDestination().getName());
+            //System.out.println("next destination" + player.getTrain().getNextDestination().getName());
             player.getTrain().dropOffPassenger();
+            // buy things. Test if the limit of the engine works
+//            player.getWallet().getCoins();
+//            player.buyPassengerWagon();
+//            player.buyPassengerWagon(); // this should not work because of the wagon limitation
+            player.buyEngine(); // buy engine upgrade
+//            player.buyFunWagon();
+            player.buyEatingWagon();
+//            player.buyTrainingWagon();
+//            player.buyPassengerWagon(); // this should not work because of the wagon limitation
+//            player.buyEngine(); // buy engine upgrade should not work
+            // upgrade activity wagons buckets
 //            for (Wagon w : player.getTrain().getWagons()) {
-//                if (w instanceof PassengerWagon && w.seatfree()) {
-//                    // einstieg, ausstieg
-//                    while (w.getPassengers().size() < 3) {
-//                        w.addPassenger(pF.createPassenger(player.getTrain().getSchedule()));
-//                    }
+//                if (w instanceof ActivityWagon) {
+//                    ActivityWagon aw = (ActivityWagon) w;
+//                    player.buyBucketUpgrade(aw);
+//                    player.buyBucketUpgrade(aw);
+//                    player.buyBucketUpgrade(aw); // this should not work because of the upgrade limitation 
 //                }
 //            }
+//            player.getWallet().getCoins();
             player.getLevel();
         }
     }

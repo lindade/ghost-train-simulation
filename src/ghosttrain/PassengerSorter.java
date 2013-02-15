@@ -37,18 +37,13 @@ public class PassengerSorter {
     }
 
     /**
-     * this method is already in wagon delete or edit?
-     *
+     * remove or edit?
      * @param p
      */
 //    public void addToWagon(Passenger p) {
-//        if (passengerSorter.size() <= 2) {
-//            passengerSorter.add(p);
-//            System.out.println("Passenger added to List");
-//        } else {
-//            System.out.println("Wagon capacity is already exhausted");
-//        }
+//         train.getPassengerWagons();
 //    }
+    
     /**
      * this method has to be optimized sort passengers into activity wagons
      *
@@ -69,7 +64,7 @@ public class PassengerSorter {
 
     public void sortRandomInWagon() {
         for (Wagon w : ratioWagons) {
-            ArrayList<Passenger> inWagon = new ArrayList<Passenger>();
+            ArrayList<Passenger> inWagon = new ArrayList<>();
             for (Passenger p : w.getPassengers()) {
                 inWagon.add(p);
             }
@@ -87,12 +82,11 @@ public class PassengerSorter {
         }
 
         int currentPassengerIndex = 0;
-
         for (Wagon w : ratioWagons) {
             for (int i = currentPassengerIndex; i < currentPassengerIndex + 3; i++) {
                 try {
                     w.addPassenger(mixedPassengers.get(i));
-                } catch (MaxPassengerCapacityReachedException mex) {
+                } catch (MaxPassengerCapacityReachedException ex) {
                     System.err.println("Tried to add too many passengers...");
                 }
             }
