@@ -7,7 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import wagons.ActivityWagon;
 import wagons.EatingWagon;
+import wagons.FunWagon;
 import wagons.PassengerWagon;
+import wagons.TrainingWagon;
 import wagons.Wagon;
 
 /**
@@ -79,7 +81,7 @@ public class Train {
     }
 
     /**
-     * a method to get only the passengerWagons of the ratioWagonList
+     * a method to get the passengerWagons of the ratioWagonList
      *
      * @return
      */
@@ -96,7 +98,7 @@ public class Train {
     }
 
     /**
-     * a method to get only the activityWagons of the ratioWagonList
+     * a method to get the activityWagons of the ratioWagonList
      *
      * @return
      */
@@ -107,6 +109,57 @@ public class Train {
                 awList.add(w);
                 Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an activity wagon to the activity wagon list: {0} ", awList);
                 return awList;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * a method to get the eatingWagons of the ratioWagonList
+     *
+     * @return
+     */
+    public List<Wagon> getEatingWagons() {
+        for (Wagon w : ratioWagons) {
+            if (w instanceof EatingWagon) {
+                List<Wagon> ewList = new ArrayList<>();
+                ewList.add(w);
+                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an eating wagon to the eating wagon list: {0} ", ewList);
+                return ewList;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * a method to get the funWagons of the ratioWagonList
+     *
+     * @return
+     */
+    public List<Wagon> getFunWagons() {
+        for (Wagon w : ratioWagons) {
+            if (w instanceof FunWagon) {
+                List<Wagon> fwList = new ArrayList<>();
+                fwList.add(w);
+                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an fun wagon to the fun wagon list: {0} ", fwList);
+                return fwList;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * a method to get the trainingWagons of the ratioWagonList
+     *
+     * @return
+     */
+    public List<Wagon> getTrainingWagons() {
+        for (Wagon w : ratioWagons) {
+            if (w instanceof TrainingWagon) {
+                List<Wagon> twList = new ArrayList<>();
+                twList.add(w);
+                Logger.getLogger(Train.class.getName()).log(Level.INFO, "added an training wagon to the training wagon list: {0} ", twList);
+                return twList;
             }
         }
         return null;

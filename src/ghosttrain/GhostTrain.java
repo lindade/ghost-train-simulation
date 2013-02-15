@@ -60,15 +60,15 @@ public class GhostTrain {
         
         //ausgeben passagierliste...
         // .> umsortieren
-        for( Wagon w : player.getTrain().getWagons() ) {
-            w.printPassengerList();
-        }
-        PassengerSorter sorter = new PassengerSorter(player.getTrain());
-        sorter.sortRandomInWagon();
-        //wieder ausgeben
-        for( Wagon w : player.getTrain().getWagons() ) {
-            w.printPassengerList();
-        }
+//        for( Wagon w : player.getTrain().getWagons() ) {
+//            w.printPassengerList();
+//        }
+//        PassengerSorter sorter = new PassengerSorter(player.getTrain());
+//        sorter.sortRandomInWagon();
+//        //wieder ausgeben
+//        for( Wagon w : player.getTrain().getWagons() ) {
+//            w.printPassengerList();
+//        }
         
         player.getTrain().enterNextCity(); // the train approaches the next city
 

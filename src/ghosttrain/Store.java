@@ -140,16 +140,16 @@ public class Store {
         if(aw.getBucket().getNumberOfUpgrade() < costCoinsBucketUpgrade.length){
             // determine costs
             int cost = costCoinsBucketUpgrade[aw.getBucket().getNumberOfUpgrade()];
-            System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
+//            System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
             // verify if enough coins are in the wallet to purchase a bucket upgrade
             if (player.getWallet().getCoins() >= cost) {
-                //System.out.println("AW capacity before upgrade: " + aw.getBucket().getCapacity());
+                System.out.println("AW capacity before upgrade: " + aw.getBucket().getCapacity());
                 aw.bucketUpgrade();
-                //System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
+//                System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
                 // sub coins
                 player.getWallet().subCoins(cost);
                 System.out.println("bought bucket upgrade");
-                //System.out.println("AW capacity after upgrade: " + aw.getBucket().getCapacity());
+                System.out.println("AW capacity after upgrade: " + aw.getBucket().getCapacity());
             } else {
                 System.out.println("Not enough coins in the wallet to purchase a bucket upgrade");
             }
