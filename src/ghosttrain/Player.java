@@ -1,6 +1,5 @@
 package ghosttrain;
 
-import com.sun.istack.internal.logging.Logger;
 import exceptions.MaxPassengerCapacityReachedException;
 import wagons.ActivityWagon;
 import wagons.PassengerWagon;
@@ -20,7 +19,7 @@ public class Player implements LevelListener {
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
     PassengerFactory pF = new PassengerFactory();
-    private static final Logger log = Logger.getLogger(Player.class);
+//    private static final Logger log = Logger.getLogger(Player.class.getName());
     
     public Player() {
         la = new LevelAdmin();
@@ -132,7 +131,7 @@ public class Player implements LevelListener {
                     + train.getWagons().size() + " wagons.");
         }
     }
-
+    
     public void buyEatingWagon() {
         // limit wagons to the strength of the engine
         if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
@@ -182,5 +181,18 @@ public class Player implements LevelListener {
     
     public void buyBucketUpgrade(ActivityWagon aw){
         store.buyBucketUpgrade(aw);
+    }
+    
+    public void update() {
+        //soll spieler überhaupt aktiv werden?
+        
+        //endscheide: 
+            // ist der zug angekommen oder nicht
+            // welchen wagentyp kaufen, wenn zu kaufen
+            // geld einsammeln oder nicht
+            // buckets upgraden oder nicht
+            // engine upgrade?
+            // passenger switching
+            
     }
 }

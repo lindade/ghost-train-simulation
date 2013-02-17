@@ -16,11 +16,13 @@ import wagons.Wagon;
  *
  * @author Linda
  */
-public class Train {
+public class Train implements Runnable {
 
     private Engine engine;
     private List<Wagon> ratioWagons;
     private Schedule theSchedule;
+    private int internalTime = 0;
+    private int step = 10;
 
     public Train(PassengerListener pL) {
         engine = new Engine();
@@ -182,6 +184,28 @@ public class Train {
             addActivityWagon(aw);
         } catch (MaxWagonCountReached ex) {
             Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void run() {
+        int i = 0;
+        while(true){
+            i++;
+        }
+    }
+    
+    public void update() {
+        internalTime += step;     
+        if( internalTime % 60 == 0 && internalTime > 0) {
+            for( ActivityWagon wagon : getActivityWagons()) {
+                wagon.fillBucket();
+            }
+        }
+        if( internalTime == getNextDestination().getDistance()) {
+            // arbeiten
+            
+            internalTime = 0;
         }
     }
 }
