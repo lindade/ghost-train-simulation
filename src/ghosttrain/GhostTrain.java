@@ -4,8 +4,7 @@ import exceptions.MaxPassengerCapacityReachedException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import wagons.ActivityWagon;
-import wagons.PassengerWagon;
+import wagons.EatingWagon;
 import wagons.Wagon;
 
 /**
@@ -58,7 +57,8 @@ public class GhostTrain {
             //System.out.println("current destination: " + player.getTrain().getCurrentDestination().getName());
             player.getLevel();
             player.getTrain().getPassengerWagons();
-            player.getTrain().getEatingWagons();
+            List<EatingWagon> eatingWagons = player.getTrain().getEatingWagons();
+            eatingWagons.get(0).fillBucket();
             player.getTrain().getFunWagons();
             player.getTrain().getTrainingWagons(); 
             player.loadPassengers(); // put some passengers in the passenger wagons
@@ -68,18 +68,18 @@ public class GhostTrain {
             
             //switch passengers
             //print passengerList...
-//            System.out.println("old order");
-//            for( Wagon w : player.getTrain().getWagons() ) {
-//                w.printPassengerList();
-//            }
-//            PassengerSorter sorter = new PassengerSorter(player.getTrain());
-//            // -> shuffle
-//            sorter.sortRandomInWagon();
-//            //print passengerList...
-//            System.out.println("new order");
-//            for( Wagon w : player.getTrain().getWagons() ) {
-//                w.printPassengerList();
-//            }
+            System.out.println("old order");
+            for( Wagon w : player.getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
+            PassengerSorter sorter = new PassengerSorter(player.getTrain());
+            // -> shuffle
+            sorter.sortRandomInWagon();
+            //print passengerList...
+            System.out.println("new order");
+            for( Wagon w : player.getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
             
             // train approaches at next destination
             player.getTrain().enterNextCity();

@@ -101,11 +101,11 @@ public class Train {
      *
      * @return
      */
-    public List<Wagon> getActivityWagons() {
-        List<Wagon> awList = new ArrayList<>();
+    public List<ActivityWagon> getActivityWagons() {
+        List<ActivityWagon> awList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof ActivityWagon) {
-                awList.add(w);
+                awList.add((ActivityWagon) w);
                 System.out.println("added an activity wagon to the activity wagon list: " + awList);
             }
         }
@@ -117,11 +117,11 @@ public class Train {
      *
      * @return
      */
-    public List<Wagon> getEatingWagons() {
-        List<Wagon> ewList = new ArrayList<>();
+    public List<EatingWagon> getEatingWagons() {
+        List<EatingWagon> ewList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof EatingWagon) {
-                ewList.add(w);
+                ewList.add((EatingWagon) w);
                 System.out.println("added an eating wagon to the eating wagon list: " + ewList);
             }
         }
@@ -133,11 +133,11 @@ public class Train {
      *
      * @return
      */
-    public List<Wagon> getFunWagons() {
-        List<Wagon> fwList = new ArrayList<>();
+    public List<FunWagon> getFunWagons() {
+        List<FunWagon> fwList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof FunWagon) {
-                fwList.add(w);
+                fwList.add((FunWagon) w);
                 System.out.println("added an fun wagon to the fun wagon list: " + fwList);
             }
         }
@@ -149,11 +149,11 @@ public class Train {
      *
      * @return
      */
-    public List<Wagon> getTrainingWagons() {
-        List<Wagon> twList = new ArrayList<>();
+    public List<TrainingWagon> getTrainingWagons() {
+        List<TrainingWagon> twList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof TrainingWagon) {
-                twList.add(w);
+                twList.add((TrainingWagon) w);
                 System.out.println("added an training wagon to the training wagon list: " + twList);
             }
         }

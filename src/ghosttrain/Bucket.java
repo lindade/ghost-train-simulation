@@ -28,9 +28,6 @@ public class Bucket {
         /**
          * Depending on the parameter of the passengers the content has to be
          * raised until the capacity of the bucket is exhausted
-         *
-         * here has to be a timer which controls the time the bucket gets filled
-         * regularly
          */
         content += coins;
         if (content > capacity) {

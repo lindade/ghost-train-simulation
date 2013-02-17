@@ -31,7 +31,7 @@ public class LevelAdmin implements PassengerListener {
      */
     public LevelAdmin() {
         dropOffCounter = 0;
-        level = 5;
+        level = 1;
         index = 0;
     }
 
