@@ -79,14 +79,11 @@ public class Player implements LevelListener {
     }
 
     public void collectIncome() {
-        for (Wagon w : train.getWagons()) {
-            if (w instanceof ActivityWagon) {
-                ActivityWagon aw = (ActivityWagon) w;
-                Bucket bucket;
-                bucket = aw.getBucket();
-                int coins = bucket.emtpyBucket();
-                wallet.addCoins(coins);
-            }
+        for (ActivityWagon aw : train.getActivityWagons()) {
+            Bucket bucket;
+            bucket = aw.getBucket();
+            int coins = bucket.emtpyBucket();
+            wallet.addCoins(coins);
         }
         System.out.println("collect income");
         wallet.getCoins();
