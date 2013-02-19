@@ -1,6 +1,7 @@
 package ghosttrain;
 
 import exceptions.MaxPassengerCapacityReachedException;
+import java.util.Random;
 import wagons.ActivityWagon;
 import wagons.PassengerWagon;
 import wagons.Wagon;
@@ -18,8 +19,7 @@ public class Player implements LevelListener {
     private Store store;
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
-    PassengerFactory pF = new PassengerFactory();
-//    private static final Logger log = Logger.getLogger(Player.class.getName());
+    private Random randomizer = new Random();
     
     public Player() {
         la = new LevelAdmin();
@@ -51,22 +51,6 @@ public class Player implements LevelListener {
 
     public Train getTrain() {
         return train;
-    }
-
-   /**
-    * add 3 passengers to the empty passenger wagons the
-    * activity wagon is still empty
-    */
-    public void loadPassengers() throws MaxPassengerCapacityReachedException {
-        System.out.println("load passengers");
-        for (Wagon w : getTrain().getWagons()) {
-            if (w instanceof PassengerWagon && w.seatfree()) {
-                // einstieg
-                while (w.getPassengers().size() < 3) {
-                    w.addPassenger(pF.createPassenger(getTrain().getSchedule()));
-                }
-            }
-        }
     }
 
     public void staffActivityWagon() {
@@ -184,15 +168,41 @@ public class Player implements LevelListener {
     }
     
     public void update() {
-        //soll spieler überhaupt aktiv werden?
-        
-        //endscheide: 
-            // ist der zug angekommen oder nicht
-            // welchen wagentyp kaufen, wenn zu kaufen
-            // geld einsammeln oder nicht
-            // buckets upgraden oder nicht
-            // engine upgrade?
-            // passenger switching
+        // should player be active
+        // plays 3x times a day for 15mim
+        // collects income when bucket is filled completely or filled partly
+        collectIncome();
+        if(train.hasArrived()){
+            //switch passengers
+            //print passengerList
+            System.out.println("old order");
+            for( Wagon w : getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
+            PassengerSorter sorter = new PassengerSorter(getTrain());
+            // -> shuffle
+            sorter.sortRandomInWagon();
+            //print passengerList...
+            System.out.println("new order");
+            for( Wagon w : getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
+            buyEngine();
+            buyPassengerWagon();
+            int decide = randomizer.nextInt(3);
+            switch( decide ) {
+                case 0 : buyEatingWagon(); break;
+                case 1 : buyFunWagon(); break;
+                case 2 : buyTrainingWagon();
+            }
+            for (ActivityWagon aw : getTrain().getActivityWagons()) {
+                    buyBucketUpgrade(aw);
+            }
+        } 
+        if(train.isAboutToArrive()){
+            Destination nextDest = train.getNextDestination();
             
+            //passenger switching to passengerWagon
+        }
     }
 }

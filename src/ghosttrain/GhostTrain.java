@@ -9,15 +9,15 @@ import wagons.Wagon;
 
 /**
  * the simulation loop: at destination                          traveling
- * 1 Passenger Boarding
- * 2 sort Passengers into AW
- * 3 sort remaining Passengers into PW
- * 4 start train                                                5 produce income
- *                                                              6 collect income
- *                                                              7 sort Passengers into PW
- * 8 Passenger getOff train from PW
- * 9 cash check
- * 10 buy upgrades
+ * 1 Passenger Boarding (train)
+ * 2 sort Passengers into AW (player)
+ * 3 sort remaining Passengers into PW (player)
+ * 4 start train (player)                                       5 produce income (train)
+ *                                                              6 collect income (player)
+ *                                                              7 sort Passengers into PW (player)
+ * 8 Passenger getOff train from PW (train)
+ * 9 cash check (train)
+ * 10 buy upgrades (player)
  *
  * @author Linda
  */
@@ -61,7 +61,7 @@ public class GhostTrain {
             eatingWagons.get(0).fillBucket();
             player.getTrain().getFunWagons();
             player.getTrain().getTrainingWagons(); 
-            player.loadPassengers(); // put some passengers in the passenger wagons
+            player.getTrain().loadPassengers(); // put some passengers in the passenger wagons
             
             // on the road
             player.collectIncome();

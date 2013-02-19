@@ -14,8 +14,27 @@ public class Schedule {
         "San Francisco", "New York", "Havana", "Moscow", "Burial Ground",
         "Necropolis", "Underworld", "City of the Dead"};
     // distance from preceding city to this city
-    private static final int[] DISTANCE_TO_CITIES = { 1400, 1600, 1800, 2000,
-        4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000, 20200, 20400, 20600, 20800};
+    
+//    private static final int[] DISTANCE_TO_CITIES = { 9, 34, 75, 134,
+//        209, 300, 409, 534, 675, 834, 1009, 1200, 1409, 1634, 1875, 2134};
+    private static final int[] DISTANCE_TO_CITIES = { 324, 1224, 2700, 4824,
+        7524, 10800, 14724, 19224, 24300, 30024, 36324, 43200, 50724, 58824, 67500, 76824};
+    //0,09h = 5,4min = 324sek
+    //0,34h = 1224sek
+    //0,75h = 45min = 2700sek
+    //1,34h = 4824sek
+    //2,09h = 7524sek
+    //3,00h = 10800sek
+    //4,09h = 14724sek
+    //5,34h = 19224sek
+    //6,75h = 24300sek
+    //8,34h = 30024sek
+    //10,90h = 36324sek
+    //12,00h = 43200sek
+    //14,09h = 50724sek
+    //16,34h = 58824sek
+    //18,75h = 67500sek
+    //21,34h = 76824sek
     private static int availableCities = 3; // initially only "Limbo", "London", "Berlin"
     private int currentCity = 0; // starting in Limbo1
     private ArrayList<Destination> currentSchedule;

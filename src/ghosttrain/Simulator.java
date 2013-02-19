@@ -10,17 +10,17 @@ import java.io.File;
 public class Simulator {
 
     private Player player;
-    private Train train;
-    private volatile boolean finished = false;
+    private int step = 12;
 
     /**
      * here the player is loaded and the train too
      *
      * @param player
-     * @param train
      */
     public Simulator() {
         //instamtiate and initialize player and train
+        this.player = new Player();
+        this.player.getTrain().setTimeStep(step);
     }
     
     public Simulator(File input) {
@@ -29,24 +29,15 @@ public class Simulator {
     
     public void simulate() {
         int timepaces = 0;
-        int step = 10;
-        while (!finished) {
+        // stop if Level 50 is reached
+        while (player.getLevel() < 4) {
             timepaces += step;
-            //player.update();
-            //train.update();
-            //train hat nächstes ziel erreich
-                //-> kaufe PW oder AW oder keinen Wagon
-                //-> kaufe Engine upgrade?
-                //-> bucket upgrade?
-            //sonst
-                // passenger switching
-                // buckets auffüllen jede volle minute
-                // spieler spielt 3x am tag 15mim
-                    // sammelt ein, wenn voll oder wenn er gerade spielt
+            player.getTrain().update();
+            player.update();
         }
     }
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Simulator sim = new Simulator();
         sim.simulate();
     }

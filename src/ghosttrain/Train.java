@@ -1,5 +1,6 @@
 package ghosttrain;
 
+import exceptions.MaxPassengerCapacityReachedException;
 import exceptions.MaxWagonCountReached;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class Train implements Runnable {
     private Schedule theSchedule;
     private int internalTime = 0;
     private int step = 10;
+    PassengerFactory pF = new PassengerFactory();
+    //    private static final Logger log = Logger.getLogger(Player.class.getName());
 
     public Train(PassengerListener pL) {
         engine = new Engine();
@@ -195,17 +198,51 @@ public class Train implements Runnable {
         }
     }
     
+    public void setTimeStep(int timeStep) {
+        step = timeStep;
+    }
+    
+    public boolean isAboutToArrive() {
+        return internalTime + step == getNextDestination().getDistance();
+    }
+    
     public void update() {
-        internalTime += step;     
+        internalTime += step; 
         if( internalTime % 60 == 0 && internalTime > 0) {
             for( ActivityWagon wagon : getActivityWagons()) {
                 wagon.fillBucket();
             }
         }
         if( internalTime == getNextDestination().getDistance()) {
-            // arbeiten
-            
+            enterNextCity();
+            System.out.println("current destination: " + getCurrentDestination().getName());
+            dropOffPassenger();
+            loadPassengers();
             internalTime = 0;
+        }
+        
+    }
+    
+    public boolean hasArrived() {
+        return internalTime == 0;
+    }
+
+    /**
+     * add 3 passengers to the empty passenger wagons the
+     * activity wagon is still empty
+     */
+    public void loadPassengers() {
+        System.out.println("load passengers");
+        for (Wagon w : getWagons()) {
+            if (w instanceof PassengerWagon && w.seatfree()) {
+                while (w.getPassengers().size() < 3) {
+                    try {
+                        w.addPassenger(pF.createPassenger(getSchedule()));
+                    } catch (MaxPassengerCapacityReachedException ex) {
+                        Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
         }
     }
 }
