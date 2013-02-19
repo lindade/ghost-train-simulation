@@ -6,5 +6,5 @@ package ghosttrain;
  */
 public interface PassengerListener {
     
-    public void passengersGotOff(int numOfPassengers);
+    public void passengersGotOff(int numOfPassengers, Destination destination);
 }

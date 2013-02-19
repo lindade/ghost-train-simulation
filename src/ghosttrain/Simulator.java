@@ -31,6 +31,7 @@ public class Simulator {
         int timepaces = 0;
         // stop if Level 50 is reached
         while (player.getLevel() < 4) {
+            System.err.println("Level: " + player.getLevel());
             timepaces += step;
             player.getTrain().update();
             player.update();

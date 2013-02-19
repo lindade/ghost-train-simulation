@@ -41,7 +41,7 @@ public class PassengerWagon extends Wagon {
         }
         if (passengerListener != null) {
             //the counter of the overall persons who left is increased
-            passengerListener.passengersGotOff(passengersToDelete.size());
+            passengerListener.passengersGotOff(passengersToDelete.size(), currentDest);
         }
     }
 

@@ -23,6 +23,7 @@ public class Train implements Runnable {
     private List<Wagon> ratioWagons;
     private Schedule theSchedule;
     private int internalTime = 0;
+    int totalTime;
     private int step = 10;
     PassengerFactory pF = new PassengerFactory();
     //    private static final Logger log = Logger.getLogger(Player.class.getName());
@@ -218,6 +219,8 @@ public class Train implements Runnable {
             System.out.println("current destination: " + getCurrentDestination().getName());
             dropOffPassenger();
             loadPassengers();
+            totalTime += internalTime;
+            System.err.println("totalTime: " + totalTime/60 + "min");
             internalTime = 0;
         }
         
