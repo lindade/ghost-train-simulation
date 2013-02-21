@@ -40,7 +40,7 @@ public class Train implements Runnable {
      */
     public void addPassengerWagon(PassengerWagon pw) {
         ratioWagons.add(pw);
-        System.out.println("added an passenger wagon to the overall wagon list: " + ratioWagons);
+        //System.out.println("added an passenger wagon to the overall wagon list: " + ratioWagons);
     }
 
     /**
@@ -48,14 +48,14 @@ public class Train implements Runnable {
      */
     public void addActivityWagon(ActivityWagon aw) {
         ratioWagons.add(aw);
-        System.out.println("added an activity wagon to the overall wagon list: " + ratioWagons);
+        //System.out.println("added an activity wagon to the overall wagon list: " + ratioWagons);
     }
 
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
-                System.out.println("dropoffPassenger");
+                //System.out.println("dropoffPassenger");
                 PassengerWagon pw = (PassengerWagon) w;
                 pw.getOff(this.getCurrentDestination());
             }
@@ -91,12 +91,12 @@ public class Train implements Runnable {
      *
      * @return
      */
-    public List<Wagon> getPassengerWagons() {
-        List<Wagon> pwList = new ArrayList<>();
+    public List<PassengerWagon> getPassengerWagons() {
+        List<PassengerWagon> pwList = new ArrayList<>();
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
-                pwList.add(w);
-                System.out.println("added an passenger wagon to the passenger wagon list: " + pwList);
+                pwList.add((PassengerWagon) w);
+                //System.out.println("added an passenger wagon to the passenger wagon list: " + pwList);
             }
         }
         return pwList;
@@ -112,7 +112,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof ActivityWagon) {
                 awList.add((ActivityWagon) w);
-                System.out.println("added an activity wagon to the activity wagon list: " + awList);
+                //System.out.println("added an activity wagon to the activity wagon list: " + awList);
             }
         }
         return awList;
@@ -128,7 +128,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof EatingWagon) {
                 ewList.add((EatingWagon) w);
-                System.out.println("added an eating wagon to the eating wagon list: " + ewList);
+                //System.out.println("added an eating wagon to the eating wagon list: " + ewList);
             }
         }
         return ewList;
@@ -144,7 +144,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof FunWagon) {
                 fwList.add((FunWagon) w);
-                System.out.println("added an fun wagon to the fun wagon list: " + fwList);
+                //System.out.println("added an fun wagon to the fun wagon list: " + fwList);
             }
         }
         return fwList;
@@ -160,7 +160,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof TrainingWagon) {
                 twList.add((TrainingWagon) w);
-                System.out.println("added an training wagon to the training wagon list: " + twList);
+                //System.out.println("added an training wagon to the training wagon list: " + twList);
             }
         }
         return twList;
@@ -246,6 +246,31 @@ public class Train implements Runnable {
                     }
                 }
             }
+        }
+        checkDesination();
+    }
+    
+    public void checkDesination(){
+        for(Wagon w : ratioWagons){
+            for(int i = 0; i < 3; i++){
+                Destination d = w.getPassengers().get(i).getDeboarding();
+                if(Schedule.DESTINATIONS.get(d.getName()) <= getSchedule().getAvailableCities() ){
+                    return;
+                }
+            }
+        }
+        //None of the passenger want to go to a unlocked destination
+        PassengerWagon pw = getPassengerWagons().get(0);
+        Passenger toDropOff = pw.getPassengers().get(0);
+        Passenger toSubstitute = pF.createPassenger(theSchedule);
+        while( toSubstitute.getDeboarding().equals( toDropOff.getDeboarding() ) ) {
+            toSubstitute = pF.createPassenger(theSchedule);
+        }
+        pw.removePassenger(toDropOff);
+        try {
+            pw.addPassenger(toSubstitute);
+        } catch (MaxPassengerCapacityReachedException ex) {
+            Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

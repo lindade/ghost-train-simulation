@@ -40,7 +40,7 @@ public class Bucket {
         if (content != 0) {
             content = 0;
         } else {
-            System.out.println("bucket is still empty, no Coins to be saved");
+            //System.out.println("bucket is still empty, no Coins to be saved");
         }
         return theContent;
     }

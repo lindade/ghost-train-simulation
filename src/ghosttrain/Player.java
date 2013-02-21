@@ -27,12 +27,12 @@ public class Player implements LevelListener {
         level = la.getLevelFromLevelAdmin(); // from the start 1
         wallet = new Wallet();
         train = new Train(la);
+        la.addScheduleUpgradeListener(train.getSchedule());
         store = new Store(this);
         index = 0;
     }
 
     public int getLevel() {
-        System.out.println("level: " + level);
         return level;
     }
 
@@ -175,25 +175,27 @@ public class Player implements LevelListener {
         if(train.hasArrived()){
             //switch passengers
             //print passengerList
-            System.out.println("old order");
-            for( Wagon w : getTrain().getWagons() ) {
-                w.printPassengerList();
-            }
+//            System.out.println("old order");
+//            for( Wagon w : getTrain().getWagons() ) {
+//                w.printPassengerList();
+//            }
             PassengerSorter sorter = new PassengerSorter(getTrain());
             // -> shuffle
             sorter.sortRandomInWagon();
             //print passengerList...
-            System.out.println("new order");
-            for( Wagon w : getTrain().getWagons() ) {
-                w.printPassengerList();
-            }
+//            System.out.println("new order");
+//            for( Wagon w : getTrain().getWagons() ) {
+//                w.printPassengerList();
+//            }
             buyEngine();
             buyPassengerWagon();
-            int decide = randomizer.nextInt(3);
+            int decide = randomizer.nextInt(5);
             switch( decide ) {
                 case 0 : buyEatingWagon(); break;
                 case 1 : buyFunWagon(); break;
-                case 2 : buyTrainingWagon();
+                case 2 : buyTrainingWagon(); break;
+                case 3 : buyPassengerWagon(); break;
+                case 4 : buyPassengerWagon();
             }
             for (ActivityWagon aw : getTrain().getActivityWagons()) {
                     buyBucketUpgrade(aw);

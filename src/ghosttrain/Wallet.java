@@ -24,7 +24,7 @@ public class Wallet {
     }
     
     public int getCoins(){
-        System.out.println("Coins: " + coins);
+        //System.out.println("Coins: " + coins);
         return coins;
     }
         
@@ -37,7 +37,7 @@ public class Wallet {
     }
     
     public int getPC(){
-        System.out.println("PremiumCredits: " + pc);
+        //System.out.println("PremiumCredits: " + pc);
         return pc;
     }
 }

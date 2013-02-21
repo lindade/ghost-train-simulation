@@ -7,7 +7,7 @@ import java.util.HashMap;
  *
  * @author Linda
  */
-public class Schedule {
+public class Schedule implements ScheduleUpgradeListener {
 
     private static final String[] AVAILABLE_CITIES = {"Limbo", "London",
         "Berlin", "Cairo", "Beijing", "Istanbul", "Sydney", "Rio de Janiero",
@@ -59,7 +59,7 @@ public class Schedule {
      **/
     public Schedule(int initCities) {
         availableCities = initCities;
-        currentSchedule = new ArrayList<Destination>();
+        currentSchedule = new ArrayList<>();
         for (int i = 0; i < AVAILABLE_CITIES.length; i++) {
             currentSchedule.add(new Destination(AVAILABLE_CITIES[i], DISTANCE_TO_CITIES[i]));
         }
@@ -138,5 +138,11 @@ public class Schedule {
             return index < availableCities;
         }
         return false;
+    }
+
+    @Override
+    public void updateSchedule() {
+        setAvailableCities(getAvailableCities() + 1);
+        System.out.println("updated Schedule to " + (getAvailableCities()) + " available Cities.");
     }
 }
