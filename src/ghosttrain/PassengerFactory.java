@@ -98,7 +98,7 @@ public class PassengerFactory {
         Passenger p = new Passenger("Name"+ count++,
                 r.nextInt(dependsOnDestination),
                 r.nextInt(dependsOnDestination),
-                r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(available+1) ));
+                r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(available+1))); //weigthedRandom(available)
                 /**
                  * The last parameter has to be one of the currently available Destinations or
                  * the next Destination not yet available on the schedule
@@ -107,4 +107,16 @@ public class PassengerFactory {
         System.out.printf("passenger deboarding destination: %s\n", p.getDeboarding().getName());
         return p;
     }
+    
+//    private int weigthedRandom(int availableCities){
+//        int randomDestination;
+//        int random = r.nextInt((availableCities+1)*10);
+//        if(random <= 20 ){
+//            randomDestination = 1;
+//        } else if(random > 20) {
+//            randomDestination = 2;
+//        }
+//            
+//        return randomDestination;
+//    }
 }

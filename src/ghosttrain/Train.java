@@ -259,8 +259,8 @@ public class Train implements Runnable {
                 }
             }
         }
-        //None of the passenger want to go to a unlocked destination
-        PassengerWagon pw = getPassengerWagons().get(0);
+        //None of the passengers want to go to a unlocked destination
+        PassengerWagon pw = getPassengerWagons().get(0); //getPassengerWagons().size()
         Passenger toDropOff = pw.getPassengers().get(0);
         Passenger toSubstitute = pF.createPassenger(theSchedule);
         while( toSubstitute.getDeboarding().equals( toDropOff.getDeboarding() ) ) {

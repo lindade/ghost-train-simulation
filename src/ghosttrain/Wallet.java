@@ -9,7 +9,7 @@ package ghosttrain;
  */
 public class Wallet {
 
-    private int coins = 1000;
+    private int coins = 575;
     private int pc;
 
     public Wallet() {
