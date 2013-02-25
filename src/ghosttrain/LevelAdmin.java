@@ -1,5 +1,7 @@
 package ghosttrain;
 
+import java.util.logging.Logger;
+
 
 /**
  * this class sets the level of the player by counting how many passengers have
@@ -23,14 +25,16 @@ public class LevelAdmin implements PassengerListener {
        504, 585, 672, 765, 1008, 1131, 1260, 1397, 1760, 1932, 2112, 2300, 2808,
        3038, 3276, 3524, 4200, 4495, 4800, 5115, 5984, 6353, 6732, 7123, 8208,
        8658, 9120, 9594, 10920, 11460, 12012, 12578, 14168, 14805, 15456, 16121,
-       18000, 18743, 19500, 20273};
+       18000, 18743};
 //    =(Level^2+2*Level)*(availableCities/2)
+   
    /**
-    * Level:       1, 2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 50
-    * Station:  2, 3, 4, 5, 6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16
+    * Level     1, 2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 50
+    * Station:  2, 3, 4, 5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16
     */
    private int[] ADD_DESTINATION = {2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 50};
    int indexAddDest;
+   private static final Logger log = Logger.getLogger(LevelAdmin.class.getName());
    
     /**
      *
@@ -52,7 +56,7 @@ public class LevelAdmin implements PassengerListener {
             level++;
             index++;
             levelListener.levelUp(level);
-            System.out.println("level was increased");
+            log.info("level was increased");
             if(level == ADD_DESTINATION[indexAddDest]){
                 scheduleUpgradeListener.updateSchedule();
                 indexAddDest++;
@@ -68,9 +72,9 @@ public class LevelAdmin implements PassengerListener {
     public void passengersGotOff(int numOfPassengers, Destination dest) {
         dropOffCounter += numOfPassengers;
         expCounter += numOfPassengers * (Schedule.DESTINATIONS.get(dest.getName()) + 1);
-        System.out.println("Drop of counter was increased by " + numOfPassengers);
-        System.out.println("Drop of counter is " + dropOffCounter);
-        System.out.println("exp " + expCounter);
+        log.info("Drop of counter was increased by " + numOfPassengers);
+        log.info("Drop of counter is " + dropOffCounter);
+        log.info("exp " + expCounter);
         // try to raise level
         raiseLevel();
     }

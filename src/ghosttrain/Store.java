@@ -1,6 +1,7 @@
 package ghosttrain;
 
 import exceptions.MaxWagonCountReached;
+import java.util.logging.Logger;
 import wagons.ActivityWagon;
 import wagons.EatingWagon;
 import wagons.FunWagon;
@@ -27,6 +28,7 @@ public class Store {
         153600, 218700}; // lenght=9 lenght=8
     private int indexE = 0;
     private int[] costCoinsBucketUpgrade = {375, 563}; // lenght=2 index=1
+    private static final Logger log = Logger.getLogger(Store.class.getName());
 
     public Store(Player player) {
         this.player = player;
@@ -42,14 +44,13 @@ public class Store {
                 // sub coins
                 player.getWallet().subCoins(cost);
                 indexPW++;
-                System.out.println("bought passenger wagon");
-                System.out.println();
+                log.info("bought passenger wagon\n");
                 return pw;
             } catch (MaxWagonCountReached ex) {
-                System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
             }
         } else {
-            System.out.println("Not enough coins in the wallet to purchase a passenger wagon");
+            log.info("Not enough coins in the wallet to purchase a passenger wagon");
         }
         return null;
     }
@@ -64,14 +65,13 @@ public class Store {
                 // sub coins
                 player.getWallet().subCoins(cost);
                 indexAW++;
-                System.out.println("bought fun wagon");
-                System.out.println();
+                log.info("bought fun wagon\n");
                 return fw;
             } catch (MaxWagonCountReached ex) {
-                System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
             }
         } else {
-            System.out.println("Not enough coins in the wallet to purchase a fun wagon");
+            log.info("Not enough coins in the wallet to purchase a fun wagon");
         }
         return null;
     }
@@ -86,14 +86,13 @@ public class Store {
                 // sub coins
                 player.getWallet().subCoins(cost);
                 indexAW++;
-                System.out.println("bought eating wagon");
-                System.out.println();
+                log.info("bought eating wagon\n");
                 return ew;
             } catch (MaxWagonCountReached ex) {
-                System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
             }
         } else {
-            System.out.println("Not enough coins in the wallet to purchase a eating wagon");
+            log.info("Not enough coins in the wallet to purchase a eating wagon");
         }
         return null;
     }
@@ -108,14 +107,13 @@ public class Store {
                 // sub coins
                 player.getWallet().subCoins(cost);
                 indexAW++;
-                System.out.println("bought training wagon");
-                System.out.println();
+                log.info("bought training wagon\n");
                 return tw;
             } catch (MaxWagonCountReached ex) {
-                System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
             }
         } else {
-            System.out.println("Not enough coins in the wallet to purchase a training wagon");
+            log.info("Not enough coins in the wallet to purchase a training wagon");
         }
         return null;
     }
@@ -129,9 +127,9 @@ public class Store {
             // sub coins
             player.getWallet().subCoins(cost);
             indexE++;
-            System.out.println("bought engine");
+            log.info("bought engine");
         } else {
-            System.out.println("Not enough coins in the wallet to purchase an engine");
+            log.info("Not enough coins in the wallet to purchase an engine");
         }
     }
 
@@ -140,21 +138,21 @@ public class Store {
         if(aw.getBucket().getNumberOfUpgrade() < costCoinsBucketUpgrade.length){
             // determine costs
             int cost = costCoinsBucketUpgrade[aw.getBucket().getNumberOfUpgrade()];
-//            System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
+//            log.info("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
             // verify if enough coins are in the wallet to purchase a bucket upgrade
             if (player.getWallet().getCoins() >= cost) {
-//                System.out.println("AW capacity before upgrade: " + aw.getBucket().getCapacity());
+//                log.info("AW capacity before upgrade: " + aw.getBucket().getCapacity());
                 aw.bucketUpgrade();
-//                System.out.println("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
+//                log.info("UpgradeNumber " + aw.getBucket().getNumberOfUpgrade());
                 // sub coins
                 player.getWallet().subCoins(cost);
-                System.out.println("bought bucket upgrade");
-//                System.out.println("AW capacity after upgrade: " + aw.getBucket().getCapacity());
+                log.info("bought bucket upgrade");
+//                log.info("AW capacity after upgrade: " + aw.getBucket().getCapacity());
             } else {
-                System.out.println("Not enough coins in the wallet to purchase a bucket upgrade");
+                log.info("Not enough coins in the wallet to purchase a bucket upgrade");
             }
         } else{
-            System.out.println("Maximum Upgrade is reached.");
+            log.info("Maximum Upgrade is reached.");
         }
     }
 }

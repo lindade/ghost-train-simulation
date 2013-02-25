@@ -34,7 +34,7 @@ public class GhostTrain {
 
 
         //print the engines quantity of wagons
-        //System.out.println("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
+        //log.info("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
         log.log(Level.INFO, "engine quantity: {0} ", player.getTrain().getEngine().getQuantityOfWagons());
         
         
@@ -54,7 +54,7 @@ public class GhostTrain {
             // in destination
             
             //print current destination name
-            //System.out.println("current destination: " + player.getTrain().getCurrentDestination().getName());
+            //log.info("current destination: " + player.getTrain().getCurrentDestination().getName());
             player.getLevel();
             player.getTrain().getPassengerWagons();
             List<EatingWagon> eatingWagons = player.getTrain().getEatingWagons();
@@ -68,7 +68,7 @@ public class GhostTrain {
             
             //switch passengers
             //print passengerList...
-            System.out.println("old order");
+            log.info("old order");
             for( Wagon w : player.getTrain().getWagons() ) {
                 w.printPassengerList();
             }
@@ -76,15 +76,15 @@ public class GhostTrain {
             // -> shuffle
             sorter.sortRandomInWagon();
             //print passengerList...
-            System.out.println("new order");
+            log.info("new order");
             for( Wagon w : player.getTrain().getWagons() ) {
                 w.printPassengerList();
             }
             
             // train approaches at next destination
             player.getTrain().enterNextCity();
-            System.out.println("current destination: " + player.getTrain().getCurrentDestination().getName());
-            //System.out.println("next destination" + player.getTrain().getNextDestination().getName());
+            log.info("current destination: " + player.getTrain().getCurrentDestination().getName());
+            //log.info("next destination" + player.getTrain().getNextDestination().getName());
             player.getTrain().dropOffPassenger();
             // buy things. Test if the limit of the engine works
 //            player.getWallet().getCoins();

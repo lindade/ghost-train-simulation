@@ -20,6 +20,8 @@ public abstract class Wagon {
     private static final int MAX_PASSENGER_CAPACITY = 3;
     private static int wagonCount = 0;
     private static final int MAX_WAGON_COUNT = 40;
+    private static final Logger log = Logger.getLogger(Wagon.class.getName());
+
 
     public Wagon() throws MaxWagonCountReached {
         increaseWagonCount();
@@ -67,7 +69,7 @@ public abstract class Wagon {
     
     public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
-            System.out.println(pas + "\t");
+            log.info(pas + "\t");
         }
     }
 

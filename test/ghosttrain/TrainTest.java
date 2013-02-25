@@ -44,7 +44,7 @@ public class TrainTest {
      */
     @Test
     public void testAddPassengerWagon() {
-        System.out.println("addPassengerWagon");
+        log.info("addPassengerWagon");
         PassengerWagon pw = null;
         Train instance = new Train();
         instance.addPassengerWagon(pw);
@@ -57,7 +57,7 @@ public class TrainTest {
      */
     @Test
     public void testAddActivityWagon() {
-        System.out.println("addActivityWagon");
+        log.info("addActivityWagon");
         ActivityWagon aw = null;
         Train instance = new Train();
         instance.addActivityWagon(aw);
@@ -70,7 +70,7 @@ public class TrainTest {
      */
     @Test
     public void testDropOffPassenger() {
-        System.out.println("dropOffPassenger");
+        log.info("dropOffPassenger");
         Train instance = new Train();
         instance.dropOffPassenger();
         // TODO review the generated test code and remove the default call to fail.
@@ -82,7 +82,7 @@ public class TrainTest {
      */
     @Test
     public void testEnterNextCity() {
-        System.out.println("enterNextCity");
+        log.info("enterNextCity");
         Train instance = new Train();
         instance.enterNextCity();
         // TODO review the generated test code and remove the default call to fail.
@@ -94,13 +94,13 @@ public class TrainTest {
      */
     @Test
     public void testGetCurrentDestination() {
-        System.out.println("getCurrentDestination");
+        log.info("getCurrentDestination");
         Train instance = new Train();
         Schedule schedule = new Schedule();
         Destination expResult = schedule.getCurrentStop();
         Destination result = instance.getCurrentDestination();
-        System.out.println(schedule.getCurrentStop().getName());
-        System.out.println(instance.getCurrentDestination().getName());
+        log.info(schedule.getCurrentStop().getName());
+        log.info(instance.getCurrentDestination().getName());
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("the saved destination is the same but has not the same reference");
@@ -111,7 +111,7 @@ public class TrainTest {
      */
     @Test
     public void testGetWagons() {
-        System.out.println("getWagons");
+        log.info("getWagons");
         Train instance = new Train();
         List expResult = null;
         List result = instance.getWagons();

@@ -4,8 +4,11 @@ import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
 import ghosttrain.Passenger;
 import ghosttrain.PassengerListener;
+import ghosttrain.Train;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +17,8 @@ import java.util.List;
 public class PassengerWagon extends Wagon {
 
     private PassengerListener passengerListener;
+    private static final Logger log = Logger.getLogger(PassengerWagon.class.getName());
+
 
     public PassengerWagon() throws MaxWagonCountReached {
         super();
@@ -32,12 +37,12 @@ public class PassengerWagon extends Wagon {
                 passengersToDelete.add(p);
             } else {
 //                Logger.getLogger(Train.class.getName()).log(Level.INFO, "Passenger {0} has not disembarked. Requested deboarding is at {1} . ", p.getName(), p.getDeboarding().getName());
-                System.out.println("Passenger " + p.getName() + " has not disembarked. Requested deboarding is at " + p.getDeboarding().getName() + ".");
+                log.log(Level.INFO, "Passenger {0} has not disembarked. Requested deboarding is at {1}.", new Object[]{p.getName(), p.getDeboarding().getName()});
             }
         }
         for (Passenger p : passengersToDelete) {
             removePassenger(p);
-            System.out.println("Passenger " + p.getName() + " has disembarked at " + currentDest.getName() + ".");
+            log.log(Level.INFO, "Passenger {0} has disembarked at {1}.", new Object[]{p.getName(), currentDest.getName()});
         }
         if (passengerListener != null) {
             //the counter of the overall persons who left is increased

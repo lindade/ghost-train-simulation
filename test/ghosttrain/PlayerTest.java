@@ -41,7 +41,7 @@ public class PlayerTest {
      */
     @Test
     public void testGetLevel() {
-        System.out.println("getLevel");
+        log.info("getLevel");
         Player instance = new Player();
         int expResult = 1;
         int result = instance.getLevel();
@@ -55,7 +55,7 @@ public class PlayerTest {
      */
     @Test
     public void testLoadPassengers() {
-        System.out.println("loadPassengers");
+        log.info("loadPassengers");
         Player instance = new Player();
         instance.loadPassengers();
         // TODO review the generated test code and remove the default call to fail.
@@ -67,7 +67,7 @@ public class PlayerTest {
      */
     @Test
     public void testStaffActivityWagon() {
-        System.out.println("staffActivityWagon");
+        log.info("staffActivityWagon");
         Player instance = new Player();
         instance.staffActivityWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -79,7 +79,7 @@ public class PlayerTest {
      */
     @Test
     public void testStaffPassengerWagon() {
-        System.out.println("staffPassengerWagon");
+        log.info("staffPassengerWagon");
         Player instance = new Player();
         instance.staffPassengerWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -91,7 +91,7 @@ public class PlayerTest {
      */
     @Test
     public void testCollectIncome() {
-        System.out.println("collectIncome");
+        log.info("collectIncome");
         Player instance = new Player();
         instance.collectIncome();
         // TODO review the generated test code and remove the default call to fail.
@@ -103,7 +103,7 @@ public class PlayerTest {
      */
     @Test
     public void testSwitchPassengersToPassengerWagon() {
-        System.out.println("switchPassengersToPassengerWagon");
+        log.info("switchPassengersToPassengerWagon");
         Player instance = new Player();
         instance.switchPassengersToPassengerWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -115,7 +115,7 @@ public class PlayerTest {
      */
     @Test
     public void testBuyPassengerWagon() {
-        System.out.println("buyPassengerWagon");
+        log.info("buyPassengerWagon");
         Player instance = new Player();
         instance.buyPassengerWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -127,7 +127,7 @@ public class PlayerTest {
      */
     @Test
     public void testBuyFunWagon() {
-        System.out.println("buyFunWagon");
+        log.info("buyFunWagon");
         Player instance = new Player();
         instance.buyFunWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -139,7 +139,7 @@ public class PlayerTest {
      */
     @Test
     public void testBuyEatingWagon() {
-        System.out.println("buyEatingWagon");
+        log.info("buyEatingWagon");
         Player instance = new Player();
         instance.buyEatingWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -151,7 +151,7 @@ public class PlayerTest {
      */
     @Test
     public void testBuyTrainingWagon() {
-        System.out.println("buyTrainingWagon");
+        log.info("buyTrainingWagon");
         Player instance = new Player();
         instance.buyTrainingWagon();
         // TODO review the generated test code and remove the default call to fail.
@@ -163,7 +163,7 @@ public class PlayerTest {
      */
     @Test
     public void testEngine() {
-        System.out.println("Engine");
+        log.info("Engine");
         Player instance = new Player();
         instance.buyEngine();
         // TODO review the generated test code and remove the default call to fail.

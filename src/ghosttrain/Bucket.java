@@ -1,5 +1,7 @@
 package ghosttrain;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Linda
@@ -9,6 +11,7 @@ public class Bucket {
     private int capacity;
     private int[] capacityUpgrade = {270, 540, 2160}; 
      private int numberOfUpgrade = 0;
+     private static final Logger log = Logger.getLogger(Bucket.class.getName());
     /**
      * As a result the index is the same like the number of the current bucketUpgrade
      * 270 default value
@@ -40,7 +43,7 @@ public class Bucket {
         if (content != 0) {
             content = 0;
         } else {
-            //System.out.println("bucket is still empty, no Coins to be saved");
+            //log.info("bucket is still empty, no Coins to be saved");
         }
         return theContent;
     }
@@ -62,7 +65,7 @@ public class Bucket {
             numberOfUpgrade++;
             capacity = capacityUpgrade[numberOfUpgrade];
         } else {
-            System.out.println("no upgrade available");
+            log.info("no upgrade available");
         }
     }
 }

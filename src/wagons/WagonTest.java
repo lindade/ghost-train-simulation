@@ -4,6 +4,7 @@ import exceptions.MaxPassengerCapacityReachedException;
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
 import ghosttrain.Passenger;
+import ghosttrain.Train;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import java.util.logging.Logger;
  * @author Linda
  */
 public class WagonTest {
+
+    private static final Logger log = Logger.getLogger(WagonTest.class.getName());
 
     public static void main(String[] args) {
         PassengerWagon passengerWagon = null;
@@ -29,7 +32,7 @@ public class WagonTest {
             eatingWagon = new EatingWagon();
             trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+            log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
         }
         
          /**
@@ -97,7 +100,7 @@ public class WagonTest {
         eatingWagon.demandEarning();
         
         // Asks if Berlin exists as a destination
-        //System.out.println("Is Berlin available: " + Schedule.doesDestinationExist("Berlin"));
+        //log.info("Is Berlin available: " + Schedule.doesDestinationExist("Berlin"));
 
 
         Passenger p21 = new Passenger("Gregor", 3, 4, 3, new Destination("Berlin"));
@@ -114,7 +117,7 @@ public class WagonTest {
         }
         trainingWagon.demandEarning();
         trainingWagon.removePassenger(p22);
-        System.out.println("Passenger " + p22.getName() + " unfortunately jumped out of the window. He will not be able to earn any money anymore. minus " + p22.getTrainingValue() );
+        log.log(Level.INFO, "Passenger {0} unfortunately jumped out of the window. He will not be able to earn any money anymore. minus {1}", new Object[]{p22.getName(), p22.getTrainingValue()});
         trainingWagon.demandEarning();
         
         /**
@@ -125,7 +128,7 @@ public class WagonTest {
             trainingWagon = new TrainingWagon();
             trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
-            System.out.println("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+            log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
         }
     }
 }

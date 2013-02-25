@@ -37,7 +37,7 @@ public class LevelAdminTest {
      */
     @Test
     public void testRaiseLevel() {
-        System.out.println("raiseLevel");
+        log.info("raiseLevel");
         LevelAdmin instance = new LevelAdmin();
         instance.raiseLevel();
         // TODO review the generated test code and remove the default call to fail.
@@ -49,7 +49,7 @@ public class LevelAdminTest {
      */
     @Test
     public void testGetLevel() {
-        System.out.println("getLevel");
+        log.info("getLevel");
         LevelAdmin instance = new LevelAdmin();
         int expResult = 1;
         int result = instance.getLevelFromLevelAdmin();

@@ -1,10 +1,10 @@
 package ghosttrain;
 
-import exceptions.MaxPassengerCapacityReachedException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import wagons.ActivityWagon;
 import wagons.PassengerWagon;
-import wagons.Wagon;
 
 /**
  *
@@ -20,6 +20,7 @@ public class Player implements LevelListener {
     private int[] levelUnlockEngine = {5, 10, 15, 20, 27, 34, 41, 48};
     private int index;
     private Random randomizer = new Random();
+    private static final Logger log = Logger.getLogger(Player.class.getName());
     
     public Player() {
         la = new LevelAdmin();
@@ -54,11 +55,11 @@ public class Player implements LevelListener {
     }
 
     public void staffActivityWagon() {
-        System.out.println("staff activity wagons");
+        log.info("staff activity wagons");
     }
 
     public void staffPassengerWagon() {
-        System.out.println("staff passenger wagons");
+        log.info("staff passenger wagons");
     }
 
     public void collectIncome() {
@@ -68,12 +69,12 @@ public class Player implements LevelListener {
             int coins = bucket.emtpyBucket();
             wallet.addCoins(coins);
         }
-        System.out.println("collect income");
+        log.info("collect income");
         wallet.getCoins();
     }
 
     public void switchPassengersToPassengerWagon() {
-        System.out.println("switch passenger who can exit to passenger wagons");
+        log.info("switch passenger who can exit to passenger wagons");
     }
 
     /**
@@ -91,11 +92,11 @@ public class Player implements LevelListener {
                 pw.addPassengerListener(la);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
-                    + "Your Engine can only pull "
-                    + train.getEngine().getQuantityOfWagons()
-                    + " wagons. You have already "
-                    + train.getWagons().size() + " wagons.");
+            log.log(Level.INFO,"You cannot buy another wagon. "
+                    + "Your Engine can only pull {0} wagons."
+                    + "You have already {1} wagons.",
+                    new Object[]{train.getEngine().getQuantityOfWagons(),
+                    train.getWagons().size()});
         }
     }
 
@@ -108,11 +109,11 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
-                    + "Your Engine can only pull "
-                    + train.getEngine().getQuantityOfWagons()
-                    + " wagons. You have already "
-                    + train.getWagons().size() + " wagons.");
+            log.log(Level.INFO,"You cannot buy another wagon. "
+                    + "Your Engine can only pull {0} wagons."
+                    + "You have already {1} wagons.",
+                    new Object[]{train.getEngine().getQuantityOfWagons(),
+                    train.getWagons().size()});
         }
     }
     
@@ -125,11 +126,11 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
-                    + "Your Engine can only pull "
-                    + train.getEngine().getQuantityOfWagons()
-                    + " wagons. You have already "
-                    + train.getWagons().size() + " wagons.");
+            log.log(Level.INFO,"You cannot buy another wagon. "
+                    + "Your Engine can only pull {0} wagons."
+                    + "You have already {1} wagons.",
+                    new Object[]{train.getEngine().getQuantityOfWagons(),
+                    train.getWagons().size()});
         }
     }
 
@@ -142,11 +143,11 @@ public class Player implements LevelListener {
                 train.addActivityWagon(aw);
             }
         } else {
-            System.out.println("You cannot buy another wagon. "
-                    + "Your Engine can only pull "
-                    + train.getEngine().getQuantityOfWagons()
-                    + " wagons. You have already "
-                    + train.getWagons().size() + " wagons.");
+            log.log(Level.INFO,"You cannot buy another wagon. "
+                    + "Your Engine can only pull {0} wagons."
+                    + "You have already {1} wagons.",
+                    new Object[]{train.getEngine().getQuantityOfWagons(),
+                        train.getWagons().size()});
         }
     }
 
@@ -157,9 +158,11 @@ public class Player implements LevelListener {
             store.buyEngine();
             index++;
         } else {
-            System.out.println("You cannot buy a new engine. First you have to level up."
-                    + " You´re at level " + getLevel() + ". You have to reach level "
-                    + levelUnlockEngine[index] + " to be able to purchase a new engine.");
+            log.log(Level.INFO,"You cannot buy a new engine."
+                    + "First you have to level up."
+                    + " You are at level {0}."
+                    + "You have to reach level {1} to be able to purchase a new engine.",
+                    new Object[]{getLevel(), levelUnlockEngine[index]});
         }
     }
     
@@ -173,9 +176,9 @@ public class Player implements LevelListener {
         // collects income when bucket is filled completely or filled partly
         collectIncome();
         if(train.hasArrived()){
-            //switch passengers
+        //switch passengers
             //print passengerList
-//            System.out.println("old order");
+//            log.info("old order");
 //            for( Wagon w : getTrain().getWagons() ) {
 //                w.printPassengerList();
 //            }
@@ -183,7 +186,7 @@ public class Player implements LevelListener {
             // -> shuffle
             sorter.sortRandomInWagon();
             //print passengerList...
-//            System.out.println("new order");
+//            log.info("new order");
 //            for( Wagon w : getTrain().getWagons() ) {
 //                w.printPassengerList();
 //            }

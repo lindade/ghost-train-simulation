@@ -54,7 +54,7 @@ public class PassengerWagonTest {
      */
     @Test
     public void testAddPassenger() {
-        System.out.println("addPassenger");
+        log.info("addPassenger");
         Passenger p = new Passenger("Alena", 2, 3, 5, new Destination("Berlin"));
         try {
             wagon.addPassenger(p);
@@ -69,7 +69,7 @@ public class PassengerWagonTest {
      */
     @Test
     public void testGetOff() {
-        System.out.println("getOff");
+        log.info("getOff");
         Passenger linda = wagon.getPassengers().get(0);
         Destination d = linda.getDeboarding();
         wagon.getOff(d);

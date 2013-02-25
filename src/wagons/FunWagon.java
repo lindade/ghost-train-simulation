@@ -2,6 +2,9 @@ package wagons;
 
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Passenger;
+import ghosttrain.Train;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,6 +12,9 @@ import ghosttrain.Passenger;
  */
 public class FunWagon extends ActivityWagon {
 
+    private static final Logger log = Logger.getLogger(FunWagon.class.getName());
+
+    
     public FunWagon() throws MaxWagonCountReached {
         super();
     }
@@ -24,7 +30,7 @@ public class FunWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getFunValue();
         }
-        System.out.println("Fun earnings: " + earnings);
+        log.log(Level.INFO, "Fun earnings: {0}", earnings);
         return earnings;
     }
 

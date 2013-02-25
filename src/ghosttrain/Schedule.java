@@ -2,6 +2,7 @@ package ghosttrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  *
@@ -10,9 +11,9 @@ import java.util.HashMap;
 public class Schedule implements ScheduleUpgradeListener {
 
     private static final String[] AVAILABLE_CITIES = {"Limbo", "London",
-        "Berlin", "Cairo", "Beijing", "Istanbul", "Sydney", "Rio de Janiero",
-        "San Francisco", "New York", "Havana", "Moscow", "Burial Ground",
-        "Necropolis", "Underworld", "City of the Dead"};
+        "Paris", "Cairo", "Beijing", "Tokyo", "Sydney", "Rio de Janiero",
+        "San Francisco", "New York", "Havana", "Burial Ground",
+        "Necropolis", "Underworld", "City of the Dead", "Moscow"};
     // distance from preceding city to this city
     
 //    private static final int[] DISTANCE_TO_CITIES = { 9, 34, 75, 134,
@@ -35,10 +36,11 @@ public class Schedule implements ScheduleUpgradeListener {
     //16,34h = 58824sek
     //18,75h = 67500sek
     //21,34h = 76824sek
-    private static int availableCities = 3; // initially only "Limbo", "London", "Berlin"
-    private int currentCity = 0; // starting in Limbo1
+    private static int availableCities = 2; // initially only "Limbo", "London"
+    private int currentCity = 0; // starting in Limbo
     private ArrayList<Destination> currentSchedule;
     public static final HashMap<String, Integer> DESTINATIONS; // contains the destination name and the index of the destination list
+    private static final Logger log = Logger.getLogger(Schedule.class.getName());
     
     /**
      * HashMap -> (DestinationName, Integer)
@@ -143,6 +145,6 @@ public class Schedule implements ScheduleUpgradeListener {
     @Override
     public void updateSchedule() {
         setAvailableCities(getAvailableCities() + 1);
-        System.out.println("updated Schedule to " + (getAvailableCities()) + " available Cities.");
+        log.info("updated Schedule to " + (getAvailableCities()) + " available Cities.");
     }
 }

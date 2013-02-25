@@ -2,6 +2,9 @@ package wagons;
 
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Passenger;
+import ghosttrain.Train;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,6 +12,9 @@ import ghosttrain.Passenger;
  */
 public class EatingWagon extends ActivityWagon {
 
+    private static final Logger log = Logger.getLogger(EatingWagon.class.getName());
+
+    
     public EatingWagon() throws MaxWagonCountReached {
         super();
     }
@@ -24,7 +30,7 @@ public class EatingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getEatingValue();
         }
-        System.out.println("Eating earnings: " + earnings);
+        log.log(Level.INFO, "Eating earnings: {0}", earnings);
         return earnings;
     } 
 }

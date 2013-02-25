@@ -17,16 +17,16 @@ import wagons.Wagon;
  *
  * @author Linda
  */
-public class Train implements Runnable {
+public class Train {
 
     private Engine engine;
     private List<Wagon> ratioWagons;
     private Schedule theSchedule;
     private int internalTime = 0;
-    int totalTime;
-    private int step = 10;
+    private int totalTime;
+    private int step;
     PassengerFactory pF = new PassengerFactory();
-    //    private static final Logger log = Logger.getLogger(Player.class.getName());
+    private static final Logger log = Logger.getLogger(Train.class.getName());
 
     public Train(PassengerListener pL) {
         engine = new Engine();
@@ -40,7 +40,7 @@ public class Train implements Runnable {
      */
     public void addPassengerWagon(PassengerWagon pw) {
         ratioWagons.add(pw);
-        //System.out.println("added an passenger wagon to the overall wagon list: " + ratioWagons);
+        log.log(Level.INFO, "added an passenger wagon to the overall wagon list: {0}", ratioWagons);
     }
 
     /**
@@ -48,14 +48,14 @@ public class Train implements Runnable {
      */
     public void addActivityWagon(ActivityWagon aw) {
         ratioWagons.add(aw);
-        //System.out.println("added an activity wagon to the overall wagon list: " + ratioWagons);
+        //log.info("added an activity wagon to the overall wagon list: " + ratioWagons);
     }
 
     public void dropOffPassenger() {
         // drop off passengers from Passenger wagons
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
-                //System.out.println("dropoffPassenger");
+                //log.info("dropoffPassenger");
                 PassengerWagon pw = (PassengerWagon) w;
                 pw.getOff(this.getCurrentDestination());
             }
@@ -70,7 +70,7 @@ public class Train implements Runnable {
         Destination d = theSchedule.getNextStop();
         //wait or do something for time d.getDistance()
         //then
-        System.out.println("on my way for distance: " + d.getDistance());
+        log.info("on my way for distance: " + d.getDistance());
         theSchedule.setCurrentCity(theSchedule.getCurrentCity() + 1);
     }
 
@@ -96,7 +96,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
                 pwList.add((PassengerWagon) w);
-                //System.out.println("added an passenger wagon to the passenger wagon list: " + pwList);
+                //log.info("added an passenger wagon to the passenger wagon list: " + pwList);
             }
         }
         return pwList;
@@ -112,7 +112,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof ActivityWagon) {
                 awList.add((ActivityWagon) w);
-                //System.out.println("added an activity wagon to the activity wagon list: " + awList);
+                //log.info("added an activity wagon to the activity wagon list: " + awList);
             }
         }
         return awList;
@@ -128,7 +128,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof EatingWagon) {
                 ewList.add((EatingWagon) w);
-                //System.out.println("added an eating wagon to the eating wagon list: " + ewList);
+                //log.info("added an eating wagon to the eating wagon list: " + ewList);
             }
         }
         return ewList;
@@ -144,7 +144,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof FunWagon) {
                 fwList.add((FunWagon) w);
-                //System.out.println("added an fun wagon to the fun wagon list: " + fwList);
+                //log.info("added an fun wagon to the fun wagon list: " + fwList);
             }
         }
         return fwList;
@@ -160,7 +160,7 @@ public class Train implements Runnable {
         for (Wagon w : ratioWagons) {
             if (w instanceof TrainingWagon) {
                 twList.add((TrainingWagon) w);
-                //System.out.println("added an training wagon to the training wagon list: " + twList);
+                //log.info("added an training wagon to the training wagon list: " + twList);
             }
         }
         return twList;
@@ -172,6 +172,10 @@ public class Train implements Runnable {
 
     public Schedule getSchedule() {
         return theSchedule;
+    }
+    
+    public int getTotalTime() {
+        return totalTime;
     }
 
     /**
@@ -191,51 +195,46 @@ public class Train implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        int i = 0;
-        while(true){
-            i++;
-        }
-    }
-    
     public void setTimeStep(int timeStep) {
         step = timeStep;
     }
-    
+
     public boolean isAboutToArrive() {
         return internalTime + step == getNextDestination().getDistance();
     }
-    
+
     public void update() {
-        internalTime += step; 
-        if( internalTime % 60 == 0 && internalTime > 0) {
-            for( ActivityWagon wagon : getActivityWagons()) {
+        internalTime += step;
+        if (internalTime % 60 == 0 && internalTime > 0) {
+            for (ActivityWagon wagon : getActivityWagons()) {
                 wagon.fillBucket();
             }
         }
-        if( internalTime == getNextDestination().getDistance()) {
+        if (internalTime == getNextDestination().getDistance()) {
             enterNextCity();
-            System.out.println("current destination: " + getCurrentDestination().getName());
+            log.log(Level.INFO, "current destination: {0}", getCurrentDestination().getName());
             dropOffPassenger();
             loadPassengers();
             totalTime += internalTime;
-            System.err.println("totalTime: " + totalTime/60 + "min");
+            log.log(Level.INFO, "totalTime: {0}min", totalTime / 60);
+            log.log(Level.INFO, "totalTime: {0}h", totalTime / 60 / 60);
+            log.log(Level.INFO, "totalTime: {0}d", totalTime / 60 / 60 / 24);
+            //log.log(Level.INFO, "totalTime: {0}h", (totalTime % (60 / 60 ))  );
             internalTime = 0;
         }
-        
+
     }
-    
+
     public boolean hasArrived() {
         return internalTime == 0;
     }
 
     /**
-     * add 3 passengers to the empty passenger wagons the
-     * activity wagon is still empty
+     * add 3 passengers to the empty passenger wagons the activity wagon is
+     * still empty
      */
     public void loadPassengers() {
-        System.out.println("load passengers");
+        log.info("load passengers");
         for (Wagon w : getWagons()) {
             if (w instanceof PassengerWagon && w.seatfree()) {
                 while (w.getPassengers().size() < 3) {
@@ -249,12 +248,12 @@ public class Train implements Runnable {
         }
         checkDesination();
     }
-    
-    public void checkDesination(){
-        for(Wagon w : ratioWagons){
-            for(int i = 0; i < 3; i++){
+
+    public void checkDesination() {
+        for (Wagon w : ratioWagons) {
+            for (int i = 0; i < 3; i++) {
                 Destination d = w.getPassengers().get(i).getDeboarding();
-                if(Schedule.DESTINATIONS.get(d.getName()) <= getSchedule().getAvailableCities() ){
+                if (Schedule.DESTINATIONS.get(d.getName()) <= getSchedule().getAvailableCities()) {
                     return;
                 }
             }
@@ -263,7 +262,7 @@ public class Train implements Runnable {
         PassengerWagon pw = getPassengerWagons().get(0); //getPassengerWagons().size()
         Passenger toDropOff = pw.getPassengers().get(0);
         Passenger toSubstitute = pF.createPassenger(theSchedule);
-        while( toSubstitute.getDeboarding().equals( toDropOff.getDeboarding() ) ) {
+        while (toSubstitute.getDeboarding().equals(toDropOff.getDeboarding())) {
             toSubstitute = pF.createPassenger(theSchedule);
         }
         pw.removePassenger(toDropOff);

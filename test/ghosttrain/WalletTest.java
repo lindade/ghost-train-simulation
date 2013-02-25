@@ -37,7 +37,7 @@ public class WalletTest {
      */
     @Test
     public void testAddCoins() {
-        System.out.println("addCoins");
+        log.info("addCoins");
         int coin = 0;
         Wallet instance = new Wallet();
         instance.addCoins(coin);
@@ -50,7 +50,7 @@ public class WalletTest {
      */
     @Test
     public void testSubCoins() {
-        System.out.println("subCoins");
+        log.info("subCoins");
         int coin = 0;
         Wallet instance = new Wallet();
         instance.subCoins(coin);
@@ -63,7 +63,7 @@ public class WalletTest {
      */
     @Test
     public void testGetCoins() {
-        System.out.println("getCoins");
+        log.info("getCoins");
         Wallet instance = new Wallet();
         instance.getCoins();
         // TODO review the generated test code and remove the default call to fail.
@@ -75,7 +75,7 @@ public class WalletTest {
      */
     @Test
     public void testAddPC() {
-        System.out.println("addPC");
+        log.info("addPC");
         int premiumCredits = 0;
         Wallet instance = new Wallet();
         instance.addPC(premiumCredits);
@@ -88,7 +88,7 @@ public class WalletTest {
      */
     @Test
     public void testSubPC() {
-        System.out.println("subPC");
+        log.info("subPC");
         int premiumCredits = 0;
         Wallet instance = new Wallet();
         instance.subPC(premiumCredits);
@@ -101,7 +101,7 @@ public class WalletTest {
      */
     @Test
     public void testGetPC() {
-        System.out.println("getPC");
+        log.info("getPC");
         Wallet instance = new Wallet();
         instance.getPC();
         // TODO review the generated test code and remove the default call to fail.

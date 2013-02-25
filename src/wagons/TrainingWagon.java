@@ -2,12 +2,18 @@ package wagons;
 
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Passenger;
+import ghosttrain.Train;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Linda
  */
 public class TrainingWagon extends ActivityWagon {
+    
+    private static final Logger log = Logger.getLogger(TrainingWagon.class.getName());
+
 
     public TrainingWagon() throws MaxWagonCountReached {
         super();
@@ -24,7 +30,7 @@ public class TrainingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getTrainingValue();
         }
-        System.out.println("Training earnings: " + earnings);
+        log.log(Level.INFO, "Training earnings: {0}", earnings);
         return earnings;
     }
 

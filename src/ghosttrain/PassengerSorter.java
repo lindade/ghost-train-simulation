@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import wagons.Wagon;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * This class should sort the passengers into the wagons The Passengers with the
@@ -30,6 +31,7 @@ public class PassengerSorter {
     private List<Wagon> ratioWagons;
     private List<Passenger> passengerSorter = new ArrayList<>();
     private Random r = new Random();
+    private static final Logger log = Logger.getLogger(PassengerSorter.class.getName());
 
     public PassengerSorter(Train train) {
         this.train = train;
@@ -87,7 +89,7 @@ public class PassengerSorter {
                 try {
                     w.addPassenger(mixedPassengers.get(i));
                 } catch (MaxPassengerCapacityReachedException ex) {
-                    System.err.println("Tried to add too many passengers...");
+                    log.info("Tried to add too many passengers...");
                 }
             }
             currentPassengerIndex += 3;
