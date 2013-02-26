@@ -53,15 +53,16 @@ public class LevelAdmin implements PassengerListener {
      * @param player
      */
     public void raiseLevel() {
-        // test case that a few levels are overleaped
-        if ((expCounter == RAISE_LEVEL[index]) || (expCounter >= RAISE_LEVEL[index])) {
-            level++;
-            index++;
-            levelListener.levelUp(level);
-            log.info("level was increased");
-            if(level == ADD_DESTINATION[indexAddDest]){
-                scheduleUpgradeListener.updateSchedule();
-                indexAddDest++;
+        if(index < RAISE_LEVEL.length){
+            if ((expCounter == RAISE_LEVEL[index]) || (expCounter >= RAISE_LEVEL[index])) {
+                level++;
+                index++;
+                levelListener.levelUp(level);
+                log.log(Level.INFO, "level was increased. You are now at level{0}", getLevelFromLevelAdmin());
+                if(level == ADD_DESTINATION[indexAddDest]){
+                    scheduleUpgradeListener.updateSchedule();
+                    indexAddDest++;
+                }
             }
         }
     }

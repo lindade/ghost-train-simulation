@@ -2,6 +2,7 @@ package ghosttrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -15,15 +16,13 @@ public class Schedule implements ScheduleUpgradeListener {
         "San Francisco", "New York", "Havana", "Burial Ground",
         "Necropolis", "Underworld", "City of the Dead", "Moscow"};
     // distance from preceding city to this city
-    
 //    private static final String[] AVAILABLE_CITIES = {"Limbo", "San Francisco",
 //        "Cairo", "Beijing", "Burial Ground ","London", "Paris", "Tokyo",
 //        "Sydney", "Rio de Janiero", "New York", "Havana", "Necropolis",
 //        "Underworld", "City of the Dead", "Moscow"};
-    
 //    private static final int[] DISTANCE_TO_CITIES = { 9, 34, 75, 134,
 //        209, 300, 409, 534, 675, 834, 1009, 1200, 1409, 1634, 1875, 2134};
-    private static final int[] DISTANCE_TO_CITIES = { 324, 1224, 2700, 4824,
+    private static final int[] DISTANCE_TO_CITIES = {324, 1224, 2700, 4824,
         7524, 10800, 14724, 19224, 24300, 30024, 36324, 43200, 50724, 58824, 67500, 76824};
     //0,09h = 5,4min = 324sek
     //0,34h = 20,4min = 1224sek
@@ -46,24 +45,25 @@ public class Schedule implements ScheduleUpgradeListener {
     private ArrayList<Destination> currentSchedule;
     public static final HashMap<String, Integer> DESTINATIONS; // contains the destination name and the index of the destination list
     private static final Logger log = Logger.getLogger(Schedule.class.getName());
-    
+
     /**
      * HashMap -> (DestinationName, Integer)
      */
     static {
         DESTINATIONS = new HashMap<>();
         int index = 0;
-        for( String city : AVAILABLE_CITIES ) {
+        for (String city : AVAILABLE_CITIES) {
             DESTINATIONS.put(city, index);
             index++;
         }
     }
-    
-    /** 
+
+    /**
      * ArrayList<Destination>
-     * 
-     * 
-     **/
+     *
+     *
+     *
+     */
     public Schedule(int initCities) {
         availableCities = initCities;
         currentSchedule = new ArrayList<>();
@@ -71,7 +71,7 @@ public class Schedule implements ScheduleUpgradeListener {
             currentSchedule.add(new Destination(AVAILABLE_CITIES[i], DISTANCE_TO_CITIES[i]));
         }
     }
-    
+
     public Schedule() {
         this(3);
     }
@@ -79,16 +79,15 @@ public class Schedule implements ScheduleUpgradeListener {
     public int getCitiesInWorld() {
         return AVAILABLE_CITIES.length;
     }
-    
+
     public Destination getDesiredDestination(int index) {
-        if( index <= availableCities && !(index == getCitiesInWorld())) {
+        if (index <= availableCities && index < getCitiesInWorld()) {
             return currentSchedule.get(index);
-        }
-        else{
+        } else {
             return null;
         }
     }
-    
+
     public Destination getDesiredDestination(String cityName) {
         int index = DESTINATIONS.get(cityName);
         return currentSchedule.get(index);
@@ -102,8 +101,7 @@ public class Schedule implements ScheduleUpgradeListener {
     }
 
     /**
-     * @param availableCities 
-     * If Level Up the availableCities to set
+     * @param availableCities If Level Up the availableCities to set
      */
     public void setAvailableCities(int availableCities) {
         this.availableCities = availableCities;
@@ -115,7 +113,7 @@ public class Schedule implements ScheduleUpgradeListener {
     public int getCurrentCity() {
         return currentCity;
     }
-    
+
     /**
      * @param currentCity the currentCity to set
      */
@@ -138,10 +136,10 @@ public class Schedule implements ScheduleUpgradeListener {
             return currentSchedule.get(currentCity + 1);
         }
     }
-    
-    public static  boolean doesDestinationExist(String destination ) {
-        Integer index =  DESTINATIONS.get(destination);
-        if ( index != null) {
+
+    public static boolean doesDestinationExist(String destination) {
+        Integer index = DESTINATIONS.get(destination);
+        if (index != null) {
             return index < availableCities;
         }
         return false;
@@ -149,7 +147,9 @@ public class Schedule implements ScheduleUpgradeListener {
 
     @Override
     public void updateSchedule() {
-        setAvailableCities(getAvailableCities() + 1);
-        log.info("updated Schedule to " + (getAvailableCities()) + " available Cities.");
+        if (getAvailableCities() < getCitiesInWorld()) {
+            setAvailableCities(getAvailableCities() + 1);
+            log.log(Level.INFO, "updated Schedule to {0} available Cities.", (getAvailableCities()));
+        }
     }
 }

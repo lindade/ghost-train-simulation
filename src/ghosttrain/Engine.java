@@ -1,5 +1,6 @@
 package ghosttrain;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -22,10 +23,10 @@ public class Engine {
      * engine upgrade extends the number of wagons which can be dragged by the engine
      */
     public void engineUpgrade() {
-        log.info("Engine was capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
+        log.log(Level.INFO, "Engine was capable of pulling {0} Wagons.", this.getQuantityOfWagons());
         quantityOfWagons = wagonAllowance[index]; // set the new value of how many wagons can be pulled
         index++;
-        log.info("Engine is now capable of pulling " + this.getQuantityOfWagons() + " Wagons.");
+        log.log(Level.INFO, "Engine is now capable of pulling {0} Wagons.", this.getQuantityOfWagons());
     }
 
     public int getQuantityOfWagons() {

@@ -106,14 +106,18 @@ public class PassengerFactory {
                  * The last parameter has to be one of the currently available Destinations or
                  * the next Destination not yet available on the schedule
                 */
-        log.info(String.format("passenger parameter: %d %d %d. Passenger deboarding destination: %s ", p.getEatingValue(), p.getFunValue(), p.getTrainingValue(), p.getDeboarding().getName()));
+        try {
+            log.info(String.format("passenger parameter: %d %d %d. Passenger deboarding destination: %s ", p.getEatingValue(), p.getFunValue(), p.getTrainingValue(), p.getDeboarding().getName()));
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }
         return p;
     }
     
     public int weigthedRandom(int availableCities){
         int value;
         value = r.nextInt(10);
-        if (value >= 5){
+        if (value >= 5 && availableCities < 16){
             return availableCities+1;
         }
         return availableCities;

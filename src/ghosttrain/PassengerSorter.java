@@ -78,14 +78,14 @@ public class PassengerSorter {
         Destination destination = train.getNextDestination();
         //print destination cities:
         
-        System.out.println("Destination: " + train.getNextDestination().getName());
-        System.out.println("\n\npre sorting [");
-        for( Wagon w : train.getWagons() ) {
-            for( Passenger p : w.getPassengers() ) {
-                System.out.print(" " + p.getDeboarding().getName() + " ");
-            }
-        }
-        System.out.println("]---");
+//        System.out.println("Destination: " + train.getNextDestination().getName());
+//        System.out.println("\n\npre sorting [");
+//        for( Wagon w : train.getWagons() ) {
+//            for( Passenger p : w.getPassengers() ) {
+//                System.out.print(" " + p.getDeboarding().getName() + " ");
+//            }
+//        }
+//        System.out.println("]---");
         LinkedList<Passenger> wantsToDeboard = new LinkedList<>();
         LinkedList<Passenger> others = new LinkedList<>();
         for( Wagon w : train.getWagons() ) {
@@ -126,14 +126,14 @@ public class PassengerSorter {
                 } 
             }
         }
-        System.out.println("Destination: " + train.getNextDestination().getName());
-        System.out.print("\n\npost sorting [");
-        for( Wagon w : train.getWagons() ) {
-            for( Passenger p : w.getPassengers() ) {
-                System.out.print(" " + p.getDeboarding().getName() + " ");
-            }
-        }
-        System.out.println("] ---");
+//        System.out.println("Destination: " + train.getNextDestination().getName());
+//        System.out.print("\n\npost sorting [");
+//        for( Wagon w : train.getWagons() ) {
+//            for( Passenger p : w.getPassengers() ) {
+//                System.out.print(" " + p.getDeboarding().getName() + " ");
+//            }
+//        }
+//        System.out.println("] ---");
     }
 
     public void sortCoinOriented() {

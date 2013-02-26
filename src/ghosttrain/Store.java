@@ -26,7 +26,7 @@ public class Store {
         324900, 343175, 361950, 381225, 401000}; // lenght=40 lenght=39
     private int indexAW = 0;
     private int[] costCoinsEngine = {2400, 8100, 19200, 37500, 64800, 102900,
-        153600, 218700}; // lenght=9 lenght=8
+        153600, 218700};
     private int indexE = 0;
     private int[] costCoinsBucketUpgrade = {375, 563}; // lenght=2 index=1
     private static final Logger log = Logger.getLogger(Store.class.getName());
@@ -128,6 +128,8 @@ public class Store {
     }
 
     public boolean buyEngine() {
+        log.log( Level.INFO, "Player''s wallet: {0}", player.getWallet().getCoins());
+        log.log(Level.INFO, "Engine costs: {0}", costCoinsEngine[indexE]);
         if(indexE < costCoinsEngine.length){
             // determine costs
             int cost = costCoinsEngine[indexE];
