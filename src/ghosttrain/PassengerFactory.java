@@ -106,8 +106,7 @@ public class PassengerFactory {
                  * The last parameter has to be one of the currently available Destinations or
                  * the next Destination not yet available on the schedule
                 */
-        log.info(String.format("passenger parameter: %d %d %d\n", p.getEatingValue(), p.getFunValue(), p.getTrainingValue()));
-        log.info(String.format("passenger deboarding destination: %s\n", p.getDeboarding().getName()));
+        log.info(String.format("passenger parameter: %d %d %d. Passenger deboarding destination: %s ", p.getEatingValue(), p.getFunValue(), p.getTrainingValue(), p.getDeboarding().getName()));
         return p;
     }
     

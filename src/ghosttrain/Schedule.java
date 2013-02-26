@@ -16,12 +16,17 @@ public class Schedule implements ScheduleUpgradeListener {
         "Necropolis", "Underworld", "City of the Dead", "Moscow"};
     // distance from preceding city to this city
     
+//    private static final String[] AVAILABLE_CITIES = {"Limbo", "San Francisco",
+//        "Cairo", "Beijing", "Burial Ground ","London", "Paris", "Tokyo",
+//        "Sydney", "Rio de Janiero", "New York", "Havana", "Necropolis",
+//        "Underworld", "City of the Dead", "Moscow"};
+    
 //    private static final int[] DISTANCE_TO_CITIES = { 9, 34, 75, 134,
 //        209, 300, 409, 534, 675, 834, 1009, 1200, 1409, 1634, 1875, 2134};
     private static final int[] DISTANCE_TO_CITIES = { 324, 1224, 2700, 4824,
         7524, 10800, 14724, 19224, 24300, 30024, 36324, 43200, 50724, 58824, 67500, 76824};
     //0,09h = 5,4min = 324sek
-    //0,34h = 1224sek
+    //0,34h = 20,4min = 1224sek
     //0,75h = 45min = 2700sek
     //1,34h = 4824sek
     //2,09h = 7524sek
@@ -76,7 +81,7 @@ public class Schedule implements ScheduleUpgradeListener {
     }
     
     public Destination getDesiredDestination(int index) {
-        if( index <= availableCities) {
+        if( index <= availableCities && !(index == getCitiesInWorld())) {
             return currentSchedule.get(index);
         }
         else{

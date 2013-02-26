@@ -70,7 +70,7 @@ public class Train {
         Destination d = theSchedule.getNextStop();
         //wait or do something for time d.getDistance()
         //then
-        log.info("on my way for distance: " + d.getDistance());
+        log.log(Level.INFO, "on my way for distance: {0}", d.getDistance());
         theSchedule.setCurrentCity(theSchedule.getCurrentCity() + 1);
     }
 
@@ -228,6 +228,10 @@ public class Train {
     public boolean hasArrived() {
         return internalTime == 0;
     }
+    
+    public boolean startedTrip(){
+        return internalTime == 12;
+    }
 
     /**
      * add 3 passengers to the empty passenger wagons the activity wagon is
@@ -235,11 +239,11 @@ public class Train {
      */
     public void loadPassengers() {
         log.info("load passengers");
-        for (Wagon w : getWagons()) {
-            if (w instanceof PassengerWagon && w.seatfree()) {
-                while (w.getPassengers().size() < 3) {
+        for (PassengerWagon pw : getPassengerWagons()) {
+            if (pw.seatfree()) {
+                while (pw.getPassengers().size() < 3) {
                     try {
-                        w.addPassenger(pF.createPassenger(getSchedule()));
+                        pw.addPassenger(pF.createPassenger(getSchedule()));
                     } catch (MaxPassengerCapacityReachedException ex) {
                         Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -249,6 +253,12 @@ public class Train {
         checkDesination();
     }
 
+    /**
+     * security function
+     * checks that not all passengers want to leave at the locked destination
+     * if everyone wants to leave at the locked destination
+     * the method changes one passenger to one passenger with an unlocked destination 
+     */
     public void checkDesination() {
         for (Wagon w : ratioWagons) {
             for (int i = 0; i < 3; i++) {
@@ -258,7 +268,7 @@ public class Train {
                 }
             }
         }
-        //None of the passengers want to go to a unlocked destination
+        // None of the passengers want to go to a unlocked destination
         PassengerWagon pw = getPassengerWagons().get(0); //getPassengerWagons().size()
         Passenger toDropOff = pw.getPassengers().get(0);
         Passenger toSubstitute = pF.createPassenger(theSchedule);

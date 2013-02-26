@@ -1,5 +1,6 @@
 package ghosttrain;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -52,7 +53,8 @@ public class LevelAdmin implements PassengerListener {
      * @param player
      */
     public void raiseLevel() {
-        if ((expCounter == RAISE_LEVEL[index]) || (dropOffCounter >= RAISE_LEVEL[index])) {
+        // test case that a few levels are overleaped
+        if ((expCounter == RAISE_LEVEL[index]) || (expCounter >= RAISE_LEVEL[index])) {
             level++;
             index++;
             levelListener.levelUp(level);
@@ -72,9 +74,9 @@ public class LevelAdmin implements PassengerListener {
     public void passengersGotOff(int numOfPassengers, Destination dest) {
         dropOffCounter += numOfPassengers;
         expCounter += numOfPassengers * (Schedule.DESTINATIONS.get(dest.getName()) + 1);
-        log.info("Drop of counter was increased by " + numOfPassengers);
-        log.info("Drop of counter is " + dropOffCounter);
-        log.info("exp " + expCounter);
+        log.log(Level.INFO, "Drop of counter was increased by {0}", numOfPassengers);
+        log.log(Level.INFO, "Drop of counter is {0}", dropOffCounter);
+        log.log(Level.INFO, "exp {0}", expCounter);
         // try to raise level
         raiseLevel();
     }

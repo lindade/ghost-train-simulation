@@ -32,11 +32,11 @@ public class Simulator {
     public void simulate() {
         int timepaces = 0;
         // stop if Level 50 is reached
-        while (player.getLevel() < 5) {
-            log.info("Level: " + player.getLevel());
+        while (player.getLevel() < 50) {
+            //log.info("Level: " + player.getLevel());
             timepaces += step;
             player.getTrain().update();
-            player.update();
+            player.update(timepaces);
         }
     }
 

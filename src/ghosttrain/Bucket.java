@@ -1,5 +1,6 @@
 package ghosttrain;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -36,6 +37,7 @@ public class Bucket {
         if (content > capacity) {
             content = capacity;
         }
+        //log.log(Level.INFO, "bucket content: {0} ", content);
     }
 
     public int emtpyBucket() {

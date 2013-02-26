@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import wagons.ActivityWagon;
 import wagons.PassengerWagon;
+import wagons.Wagon;
 
 /**
  *
@@ -21,6 +22,12 @@ public class Player implements LevelListener {
     private int index;
     private Random randomizer = new Random();
     private static final Logger log = Logger.getLogger(Player.class.getName());
+    private Strategy currentStrategy;
+    
+    public enum Strategy {
+        Coin_Oriented,
+        Experience_Oriented;
+    }
     
     public Player() {
         la = new LevelAdmin();
@@ -69,7 +76,7 @@ public class Player implements LevelListener {
             int coins = bucket.emtpyBucket();
             wallet.addCoins(coins);
         }
-        log.info("collect income");
+        //log.info("collect income");
         wallet.getCoins();
     }
 
@@ -77,11 +84,7 @@ public class Player implements LevelListener {
         log.info("switch passenger who can exit to passenger wagons");
     }
 
-    /**
-     * create exception and do a try-catch block in the following methods
-     * instead of the if-else-branch
-     */
-    public void buyPassengerWagon() {
+    public boolean buyPassengerWagon() {
         // limit wagons to the strength of the engine
         if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
             // get PassengerWagon
@@ -90,6 +93,7 @@ public class Player implements LevelListener {
                 train.addPassengerWagon(pw);
                 //add LevelAdmin to PassengerWagon
                 pw.addPassengerListener(la);
+                return true;
             }
         } else {
             log.log(Level.INFO,"You cannot buy another wagon. "
@@ -98,15 +102,17 @@ public class Player implements LevelListener {
                     new Object[]{train.getEngine().getQuantityOfWagons(),
                     train.getWagons().size()});
         }
+        return false;
     }
 
-    public void buyFunWagon() {
+    public boolean buyFunWagon() {
         // limit wagons to the strength of the engine
         if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
             // get ActivityWagon
             ActivityWagon aw = store.buyFunWagon();
             if (aw != null) {
                 train.addActivityWagon(aw);
+                return true;
             }
         } else {
             log.log(Level.INFO,"You cannot buy another wagon. "
@@ -115,15 +121,17 @@ public class Player implements LevelListener {
                     new Object[]{train.getEngine().getQuantityOfWagons(),
                     train.getWagons().size()});
         }
+        return false;
     }
     
-    public void buyEatingWagon() {
+    public boolean buyEatingWagon() {
         // limit wagons to the strength of the engine
         if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
             // get ActivityWagon
             ActivityWagon aw = store.buyEatingWagon();
             if (aw != null) {
                 train.addActivityWagon(aw);
+                return true;
             }
         } else {
             log.log(Level.INFO,"You cannot buy another wagon. "
@@ -132,15 +140,17 @@ public class Player implements LevelListener {
                     new Object[]{train.getEngine().getQuantityOfWagons(),
                     train.getWagons().size()});
         }
+        return false;
     }
 
-    public void buyTrainingWagon() {
+    public boolean buyTrainingWagon() {
         // limit wagons to the strength of the engine
         if (train.getWagons().size() < train.getEngine().getQuantityOfWagons()) {
             // get ActivityWagon
             ActivityWagon aw = store.buyTrainingWagon();
             if (aw != null) {
                 train.addActivityWagon(aw);
+                return true;
             }
         } else {
             log.log(Level.INFO,"You cannot buy another wagon. "
@@ -149,48 +159,42 @@ public class Player implements LevelListener {
                     new Object[]{train.getEngine().getQuantityOfWagons(),
                         train.getWagons().size()});
         }
+        return false;
     }
 
-    public void buyEngine() {
-        //limit engine purchase by Level
-        if (level == levelUnlockEngine[index] || level >= levelUnlockEngine[index]) {
-            // get Engine
-            store.buyEngine();
-            index++;
-        } else {
-            log.log(Level.INFO,"You cannot buy a new engine."
-                    + "First you have to level up."
-                    + " You are at level {0}."
-                    + "You have to reach level {1} to be able to purchase a new engine.",
-                    new Object[]{getLevel(), levelUnlockEngine[index]});
+    public boolean buyEngine() {
+        if(index < levelUnlockEngine.length){
+            //limit engine purchase by Level
+            if (level == levelUnlockEngine[index] || level >= levelUnlockEngine[index]) {
+                // get Engine
+                boolean bought = store.buyEngine();
+                index++;
+                return bought;
+            } else {
+                log.log(Level.INFO,"You cannot buy a new engine."
+                        + "First you have to level up."
+                        + " You are at level {0}."
+                        + "You have to reach level {1} to be able to purchase a new engine.",
+                        new Object[]{getLevel(), levelUnlockEngine[index]});
+                return false;
+            }
         }
+        return false;
     }
     
-    public void buyBucketUpgrade(ActivityWagon aw){
-        store.buyBucketUpgrade(aw);
+    public boolean buyBucketUpgrade(ActivityWagon aw){
+        boolean bought = store.buyBucketUpgrade(aw);
+        return bought;
     }
     
-    public void update() {
-        // should player be active
+    public void update(int travelTime) {
         // plays 3x times a day for 15mim
-        // collects income when bucket is filled completely or filled partly
-        collectIncome();
         if(train.hasArrived()){
-        //switch passengers
-            //print passengerList
-//            log.info("old order");
-//            for( Wagon w : getTrain().getWagons() ) {
-//                w.printPassengerList();
-//            }
-            PassengerSorter sorter = new PassengerSorter(getTrain());
-            // -> shuffle
-            sorter.sortRandomInWagon();
-            //print passengerList...
-//            log.info("new order");
-//            for( Wagon w : getTrain().getWagons() ) {
-//                w.printPassengerList();
-//            }
-            buyEngine();
+            if( buyEngine()) {
+                currentStrategy = Strategy.Coin_Oriented;
+            } else {
+                currentStrategy = Strategy.Experience_Oriented;
+            }
             buyPassengerWagon();
             int decide = randomizer.nextInt(5);
             switch( decide ) {
@@ -200,14 +204,34 @@ public class Player implements LevelListener {
                 case 3 : buyPassengerWagon(); break;
                 case 4 : buyPassengerWagon();
             }
-            for (ActivityWagon aw : getTrain().getActivityWagons()) {
-                    buyBucketUpgrade(aw);
-            }
-        } 
-        if(train.isAboutToArrive()){
-            Destination nextDest = train.getNextDestination();
+//            for (ActivityWagon aw : getTrain().getActivityWagons()) {
+//                    buyBucketUpgrade(aw);
+//            }
             
+            
+        }else if(train.isAboutToArrive()){
+            collectIncome();
             //passenger switching to passengerWagon
+        } else if(train.startedTrip()) {
+        //switch passengers
+            //print passengerList
+            log.info("old order");
+            for( Wagon w : getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
+            PassengerSorter sorter = new PassengerSorter(getTrain());
+            sorter.sortExperienceOriented();
+            log.info("new order");
+            for( Wagon w : getTrain().getWagons() ) {
+                w.printPassengerList();
+            }
+        } else {
+            // should player be active
+            // collects income when bucket is filled completely or filled partly
+            // 960 = all 16 min
+            if(travelTime % 960 == 0 && travelTime > 0){
+                collectIncome();
+            }
         }
     }
 }

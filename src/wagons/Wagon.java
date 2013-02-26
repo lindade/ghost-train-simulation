@@ -59,13 +59,6 @@ public abstract class Wagon {
     public void removePassenger(Passenger p) {
         passengers.remove(p);
     }
-  
-//    delete if not needed
-//    public List<Passenger> dropOffPassengers(){
-//        List<Passenger> returnValue = passengers;
-//        passengers = null;
-//        return returnValue;
-//    }
     
     public void printPassengerList() {
         for (Passenger pas : getPassengers()) {
@@ -78,5 +71,9 @@ public abstract class Wagon {
             return true;
         }
         return false;
+    }
+    
+    public void clearPassengers() {
+        passengers.clear();
     }
 }

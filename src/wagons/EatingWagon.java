@@ -2,7 +2,6 @@ package wagons;
 
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Passenger;
-import ghosttrain.Train;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +29,7 @@ public class EatingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getEatingValue();
         }
-        log.log(Level.INFO, "Eating earnings: {0}", earnings);
+        //log.log(Level.INFO, "Eating earnings: {0}", earnings);
         return earnings;
     } 
 }

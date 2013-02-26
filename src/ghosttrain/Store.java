@@ -1,6 +1,7 @@
 package ghosttrain;
 
 import exceptions.MaxWagonCountReached;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import wagons.ActivityWagon;
 import wagons.EatingWagon;
@@ -35,105 +36,117 @@ public class Store {
     }
 
     public PassengerWagon buyPassengerWagon() {
-        // determine costs
-        int cost = costCoinsPassengerWagon[indexPW];
-        // verify if enough coins are in the wallet to purchase a passenger wagon
-        if (player.getWallet().getCoins() >= cost) {
-            try {
-                PassengerWagon pw = new PassengerWagon();
-                // sub coins
-                player.getWallet().subCoins(cost);
-                indexPW++;
-                log.info("bought passenger wagon\n");
-                return pw;
-            } catch (MaxWagonCountReached ex) {
-                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        if(indexPW < costCoinsPassengerWagon.length){
+            // determine costs
+            int cost = costCoinsPassengerWagon[indexPW];
+            // verify if enough coins are in the wallet to purchase a passenger wagon
+            if (player.getWallet().getCoins() >= cost) {
+                try {
+                    PassengerWagon pw = new PassengerWagon();
+                    // sub coins
+                    player.getWallet().subCoins(cost);
+                    indexPW++;
+                    log.info("bought passenger wagon\n");
+                    return pw;
+                } catch (MaxWagonCountReached ex) {
+                    log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+                }
+            } else {
+                log.info("Not enough coins in the wallet to purchase a passenger wagon");
             }
-        } else {
-            log.info("Not enough coins in the wallet to purchase a passenger wagon");
         }
         return null;
     }
 
     public FunWagon buyFunWagon() {
-        // determine costs
-        int cost = costCoinsActivityWagon[indexAW];
-        // verify if enough coins are in the wallet to purchase a fun wagon
-        if (player.getWallet().getCoins() >= cost) {
-            try {
-                FunWagon fw = new FunWagon();
-                // sub coins
-                player.getWallet().subCoins(cost);
-                indexAW++;
-                log.info("bought fun wagon\n");
-                return fw;
-            } catch (MaxWagonCountReached ex) {
-                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        if(indexAW < costCoinsActivityWagon.length){
+            // determine costs
+            int cost = costCoinsActivityWagon[indexAW];
+            // verify if enough coins are in the wallet to purchase a fun wagon
+            if (player.getWallet().getCoins() >= cost) {
+                try {
+                    FunWagon fw = new FunWagon();
+                    // sub coins
+                    player.getWallet().subCoins(cost);
+                    indexAW++;
+                    log.info("bought fun wagon\n");
+                    return fw;
+                } catch (MaxWagonCountReached ex) {
+                    log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+                }
+            } else {
+                log.info("Not enough coins in the wallet to purchase a fun wagon");
             }
-        } else {
-            log.info("Not enough coins in the wallet to purchase a fun wagon");
         }
         return null;
     }
 
     public EatingWagon buyEatingWagon() {
-        // determine costs
-        int cost = costCoinsActivityWagon[indexAW];
-        // verify if enough coins are in the wallet to purchase a eating wagon
-        if (player.getWallet().getCoins() >= cost) {
-            try {
-                EatingWagon ew = new EatingWagon();
-                // sub coins
-                player.getWallet().subCoins(cost);
-                indexAW++;
-                log.info("bought eating wagon\n");
-                return ew;
-            } catch (MaxWagonCountReached ex) {
-                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        if(indexAW < costCoinsActivityWagon.length){
+            // determine costs
+            int cost = costCoinsActivityWagon[indexAW];
+            // verify if enough coins are in the wallet to purchase a eating wagon
+            if (player.getWallet().getCoins() >= cost) {
+                try {
+                    EatingWagon ew = new EatingWagon();
+                    // sub coins
+                    player.getWallet().subCoins(cost);
+                    indexAW++;
+                    log.info("bought eating wagon\n");
+                    return ew;
+                } catch (MaxWagonCountReached ex) {
+                    log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+                }
+            } else {
+                log.info("Not enough coins in the wallet to purchase a eating wagon");
             }
-        } else {
-            log.info("Not enough coins in the wallet to purchase a eating wagon");
         }
         return null;
     }
 
     public TrainingWagon buyTrainingWagon() {
-        // determine costs
-        int cost = costCoinsActivityWagon[indexAW];
-        // verify if enough coins are in the wallet to purchase a training wagon
-        if (player.getWallet().getCoins() >= cost) {
-            try {
-                TrainingWagon tw = new TrainingWagon();
-                // sub coins
-                player.getWallet().subCoins(cost);
-                indexAW++;
-                log.info("bought training wagon\n");
-                return tw;
-            } catch (MaxWagonCountReached ex) {
-                log.info("Maximum number of wagons reached!" + " ex: " + ex.getMessage());
+        if(indexAW < costCoinsActivityWagon.length){
+            // determine costs
+            int cost = costCoinsActivityWagon[indexAW];
+            // verify if enough coins are in the wallet to purchase a training wagon
+            if (player.getWallet().getCoins() >= cost) {
+                try {
+                    TrainingWagon tw = new TrainingWagon();
+                    // sub coins
+                    player.getWallet().subCoins(cost);
+                    indexAW++;
+                    log.info("bought training wagon\n");
+                    return tw;
+                } catch (MaxWagonCountReached ex) {
+                    log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+                }
+            } else {
+                log.info("Not enough coins in the wallet to purchase a training wagon");
             }
-        } else {
-            log.info("Not enough coins in the wallet to purchase a training wagon");
         }
         return null;
     }
 
-    public void buyEngine() {
-        // determine costs
-        int cost = costCoinsEngine[indexE];
-        // verify if enough coins are in the wallet to purchase an engine
-        if (player.getWallet().getCoins() >= cost) {
-            player.getTrain().getEngine().engineUpgrade();
-            // sub coins
-            player.getWallet().subCoins(cost);
-            indexE++;
-            log.info("bought engine");
-        } else {
-            log.info("Not enough coins in the wallet to purchase an engine");
+    public boolean buyEngine() {
+        if(indexE < costCoinsEngine.length){
+            // determine costs
+            int cost = costCoinsEngine[indexE];
+            // verify if enough coins are in the wallet to purchase an engine
+            if (player.getWallet().getCoins() >= cost) {
+                player.getTrain().getEngine().engineUpgrade();
+                // sub coins
+                player.getWallet().subCoins(cost);
+                indexE++;
+                log.info("bought engine");
+                return true;
+            } else {
+                log.info("Not enough coins in the wallet to purchase an engine");
+            }
         }
+        return false;
     }
 
-    public void buyBucketUpgrade(ActivityWagon aw) {
+    public boolean buyBucketUpgrade(ActivityWagon aw) {
         // check the Upgrade the bucket already has
         if(aw.getBucket().getNumberOfUpgrade() < costCoinsBucketUpgrade.length){
             // determine costs
@@ -148,11 +161,14 @@ public class Store {
                 player.getWallet().subCoins(cost);
                 log.info("bought bucket upgrade");
 //                log.info("AW capacity after upgrade: " + aw.getBucket().getCapacity());
+                return true;
             } else {
                 log.info("Not enough coins in the wallet to purchase a bucket upgrade");
+                return false;
             }
-        } else{
+        } else {
             log.info("Maximum Upgrade is reached.");
+            return false;
         }
     }
 }
