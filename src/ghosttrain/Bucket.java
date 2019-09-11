@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class Bucket {
 
     private int capacity;
-    private int[] capacityUpgrade = {270, 540, 2160}; 
+    public static int[] capacityUpgrade = {270, 540, 2160}; 
      private int numberOfUpgrade = 0;
      private static final Logger log = Logger.getLogger(Bucket.class.getName());
     /**
@@ -37,7 +37,7 @@ public class Bucket {
         if (content > capacity) {
             content = capacity;
         }
-        //log.log(Level.INFO, "bucket content: {0} ", content);
+        log.log(Level.FINEST, "bucket content: {0} ", content);
     }
 
     public int emtpyBucket() {
@@ -45,7 +45,7 @@ public class Bucket {
         if (content != 0) {
             content = 0;
         } else {
-            //log.info("bucket is still empty, no Coins to be saved");
+            log.log(Level.FINEST, "bucket is still empty, no Coins to be saved");
         }
         return theContent;
     }
@@ -66,6 +66,7 @@ public class Bucket {
         if(numberOfUpgrade < capacityUpgrade.length) {
             numberOfUpgrade++;
             capacity = capacityUpgrade[numberOfUpgrade];
+//            log.info(String.format( "Bucket upgrade: numberOfUpgrade=%d , capacity=%d", numberOfUpgrade, capacity ));
         } else {
             log.info("no upgrade available");
         }

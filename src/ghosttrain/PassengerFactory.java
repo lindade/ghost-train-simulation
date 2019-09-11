@@ -1,14 +1,10 @@
 package ghosttrain;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
 /**
- * the destination where the passenger wants to leave does never match with the
- * current destination have to check the references
- * 
- * have to test the parameters of the passengers
- * 
  * @author Linda
  */
 public class PassengerFactory {
@@ -17,9 +13,15 @@ public class PassengerFactory {
     private Random r = new Random();
     int count = 1;
     private static final Logger log = Logger.getLogger(PassengerFactory.class.getName());
+    private HashMap<String, Integer> maxPassengerSkillValue;
 
 
     public PassengerFactory() {
+        maxPassengerSkillValue = new HashMap<>();
+    }
+    
+    public void setMaxPassengerSkillValue(HashMap<String, Integer> skillValues) {
+        maxPassengerSkillValue = skillValues;
     }
 
     /**
@@ -28,6 +30,9 @@ public class PassengerFactory {
      * @param currentDest
      */
     public int getRandNumDependOnDest(Destination currentDest) {
+        if( maxPassengerSkillValue != null && !maxPassengerSkillValue.isEmpty() ) {
+            return maxPassengerSkillValue.get(currentDest.getName());
+        }
         int dependingOnDestination = 0;
         switch (currentDest.getName()) {
             case "Limbo":
@@ -98,18 +103,20 @@ public class PassengerFactory {
          * creates random numbers between zero and 5
          * random.nextInt(6);
          */
+        int destination = r.nextInt(weigthedRandom(available));
+        
         Passenger p = new Passenger("Name"+ count++,
                 r.nextInt(dependsOnDestination),
                 r.nextInt(dependsOnDestination),
-                r.nextInt(dependsOnDestination), schedule.getDesiredDestination(r.nextInt(weigthedRandom(available)))); // available+1; weigthedRandom(available)
+                r.nextInt(dependsOnDestination), schedule.getDesiredDestination(destination)); // available+1; weigthedRandom(available)
                 /**
                  * The last parameter has to be one of the currently available Destinations or
                  * the next Destination not yet available on the schedule
                 */
         try {
-            log.info(String.format("passenger parameter: %d %d %d. Passenger deboarding destination: %s ", p.getEatingValue(), p.getFunValue(), p.getTrainingValue(), p.getDeboarding().getName()));
+            log.finest(String.format("passenger parameter: %d %d %d. Passenger deboarding destination: %s ", p.getEatingValue(), p.getFunValue(), p.getTrainingValue(), p.getDeboarding().getName()));
         }catch (Exception e){
-            log.info(e.getMessage());
+            log.finest(e.getMessage());
         }
         return p;
     }

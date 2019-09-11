@@ -4,7 +4,7 @@ package ghosttrain;
  *
  * @author Linda
  */
-public interface ScheduleUpgradeListener {
+public interface ScheduleUpdateListener {
     
     public void updateSchedule();
     

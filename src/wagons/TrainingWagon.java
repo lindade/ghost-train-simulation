@@ -29,7 +29,7 @@ public class TrainingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getTrainingValue();
         }
-        //log.log(Level.INFO, "Training earnings: {0}", earnings);
+        log.log(Level.FINEST, "Training earnings: {0}", earnings);
         return earnings;
     }
 

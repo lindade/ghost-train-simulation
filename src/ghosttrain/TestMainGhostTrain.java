@@ -21,21 +21,21 @@ import wagons.Wagon;
  *
  * @author Linda
  */
-public class GhostTrain {
+public class TestMainGhostTrain {
 
-    private static final Logger log = Logger.getLogger(GhostTrain.class.getSimpleName());
+    private static final Logger log = Logger.getLogger(TestMainGhostTrain.class.getSimpleName());
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws MaxPassengerCapacityReachedException {
-        Player player = new Player();
+        LevelAdmin la = new LevelAdmin();
+        Player player = new Player(la);
         log.setLevel(Level.OFF);
 
 
         //print the engines quantity of wagons
-        //log.info("engine quantity: " + player.getTrain().getEngine().getQuantityOfWagons());
-        log.log(Level.INFO, "engine quantity: {0} ", player.getTrain().getEngine().getQuantityOfWagons());
+        log.log(Level.FINEST, "engine quantity: {0}", player.getTrain().getEngine().getQuantityOfWagons());
         
         
         
@@ -54,7 +54,7 @@ public class GhostTrain {
             // in destination
             
             //print current destination name
-            //log.info("current destination: " + player.getTrain().getCurrentDestination().getName());
+            log.log(Level.FINEST, "current destination: {0}", player.getTrain().getCurrentDestination().getName());
             player.getLevel();
             player.getTrain().getPassengerWagons();
             List<EatingWagon> eatingWagons = player.getTrain().getEatingWagons();
@@ -68,7 +68,7 @@ public class GhostTrain {
             
             //switch passengers
             //print passengerList...
-            log.info("old order");
+            log.log(Level.FINEST, "old order");
             for( Wagon w : player.getTrain().getWagons() ) {
                 w.printPassengerList();
             }
@@ -83,8 +83,8 @@ public class GhostTrain {
             
             // train approaches at next destination
             player.getTrain().enterNextCity();
-            log.info("current destination: " + player.getTrain().getCurrentDestination().getName());
-            //log.info("next destination" + player.getTrain().getNextDestination().getName());
+            log.log(Level.FINEST, "current destination: {0}", player.getTrain().getCurrentDestination().getName());
+            log.log(Level.FINEST, "next destination{0}", player.getTrain().getNextDestination().getName());
             player.getTrain().dropOffPassenger();
             // buy things. Test if the limit of the engine works
 //            player.getWallet().getCoins();

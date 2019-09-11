@@ -4,6 +4,7 @@ import exceptions.MaxPassengerCapacityReachedException;
 import exceptions.MaxWagonCountReached;
 import ghosttrain.Destination;
 import ghosttrain.Passenger;
+import ghosttrain.Schedule;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,14 +32,14 @@ public class WagonTest {
             eatingWagon = new EatingWagon();
             trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
-            log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+            log.log(Level.FINEST,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
         }
         
          /**
          * create destinations
          */
         Destination berlin = new Destination("Berlin");
-        Destination munich = new Destination("munich", 3000);
+        Destination munich = new Destination("munich", 3000, 12);
         
         // print out the number of wagons
         passengerWagon.getWagonCount();
@@ -61,7 +62,7 @@ public class WagonTest {
             passengerWagon.addPassenger(p3);
         } catch (MaxPassengerCapacityReachedException ex) {
             // automatically generated after Logger
-            Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
         // unload passengers
         passengerWagon.getOff(berlin);
@@ -74,7 +75,7 @@ public class WagonTest {
             funWagon.addPassenger(p3);
         } catch (MaxPassengerCapacityReachedException ex) {
             // automatically generated after Logger
-            Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
         // calculate the parameter of the passengers
         funWagon.demandEarning();
@@ -94,12 +95,12 @@ public class WagonTest {
             //eatingWagon.addPassenger(p1);
         } catch (MaxPassengerCapacityReachedException ex) {
             // automatically generated after Logger
-            Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
         eatingWagon.demandEarning();
         
         // Asks if Berlin exists as a destination
-        //log.info("Is Berlin available: " + Schedule.doesDestinationExist("Berlin"));
+        log.log(Level.FINEST, "Is Berlin available: {0}", Schedule.doesDestinationExist("Berlin"));
 
 
         Passenger p21 = new Passenger("Gregor", 3, 4, 3, new Destination("Berlin"));
@@ -112,11 +113,11 @@ public class WagonTest {
             trainingWagon.addPassenger(p23);
         } catch (MaxPassengerCapacityReachedException ex) {
             // automatically generated after Logger
-            Logger.getLogger(WagonTest.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
         trainingWagon.demandEarning();
         trainingWagon.removePassenger(p22);
-        log.log(Level.INFO, "Passenger {0} unfortunately jumped out of the window. He will not be able to earn any money anymore. minus {1}", new Object[]{p22.getName(), p22.getTrainingValue()});
+        log.log(Level.FINEST, "Passenger {0} unfortunately jumped out of the window. He will not be able to earn any money anymore. minus {1}", new Object[]{p22.getName(), p22.getTrainingValue()});
         trainingWagon.demandEarning();
         
         /**
@@ -127,7 +128,7 @@ public class WagonTest {
             trainingWagon = new TrainingWagon();
             trainingWagon = new TrainingWagon();
         } catch (MaxWagonCountReached ex) {
-            log.log(Level.INFO,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
+            log.log(Level.FINEST,"Maximum number of wagons reached!" + " ex: {0}", ex.getMessage());
         }
     }
 }

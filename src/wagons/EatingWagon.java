@@ -29,7 +29,7 @@ public class EatingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getEatingValue();
         }
-        //log.log(Level.INFO, "Eating earnings: {0}", earnings);
+        log.log(Level.FINEST, "Eating earnings: {0}", earnings);
         return earnings;
     } 
 }

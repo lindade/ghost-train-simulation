@@ -27,12 +27,24 @@ public class Train {
     private int step;
     PassengerFactory pF = new PassengerFactory();
     private static final Logger log = Logger.getLogger(Train.class.getName());
+    private int interval = 60;
+    private final PassengerListener passengerListener;
 
     public Train(PassengerListener pL) {
         engine = new Engine();
         ratioWagons = new ArrayList<>();
         theSchedule = new Schedule(3);
-        createFirstWagons(pL);
+        this.passengerListener = pL;
+        initValues();
+    }
+
+    public final void initValues() {
+        createFirstWagons(passengerListener);
+        setInterval(interval);
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 
     /**
@@ -40,7 +52,7 @@ public class Train {
      */
     public void addPassengerWagon(PassengerWagon pw) {
         ratioWagons.add(pw);
-        log.log(Level.INFO, "added an passenger wagon to the overall wagon list: {0}", ratioWagons);
+        log.log(Level.FINEST, "added an passenger wagon to the overall wagon list: {0}", ratioWagons);
     }
 
     /**
@@ -48,7 +60,7 @@ public class Train {
      */
     public void addActivityWagon(ActivityWagon aw) {
         ratioWagons.add(aw);
-        //log.info("added an activity wagon to the overall wagon list: " + ratioWagons);
+        log.log(Level.FINEST, "added an activity wagon to the overall wagon list: {0}", ratioWagons);
     }
 
     public void dropOffPassenger() {
@@ -70,7 +82,7 @@ public class Train {
         Destination d = theSchedule.getNextStop();
         //wait or do something for time d.getDistance()
         //then
-        log.log(Level.INFO, "on my way for distance: {0}", d.getDistance());
+        log.log(Level.FINEST, "on my way for distance: {0}", d.getDistance());
         theSchedule.setCurrentCity(theSchedule.getCurrentCity() + 1);
     }
 
@@ -86,6 +98,10 @@ public class Train {
         return ratioWagons;
     }
 
+    public void setWagons(List<Wagon> wagons) {
+        ratioWagons = wagons;
+    }
+
     /**
      * a method to get the passengerWagons of the ratioWagonList
      *
@@ -96,7 +112,7 @@ public class Train {
         for (Wagon w : ratioWagons) {
             if (w instanceof PassengerWagon) {
                 pwList.add((PassengerWagon) w);
-                //log.info("added an passenger wagon to the passenger wagon list: " + pwList);
+                log.log(Level.FINEST, "added an passenger wagon to the passenger wagon list: {0}", pwList);
             }
         }
         return pwList;
@@ -112,7 +128,7 @@ public class Train {
         for (Wagon w : ratioWagons) {
             if (w instanceof ActivityWagon) {
                 awList.add((ActivityWagon) w);
-                //log.info("added an activity wagon to the activity wagon list: " + awList);
+                log.log(Level.FINEST, "added an activity wagon to the activity wagon list: {0}", awList);
             }
         }
         return awList;
@@ -128,7 +144,7 @@ public class Train {
         for (Wagon w : ratioWagons) {
             if (w instanceof EatingWagon) {
                 ewList.add((EatingWagon) w);
-                //log.info("added an eating wagon to the eating wagon list: " + ewList);
+                log.log(Level.FINEST, "added an eating wagon to the eating wagon list: {0}", ewList);
             }
         }
         return ewList;
@@ -144,7 +160,7 @@ public class Train {
         for (Wagon w : ratioWagons) {
             if (w instanceof FunWagon) {
                 fwList.add((FunWagon) w);
-                //log.info("added an fun wagon to the fun wagon list: " + fwList);
+                log.log(Level.FINEST, "added an fun wagon to the fun wagon list: {0}", fwList);
             }
         }
         return fwList;
@@ -160,7 +176,7 @@ public class Train {
         for (Wagon w : ratioWagons) {
             if (w instanceof TrainingWagon) {
                 twList.add((TrainingWagon) w);
-                //log.info("added an training wagon to the training wagon list: " + twList);
+                log.log(Level.FINEST, "added an training wagon to the training wagon list: {0}", twList);
             }
         }
         return twList;
@@ -173,7 +189,7 @@ public class Train {
     public Schedule getSchedule() {
         return theSchedule;
     }
-    
+
     public int getTotalTime() {
         return totalTime;
     }
@@ -191,7 +207,7 @@ public class Train {
             ActivityWagon aw = new EatingWagon();
             addActivityWagon(aw);
         } catch (MaxWagonCountReached ex) {
-            Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -203,33 +219,11 @@ public class Train {
         return internalTime + step == getNextDestination().getDistance();
     }
 
-    public void update() {
-        internalTime += step;
-        if (internalTime % 60 == 0 && internalTime > 0) {
-            for (ActivityWagon wagon : getActivityWagons()) {
-                wagon.fillBucket();
-            }
-        }
-        if (internalTime == getNextDestination().getDistance()) {
-            enterNextCity();
-            log.log(Level.INFO, "current destination: {0}", getCurrentDestination().getName());
-            dropOffPassenger();
-            loadPassengers();
-            totalTime += internalTime;
-            log.log(Level.INFO, "totalTime: {0}min", totalTime / 60);
-            log.log(Level.INFO, "totalTime: {0}h", totalTime / 60 / 60);
-            log.log(Level.INFO, "totalTime: {0}d", totalTime / 60 / 60 / 24);
-            //log.log(Level.INFO, "totalTime: {0}h", (totalTime % (60 / 60 ))  );
-            internalTime = 0;
-        }
-
-    }
-
     public boolean hasArrived() {
         return internalTime == 0;
     }
-    
-    public boolean startedTrip(){
+
+    public boolean startedTrip() {
         return internalTime == 12;
     }
 
@@ -238,48 +232,81 @@ public class Train {
      * still empty
      */
     public void loadPassengers() {
-        log.info("load passengers");
+        log.finest("load passengers");
         for (PassengerWagon pw : getPassengerWagons()) {
             if (pw.seatfree()) {
                 while (pw.getPassengers().size() < 3) {
                     try {
                         pw.addPassenger(pF.createPassenger(getSchedule()));
                     } catch (MaxPassengerCapacityReachedException ex) {
-                        Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
+                        log.log(Level.SEVERE, null, ex);
                     }
                 }
             }
         }
-        checkDesination();
+        checkDestination();
     }
 
     /**
-     * security function
-     * checks that not all passengers want to leave at the locked destination
-     * if everyone wants to leave at the locked destination
-     * the method changes one passenger to one passenger with an unlocked destination 
+     * security function checks that not all passengers want to leave at the
+     * locked destination if everyone wants to leave at the locked destination
+     * the method changes one passenger to one passenger with an unlocked
+     * destination
      */
-    public void checkDesination() {
+    public void checkDestination() {
         for (Wagon w : ratioWagons) {
-            for (int i = 0; i < 3; i++) {
-                Destination d = w.getPassengers().get(i).getDeboarding();
-                if (Schedule.DESTINATIONS.get(d.getName()) <= getSchedule().getAvailableCities()) {
+            List<Passenger> passengerList = w.getPassengers();
+            for (Passenger passenger : passengerList) {
+                Destination d = passenger.getDeboarding();
+//                log.info(String.format("target: %s, index: %d, availableCities: %d",
+//                        d.getName(),
+//                        Schedule.DESTINATIONS.get(d.getName()),
+//                        getSchedule().getAvailableCities()));
+                if (Schedule.DESTINATIONS.get(d.getName()) < getSchedule().getAvailableCities()) {
                     return;
                 }
             }
         }
-        // None of the passengers want to go to a unlocked destination
+//        log.info("Everyone wants to disembark at an locked location.");
+        // None of the passengers want to go to an unlocked destination
         PassengerWagon pw = getPassengerWagons().get(0); //getPassengerWagons().size()
         Passenger toDropOff = pw.getPassengers().get(0);
         Passenger toSubstitute = pF.createPassenger(theSchedule);
         while (toSubstitute.getDeboarding().equals(toDropOff.getDeboarding())) {
             toSubstitute = pF.createPassenger(theSchedule);
         }
+        // sub PremiumCredits Wallet.subPC();
         pw.removePassenger(toDropOff);
         try {
             pw.addPassenger(toSubstitute);
         } catch (MaxPassengerCapacityReachedException ex) {
-            Logger.getLogger(Train.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void update() {
+        internalTime += step;
+        if (internalTime % interval == 0 && internalTime > 0) {
+            for (ActivityWagon wagon : getActivityWagons()) {
+                wagon.fillBucket();
+            }
+        }
+        if (internalTime == getNextDestination().getDistance()) {
+            enterNextCity();
+            log.log(Level.FINEST, "current destination: {0}", getCurrentDestination().getName());
+            dropOffPassenger();
+            loadPassengers();
+            totalTime += internalTime;
+            log.log(Level.FINEST, "totalTime: {0}min", totalTime / 60);
+            log.log(Level.FINEST, "totalTime: {0}h", totalTime / 60 / 60);
+            log.log(Level.FINEST, "totalTime: {0}d", totalTime / 60 / 60 / 24);
+            //log.log(Level.FINEST, "totalTime: {0}h", (totalTime % (60 / 60 ))  );
+            internalTime = 0;
+        }
+
+    }
+
+    public PassengerFactory getPassengerFactory() {
+        return pF;
     }
 }

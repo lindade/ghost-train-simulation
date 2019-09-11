@@ -1,5 +1,8 @@
 package ghosttrain;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Wallet contains all coins and premiumCredits one player possesses
@@ -11,6 +14,8 @@ public class Wallet {
 
     private int coins = 575;
     private int pc;
+    private static final Logger log = Logger.getLogger(Wallet.class.getName());
+
 
     public Wallet() {
     }
@@ -24,12 +29,24 @@ public class Wallet {
     }
     
     public int getCoins(){
-        //log.info("Coins: " + coins);
+        log.log(Level.FINEST, "Coins: {0}", coins);
         return coins;
     }
         
-    public void addPC(int premiumCredits){
-        pc += premiumCredits;
+//    public void addPC(int premiumCredits){
+//        pc += premiumCredits;
+//    }
+    
+    public void addPC(){
+        pc += 1;
+    }
+    
+    public void initPC(int credits) {
+        pc = credits;
+    }
+    
+    public void initCoins(int coins) {
+        this.coins = coins;
     }
     
     public void subPC(int premiumCredits){
@@ -37,7 +54,7 @@ public class Wallet {
     }
     
     public int getPC(){
-        //log.info("PremiumCredits: " + pc);
+        log.log(Level.FINEST, "PremiumCredits: {0}", pc);
         return pc;
     }
 }

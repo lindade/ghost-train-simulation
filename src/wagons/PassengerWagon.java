@@ -35,13 +35,12 @@ public class PassengerWagon extends Wagon {
             if (p.getDeboarding() == currentDest) {
                 passengersToDelete.add(p);
             } else {
-//                Logger.getLogger(Train.class.getName()).log(Level.INFO, "Passenger {0} has not disembarked. Requested deboarding is at {1} . ", p.getName(), p.getDeboarding().getName());
-                log.log(Level.INFO, "Passenger {0} has not disembarked. Requested deboarding is at {1}.", new Object[]{p.getName(), p.getDeboarding().getName()});
+                log.log(Level.FINEST, "Passenger {0} has not disembarked. Requested deboarding is at {1}.", new Object[]{p.getName(), p.getDeboarding().getName()});
             }
         }
         for (Passenger p : passengersToDelete) {
             removePassenger(p);
-            log.log(Level.INFO, "Passenger {0} has disembarked at {1}.", new Object[]{p.getName(), currentDest.getName()});
+            log.log(Level.FINEST, "Passenger {0} has disembarked at {1}.", new Object[]{p.getName(), currentDest.getName()});
         }
         if (passengerListener != null) {
             //the counter of the overall persons who left is increased

@@ -15,24 +15,21 @@ import wagons.PassengerWagon;
 import wagons.TrainingWagon;
 
 /**
- * This class should sort the passengers into the wagons The Passengers with the
- * highest value should be sorted into the particular wagon of that value to
- * earn the highest possible amount of coins
+ * This class sorts the passengers into the wagons
  *
- * One other method puts the passengers randomly into the wagons
+ * One method puts the passengers randomly into the wagons
  *
  * Before the arrival of the train in the station the passengers who can get off
  * the train will be placed into an passenger wagon.
  *
- * @author
+ * @author Linda
  */
 public class PassengerSorter {
 
     /**
      * The list of wagons contains all wagons which are owned by the player
      *
-     * PassengerSorter contains all passengers who are in the train AND the new
-     * passengers who are boarding the train.
+     * PassengerSorter contains all passengers who are in the train
      */
     private Train train;
     private List<Wagon> ratioWagons;
@@ -47,19 +44,9 @@ public class PassengerSorter {
     }
 
     /**
-     * remove or edit?
-     *
-     * @param p
-     */
-//    public void addToWagon(Passenger p) {
-//         train.getPassengerWagons();
-//    }
-    /**
-     * this method has to be optimized sort passengers into activity wagons
-     *
      * @param passengerList
      */
-    public void sortOptimalInWagon(List<Passenger> passengerList) {
+    public void sortCoinOriented(List<Passenger> passengerList) {
         for (Passenger p : passengerList) {
             if ((p.getFunValue() >= p.getEatingValue()) && (p.getFunValue() >= p.getTrainingValue())) {
                 //train.getActivityWagons(); need funwagon not general activity wagon
@@ -77,7 +64,7 @@ public class PassengerSorter {
         waitingHall.clear();
         Destination destination = train.getNextDestination();
         //print destination cities:
-        
+
 //        System.out.println("Destination: " + train.getNextDestination().getName());
 //        System.out.println("\n\npre sorting [");
 //        for( Wagon w : train.getWagons() ) {
@@ -88,42 +75,41 @@ public class PassengerSorter {
 //        System.out.println("]---");
         LinkedList<Passenger> wantsToDeboard = new LinkedList<>();
         LinkedList<Passenger> others = new LinkedList<>();
-        for( Wagon w : train.getWagons() ) {
-            for( Passenger p: w.getPassengers() ) {
-                if( p.getDeboarding().equals(destination)) {
+        for (Wagon w : train.getWagons()) {
+            for (Passenger p : w.getPassengers()) {
+                if (p.getDeboarding().equals(destination)) {
                     wantsToDeboard.add(p);
-                }
-                else {
+                } else {
                     others.add(p);
                 }
-            }        
+            }
             w.clearPassengers();
         }
-        for( Wagon w : train.getWagons() ) {
-            if( w instanceof PassengerWagon && !wantsToDeboard.isEmpty()) {
-                while( w.seatfree() && !wantsToDeboard.isEmpty() ) {
+        for (Wagon w : train.getWagons()) {
+            if (w instanceof PassengerWagon && !wantsToDeboard.isEmpty()) {
+                while (w.seatfree() && !wantsToDeboard.isEmpty()) {
                     try {
                         w.addPassenger(wantsToDeboard.removeFirst());
                     } catch (MaxPassengerCapacityReachedException ex) {
-                        Logger.getLogger(PassengerSorter.class.getName()).log(Level.SEVERE, null, ex);
+                        log.log(Level.SEVERE, null, ex);
                     }
                 }
-                while( w.seatfree() && !others.isEmpty()) {
+                while (w.seatfree() && !others.isEmpty()) {
                     try {
                         w.addPassenger(others.remove());
                     } catch (MaxPassengerCapacityReachedException ex) {
-                        Logger.getLogger(PassengerSorter.class.getName()).log(Level.SEVERE, null, ex);
+                        log.log(Level.SEVERE, null, ex);
                     }
                 }
-                //when wantsToDeboard is empty, but passengerwagon is not full
+                //when wantsToDeboard is empty, but passengerwagon is not full put passgers in who dont want to deboard.
             } else {
-                while( w.seatfree() && !others.isEmpty() ) {
+                while (w.seatfree() && !others.isEmpty()) {
                     try {
                         w.addPassenger(others.removeFirst());
                     } catch (MaxPassengerCapacityReachedException ex) {
-                        Logger.getLogger(PassengerSorter.class.getName()).log(Level.SEVERE, null, ex);
+                        log.log(Level.SEVERE, null, ex);
                     }
-                } 
+                }
             }
         }
 //        System.out.println("Destination: " + train.getNextDestination().getName());
@@ -136,60 +122,66 @@ public class PassengerSorter {
 //        System.out.println("] ---");
     }
 
-    public void sortCoinOriented() {
-        //maximize income
-    }
-
     public void sortRandomInWagon() {
         for (Wagon w : ratioWagons) {
             ArrayList<Passenger> inWagon = new ArrayList<>();
+            // add all passengers from one wagon to a list
             for (Passenger p : w.getPassengers()) {
                 inWagon.add(p);
             }
+            // remove passengers from old wagon list
             for (Passenger p : inWagon) {
                 w.removePassenger(p);
             }
+            // add all passengers to one list
             passengerSorter.addAll(inWagon);
         }
-        ArrayList<Passenger> suffledPassengers = new ArrayList<>();
+        // shuffle all passengers and put them into a new list 
+        ArrayList<Passenger> shuffledPassengers = new ArrayList<>();
         while (!passengerSorter.isEmpty()) {
             int randomPassenger = r.nextInt(passengerSorter.size());
             Passenger p = passengerSorter.get(randomPassenger);
-            suffledPassengers.add(p);
+            shuffledPassengers.add(p);
             passengerSorter.remove(p);
         }
 
         int currentPassengerIndex = 0;
         for (Wagon w : ratioWagons) {
-            for (int i = currentPassengerIndex; i < currentPassengerIndex + 3; i++) {
+            int added = 0;
+            // add shuffled passengers into the wagons
+            for(Passenger passenger : shuffledPassengers) {
                 try {
-                    w.addPassenger(suffledPassengers.get(i));
+                    w.addPassenger( passenger );
+                    added++;
                 } catch (MaxPassengerCapacityReachedException ex) {
-                    log.info("Tried to add too many passengers...");
+                    log.finest("Tried to add too many passengers...");
                 }
+                currentPassengerIndex += added;
             }
-            currentPassengerIndex += 3;
-            if (currentPassengerIndex >= suffledPassengers.size()) {
+//            if (shuffledPassengers.size() > currentPassengerIndex) {
+//                for (int i = currentPassengerIndex; i < currentPassengerIndex + 3; i++) {
+//                    try {
+//                        try {
+//                            Passenger p = shuffledPassengers.get(i);
+//                            w.addPassenger(p);
+//                            added++;
+//                        } catch( ArrayIndexOutOfBoundsException outofbounds) {
+//                            break;
+//                        }
+//                    } catch (MaxPassengerCapacityReachedException ex) {
+//                        log.finest("Tried to add too many passengers...");
+//                    }
+//                }
+//
+//                currentPassengerIndex += added;
+//            }
+
+            if (currentPassengerIndex >= shuffledPassengers.size()) {
                 break;
             }
         }
     }
 
-//    public void sortToEatingWagon(Passenger p){
-//        int i = 0;
-//        int passengersInWagon = 0;
-//        EatingWagon ew = train.getEatingWagons().get(i);
-//        try {
-//            ew.addPassenger(p);
-//            passengersInWagon++;
-//            if(passengersInWagon == 3){
-//                i++;
-//                passengersInWagon = 0;
-//            }
-//        } catch (MaxPassengerCapacityReachedException ex) {
-//            log.info("Tried to add too many passengers...");
-//        }
-//    }
     public boolean sortToEatingWagon(Passenger p) {
         boolean added = false;
         for (EatingWagon ew : train.getEatingWagons()) {

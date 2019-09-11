@@ -30,7 +30,7 @@ public class FunWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getFunValue();
         }
-        //log.log(Level.INFO, "Fun earnings: {0}", earnings);
+        log.log(Level.FINEST, "Fun earnings: {0}", earnings);
         return earnings;
     }
 

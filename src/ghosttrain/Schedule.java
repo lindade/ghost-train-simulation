@@ -1,7 +1,9 @@
 package ghosttrain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,9 +11,9 @@ import java.util.logging.Logger;
  *
  * @author Linda
  */
-public class Schedule implements ScheduleUpgradeListener {
+public class Schedule implements ScheduleUpdateListener {
 
-    private static final String[] AVAILABLE_CITIES = {"Limbo", "London",
+    public static String[] AVAILABLE_CITIES = {"Limbo", "London",
         "Paris", "Cairo", "Beijing", "Tokyo", "Sydney", "Rio de Janiero",
         "San Francisco", "New York", "Havana", "Burial Ground",
         "Necropolis", "Underworld", "City of the Dead", "Moscow"};
@@ -22,7 +24,7 @@ public class Schedule implements ScheduleUpgradeListener {
 //        "Underworld", "City of the Dead", "Moscow"};
 //    private static final int[] DISTANCE_TO_CITIES = { 9, 34, 75, 134,
 //        209, 300, 409, 534, 675, 834, 1009, 1200, 1409, 1634, 1875, 2134};
-    private static final int[] DISTANCE_TO_CITIES = {324, 1224, 2700, 4824,
+    public static int[] DISTANCE_TO_CITIES = {324, 1224, 2700, 4824,
         7524, 10800, 14724, 19224, 24300, 30024, 36324, 43200, 50724, 58824, 67500, 76824};
     //0,09h = 5,4min = 324sek
     //0,34h = 20,4min = 1224sek
@@ -43,13 +45,20 @@ public class Schedule implements ScheduleUpgradeListener {
     private static int availableCities = 2; // initially only "Limbo", "London"
     private int currentCity = 0; // starting in Limbo
     private ArrayList<Destination> currentSchedule;
-    public static final HashMap<String, Integer> DESTINATIONS; // contains the destination name and the index of the destination list
+    public static int[] experiencePerPassenger = new int[]{
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+    };
+    public static HashMap<String, Integer> DESTINATIONS; // contains the destination name and the index of the destination list
     private static final Logger log = Logger.getLogger(Schedule.class.getName());
 
     /**
      * HashMap -> (DestinationName, Integer)
      */
     static {
+        updateDestinations();
+    }
+
+    public static void updateDestinations() {
         DESTINATIONS = new HashMap<>();
         int index = 0;
         for (String city : AVAILABLE_CITIES) {
@@ -65,10 +74,20 @@ public class Schedule implements ScheduleUpgradeListener {
      *
      */
     public Schedule(int initCities) {
+        initSchedule(initCities);
+    }
+
+    /**
+     * (Re-)Init values based on static arrays. If Configurator changes the
+     * static base arrays the Schedule has to update its settings.
+     *
+     * @param initCities
+     */
+    public void initSchedule(int initCities) {
         availableCities = initCities;
         currentSchedule = new ArrayList<>();
         for (int i = 0; i < AVAILABLE_CITIES.length; i++) {
-            currentSchedule.add(new Destination(AVAILABLE_CITIES[i], DISTANCE_TO_CITIES[i]));
+            currentSchedule.add(new Destination(AVAILABLE_CITIES[i], DISTANCE_TO_CITIES[i], experiencePerPassenger[i]));
         }
     }
 
@@ -86,11 +105,6 @@ public class Schedule implements ScheduleUpgradeListener {
         } else {
             return null;
         }
-    }
-
-    public Destination getDesiredDestination(String cityName) {
-        int index = DESTINATIONS.get(cityName);
-        return currentSchedule.get(index);
     }
 
     /**
@@ -149,7 +163,12 @@ public class Schedule implements ScheduleUpgradeListener {
     public void updateSchedule() {
         if (getAvailableCities() < getCitiesInWorld()) {
             setAvailableCities(getAvailableCities() + 1);
-            log.log(Level.INFO, "updated Schedule to {0} available Cities.", (getAvailableCities()));
+            log.log(Level.INFO, "available cities: {0} cities in world: {1}", new Object[]{getAvailableCities(), getCitiesInWorld()});
+//            log.log(Level.FINEST, "updated Schedule to {0} available Cities.", (getAvailableCities()));
         }
+    }
+
+    public List<Destination> getDestinations() {
+        return Collections.unmodifiableList(currentSchedule);
     }
 }
