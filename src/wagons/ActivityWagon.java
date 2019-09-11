@@ -8,21 +8,25 @@ import ghosttrain.Bucket;
  * @author Linda
  */
 public abstract class ActivityWagon extends Wagon {
+ 
+    protected Bucket bucket;
 
     public ActivityWagon() throws MaxWagonCountReached {
         super();
+        bucket = new Bucket();
     }
 
-     
-    
-    protected Bucket bucket;
-    protected String name;
+    public abstract void fillBucket();
 
-    abstract void fillBucket();
-
-    abstract String printName();
+  //  abstract String printName();
 
     abstract int demandEarning();
     
+    public Bucket getBucket(){
+        return bucket;
+    }
     
+    public void bucketUpgrade(){
+        bucket.upgrade();
+    }
 }

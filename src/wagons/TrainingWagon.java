@@ -1,34 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package wagons;
 
 import exceptions.MaxWagonCountReached;
-import ghosttrain.Bucket;
 import ghosttrain.Passenger;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Linda
  */
 public class TrainingWagon extends ActivityWagon {
+    
+    private static final Logger log = Logger.getLogger(TrainingWagon.class.getName());
 
-    public TrainingWagon(String name) throws MaxWagonCountReached {
+
+    public TrainingWagon() throws MaxWagonCountReached {
         super();
-        bucket = new Bucket();
-        this.name = name;
     }
 
     @Override
     public void fillBucket() {
-        bucket.fillBucket();
-    }
-
-    @Override
-    public String printName() {
-        return String.format("Trainingwagon: " + name + "\n");
+        bucket.fillBucket(demandEarning());
     }
 
     @Override
@@ -37,7 +29,7 @@ public class TrainingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getTrainingValue();
         }
-        System.out.println("Training earnings: " + earnings);
+        log.log(Level.FINEST, "Training earnings: {0}", earnings);
         return earnings;
     }
 

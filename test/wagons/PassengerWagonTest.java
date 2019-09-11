@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+=======
+>>>>>>> update-readme
 package wagons;
 
 import exceptions.MaxPassengerCapacityReachedException;
@@ -19,7 +22,11 @@ import static org.junit.Assert.*;
 
 /**
  *
+<<<<<<< HEAD
  * @author mnguyen
+=======
+ * @author linda
+>>>>>>> update-readme
  */
 public class PassengerWagonTest {
     PassengerWagon wagon;
@@ -58,8 +65,13 @@ public class PassengerWagonTest {
      */
     @Test
     public void testAddPassenger() {
+<<<<<<< HEAD
         System.out.println("addPassenger");
         Passenger p = new Passenger("Minh", 2, 3, 5, new Destination("Berlin"));
+=======
+        log.info("addPassenger");
+        Passenger p = new Passenger("Alena", 2, 3, 5, new Destination("Berlin"));
+>>>>>>> update-readme
         try {
             wagon.addPassenger(p);
         } catch (MaxPassengerCapacityReachedException ex) {
@@ -73,7 +85,11 @@ public class PassengerWagonTest {
      */
     @Test
     public void testGetOff() {
+<<<<<<< HEAD
         System.out.println("getOff");
+=======
+        log.info("getOff");
+>>>>>>> update-readme
         Passenger linda = wagon.getPassengers().get(0);
         Destination d = linda.getDeboarding();
         wagon.getOff(d);

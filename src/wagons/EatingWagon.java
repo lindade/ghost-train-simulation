@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package wagons;
 
 import exceptions.MaxWagonCountReached;
-import ghosttrain.Bucket;
 import ghosttrain.Passenger;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,19 +11,16 @@ import java.util.ArrayList;
  */
 public class EatingWagon extends ActivityWagon {
 
-    public EatingWagon(String name) throws MaxWagonCountReached {
+    private static final Logger log = Logger.getLogger(EatingWagon.class.getName());
+
+    
+    public EatingWagon() throws MaxWagonCountReached {
         super();
-        bucket = new Bucket();
-        this.name = name;
     }
 
     @Override
     public void fillBucket() {
-    }
-
-    @Override
-    public String printName() {
-        return String.format("Eatingwagon: " + name + "\n");
+        bucket.fillBucket(demandEarning());
     }
 
     @Override
@@ -36,8 +29,9 @@ public class EatingWagon extends ActivityWagon {
         for (Passenger p : getPassengers()) {
             earnings += p.getEatingValue();
         }
-        System.out.println("Eating earnings: " + earnings);
+        log.log(Level.FINEST, "Eating earnings: {0}", earnings);
         return earnings;
+<<<<<<< HEAD
     }
 
     @Override
@@ -57,4 +51,7 @@ public class EatingWagon extends ActivityWagon {
         }
     }
 
+=======
+    } 
+>>>>>>> update-readme
 }

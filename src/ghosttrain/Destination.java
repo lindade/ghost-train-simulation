@@ -8,10 +8,12 @@ public class Destination {
 
     private String name;
     private int distance;
+    private int passengerExperience;
 
-    public Destination(String name, int distance) {
+    public Destination(String name, int distance, int passengerExperience) {
         this.name = name;
         this.distance = distance;
+        this.passengerExperience = passengerExperience;
     }
 
     public Destination(String name) {
@@ -28,5 +30,9 @@ public class Destination {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+    
+    public int getPassengerExperience() {
+        return passengerExperience;
     }
 }

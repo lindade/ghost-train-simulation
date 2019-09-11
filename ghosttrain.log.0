@@ -1,0 +1,117 @@
+17.03.2013 22:33:32 INFO util.Configurator initStartParameters Initializing Start Parameters using configuration file.
+17.03.2013 22:33:32 INFO util.Configurator initStartParameters Set player level to: 1
+17.03.2013 22:33:32 INFO util.Configurator initStartParameters Set available Cities to: 2
+17.03.2013 22:33:32 INFO util.Configurator initStartParameters Set engine level: 1
+17.03.2013 22:33:32 INFO util.Configurator initGameSettings Initializing GameSettings
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 2 after 20 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 3 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 3 after 46 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 4 after 91 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 4 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 5 after 162 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 242 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 242 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 247 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 6 after 268 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 7 after 393 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 8 after 464 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 5 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 9 after 821 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 10 after 1.017 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 1.223 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 1.294 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 11 after 1.294 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 12 after 1.651 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 6 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 1.776 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 2.107 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 13 after 2.107 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyTrainingWagon Bought training wagon at 2.413 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 14 after 2.564 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 15 after 2.940 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 3.326 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 16 after 3.397 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 7 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 3.783 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 17 after 4.485 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 4.730 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 18 after 4.881 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 19 after 5.187 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 20 after 5.583 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 8 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 6.454 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 6.731 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 21 after 6.911 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 7.477 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyTrainingWagon Bought training wagon at 7.628 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 22 after 7.628 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 8.499 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 23 after 8.570 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 8.956 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 24 after 9.201 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 9 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 9.927 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 10.203 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 25 after 10.629 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 11.354 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 26 after 11.505 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 27 after 12.056 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 12.376 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 12.781 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 12.787 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 28 after 12.933 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 10 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyTrainingWagon Bought training wagon at 14.209 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyTrainingWagon Bought training wagon at 14.780 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 15.166 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 29 after 15.166 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 30 after 16.137 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 31 after 17.094 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 32 after 18.636 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 11 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 33 after 22.120 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 34 after 23.908 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 24.088 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 24.088 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 24.088 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 24.333 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 24.333 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 24.654 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 35 after 25.059 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 36 after 26.441 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 12 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 37 after 29.694 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 38 after 30.845 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 39 after 32.947 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 40 after 34.599 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 13 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 41 after 40.023 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 40.868 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyPassengerWagon Bought passenger wagon at 40.868 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyTrainingWagon Bought training wagon at 40.873 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 40.894 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 40.939 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEatingWagon Bought eating wagon at 41.019 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 42 after 41.570 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 43 after 43.401 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 44 after 45.423 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 14 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 45 after 51.473 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 46 after 55.195 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 47 after 57.052 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 48 after 60.480 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 15 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Store buyEngine Bought engine at 60.660 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 62.737 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 63.457 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 64.302 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Store buyFunWagon Bought fun wagon at 65.283 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 49 after 68.941 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Simulator levelUp Reached Level 50 after 72.763 min play time.
+17.03.2013 22:33:32 INFO ghosttrain.Schedule updateSchedule available cities: 16 cities in world: 16
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Congratulations! You have reached Level 50
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Total play time in hours 1.214
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Total play time endless days 50
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Dropped off passengers 3.039
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Accumulated EXP 18.744
+17.03.2013 22:33:32 INFO ghosttrain.Simulator simulate Premium Credits 771

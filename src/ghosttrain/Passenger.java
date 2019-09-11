@@ -39,4 +39,11 @@ public class Passenger {
     public Destination getDeboarding() {
         return deboarding;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Passenger '%s' [e:%s, f:%s, t:%s] destination: %s", getName(), getEatingValue(), getFunValue(), getTrainingValue(), getDeboarding().getName());
+    }
+    
+    
 }
