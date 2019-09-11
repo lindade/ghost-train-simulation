@@ -1,6 +1,6 @@
 # Ghost train balancing simulation
 
-Die executable-Dateien liegen im dist-Verzeichnis.
+Die executable-Dateien liegen im dist-Verzeichnis. (befinden dich nicht auf github)
 
 Zum Aufruf der Ghost train Balanding Simulation:
 
@@ -8,7 +8,6 @@ java -jar GhostTrain.jar <step in seconds> <pilst>
 
 Beispiel:
 java -jar GhostTrain.jar 12 balancing.plist
-
 
 
 
